@@ -35,9 +35,13 @@
     }
 
   .option1 { transform: rotate(0deg) translate(170px) rotate(0deg); }
-  .option2 { transform: rotate(90deg) translate(170px) rotate(-90deg); }
-  .option3 { transform: rotate(180deg) translate(170px) rotate(-180deg); }
-  .option4 { transform: rotate(270deg) translate(170px) rotate(-270deg); }
+  .option2 { transform: rotate(45deg) translate(170px) rotate(-45deg); }
+  .option3 { transform: rotate(90deg) translate(170px) rotate(-90deg); }
+  .option4 { transform: rotate(135deg) translate(170px) rotate(-135deg); }
+  .option5 { transform: rotate(180deg) translate(170px) rotate(-180deg); }
+  .option6 { transform: rotate(225deg) translate(170px) rotate(-225deg); }
+  .option7 { transform: rotate(270deg) translate(170px) rotate(-270deg); }
+  .option8 { transform: rotate(315deg) translate(170px) rotate(-315deg); }
 
   
   #description-box {
@@ -115,9 +119,13 @@
      stimulus: `
        <div class="circle-container">
        <div class="circle-option option1" id="Experience">Experience</div>
-       <div class="circle-option option2" id="Education">Education</div>
-       <div class="circle-option option3" id="Motivation">Motivation</div>
-       <div class="circle-option option4" id="Skills">Skills</div>
+       <div class="circle-option option2" id="References">References</div>
+       <div class="circle-option option3" id="Education">Education</div>
+       <div class="circle-option option4" id="Leadership">Leadership</div>
+       <div class="circle-option option5" id="Motivation">Motivation</div>
+       <div class="circle-option option6" id="Communication">Communication</div>
+       <div class="circle-option option7" id="Skills">Skills</div>
+       <div class="circle-option option8" id="Teamwork">Teamwork</div>
        <div id="description-box">Hover over an option to see details.</div>
      </div>
     `,
@@ -128,9 +136,13 @@
       //Konstanten infoData är ett objekt som innehåller texten som visas när man hovrar över varje corkelalternativ. Varje nyckel i objektet motsvarar id:t för ett cirkelalternativ, och värdet är den text som ska visas i beskrivnings
       const infoData = {
         Experience: "5 years in industry",
+        References: "Strong references from previous employers",
         Education: "Master's degree",
+        Leadership: "Led teams of 10+ people",
         Motivation: "Highly motivated",
+        Communication: "Excellent written and verbal skills",
         Skills: "Proficient at JAVA",
+        Teamwork: "Collaborative team player",
       };
       //document söker i htmln, queryselectorAll väljer det element som har klassen circle-option, for each loopar igenom alla dessa element
      document.querySelectorAll(".circle-option").forEach((option) => {
