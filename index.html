@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My experiment</title>
+    <!--Länkar till jspsych biblioteket och de plugins som behövs för att skapa och köra experimentet. De specifika versionerna av jspsych och dess plugins anges i URL:erna-->
+    <script src="https://unpkg.com/jspsych@7.3.4"></script>
+    <link href="https://unpkg.com/jspsych@7.3.4/css/jspsych.css" rel="stylesheet" type="text/css" />
+
+    <script src="https://unpkg.com/@jspsych/plugin-html-button-response@1.1.3"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-survey-text@1.1.3"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-survey-likert@1.1.3"></script>
+
+<style>
+  .circle-container {
+        width: 400px;
+        height: 400px;
+        border-radius: 50%;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+  .circle-container .circle-option {
+        width: 80px;
+        height: 80px;
+        position: absolute;
+        border-radius: 50%;
+        line-height: 80px;
+        text-align: center;
+        font-size: 14px;
+    }
+
+  .option1 { transform: rotate(0deg) translate(170px) rotate(0deg); }
+  .option2 { transform: rotate(90deg) translate(170px) rotate(-90deg); }
+  .option3 { transform: rotate(180deg) translate(170px) rotate(-180deg); }
+  .option4 { transform: rotate(270deg) translate(170px) rotate(-270deg); }
+
+  
+  #description-box {
+     position: absolute;
+     width: 200px;
+     height: auto;
+     text-align: center;
+     font-size: 16px;
+     background-color: white;
+     border: 1px solid black;
+     border-radius: 10px;
+     padding: 10px;
+  }
+
+  .jspsych-btn {
+    position: fixed;
+    z-index: 1000;
+    bottom: 10%;
+    left: 50%;
+  }
+
+
+</style>
+
+ </head>
+  <body>
+  </body>
+  <script>
+
+    //initierar jsPsych och anger en on_finish funktion som kommer att köras när experimentet är klart. 
+    var jsPsych = initJsPsych({
+      //on_finish funktionen kommer att spara all data som samlats in under experimentet i en CSV-fil med namnet 'mouselab_data.csv'. Den hämtar all data från jsPsychs dataobjekt, konverterar det till CSV-format och sparar det lokalt på användarens dator.
+      on_finish: () => {
+        jsPsych.data.get().localSave('csv', 'mouselab_data.csv');
+        console.log("funktionen initJsPsych körs");
+      },
+    });
+
+    /* Timeline är en array som innehåller alla delar av experimentet i den ordning de ska visas. Varje del är ett objekt som beskriver vilken typ av stimuli som ska visas, vilka frågor som ska ställas, och eventuella funktioner som ska köras när delen startar eller avslutas.*/
+    var timeline = [];
+
+    /*startar när sidan laddas och avslutas när man trycker på continue på förstasidan
+     variabeln definieras som ett objekt med innehållet på den första sidan i experimentet*/
+    var welcome = {
+        type: jsPsychHtmlButtonResponse,
+        stimulus: "Welcome. In this experiment, you are going to be engage in a decision-making task. Specifically, you will be tasked with evaluating a candidate's fit for a particular position. In the next step, you will be given a brief description of the candidate based on your first encounter. Later, you will get to see all the information collected throughout the recruitment process, so that you can make a well-informed decision.",
+        choices: ["Continue"]
+    };
+
+    /*!!!!! här ska texten komma in emellan welcome och grading_scale*/
+
+    /* variabeln grading_scale definieras som ett objekt som beskriver en del av experimentet där deltagaren får bedöma sin attityd till kandidaten baserat på sin första intryck. Denna del använder sig av en Likert-skala där deltagaren kan välja mellan fem olika alternativ, från "Very negative" till "Very positive". När deltagaren har gjort sitt val och klickar på "Continue", kommer experimentet att gå vidare till nästa del.*/
+    /*!!!! eventuellt ska vu byta dem mot en slide*/
+    var grading_scale = {
+      type: jsPsychSurveyLikert,
+      preamble: "<h3>Based on your initial impression of the candidate, what is attitude towards hiring the person?</h3>",
+      questions: [
+        {
+          prompt: "Rate your attitude towards hiring the person from negative to positive, in accordance with your first impression.",
+          /*!!!Hur sparas denna variabel?*/
+          labels: ["Very negative", "Negative", "Neutral", "Positive", "Very positive"],
+          required: true
+        }
+      ],
+      choices: ["Continue"]
+    };
+    /* variabeln hoverData definieras som en tom array som kommer att användas för att lagra data om hur länge deltagaren hovrar över varje cirkelalternativ i den kommande delen av experimentet. När deltagaren interagerar med cirkelalternativen, kommer information om vilken cirkel de hovrar över och hur länge de gör det att sparas i denna array.*/
+    let hoverData = [];
+
+    //circle_page objektet definieras
+    var circle_page = {
+      //egenskapen type sätts till en jspsych funktion som skapar knappar
+     type: jsPsychHtmlButtonResponse,
+     //detta står på knapparna
+     stimulus: `
+       <div class="circle-container">
+       <div class="circle-option option1" id="Experience">Experience</div>
+       <div class="circle-option option2" id="Education">Education</div>
+       <div class="circle-option option3" id="Motivation">Motivation</div>
+       <div class="circle-option option4" id="Skills">Skills</div>
+       <div id="description-box">Hover over an option to see details.</div>
+     </div>
+    `,
+  
+    choices: ["Continue"],
+    //on_load funktionen ligger inne i objeketet circle_page för att köras när den sidan laddas
+    on_load: function () {
+      //Konstanten infoData är ett objekt som innehåller texten som visas när man hovrar över varje corkelalternativ. Varje nyckel i objektet motsvarar id:t för ett cirkelalternativ, och värdet är den text som ska visas i beskrivnings
+      const infoData = {
+        Experience: "5 years in industry",
+        Education: "Master's degree",
+        Motivation: "Highly motivated",
+        Skills: "Proficient at JAVA",
+      };
+      //document söker i htmln, queryselectorAll väljer det element som har klassen circle-option, for each loopar igenom alla dessa element
+     document.querySelectorAll(".circle-option").forEach((option) => {
+       let startTime = 0;
+       //och lägger till event listeners för mouseover
+       option.addEventListener("mouseover", (event) => {
+         const id = event.target.id;
+         startTime = Date.now();
+         //Hittar diven med idt description box oxh lägger in texten som motsvarar det cirkelalternativ som musen hovrar över. Texten hämtas från infoData-objektet där nyckeln är id:t för det cirkelalternativ som hovras över. 
+         document.getElementById("description-box").textContent = infoData[id];
+       });
+       //och lägger till event listeners för mouseout
+       option.addEventListener("mouseout", (event) => {
+         const id = event.target.id;
+         const duration = Date.now() - startTime;
+        
+         //När musen lämnar ett cirkelalternativ, beräknas hur länge den har hovrat över det genom att ta skillnaden mellan det aktuella datumet och startTime. Denna information, tillsammans med id:t för det cirkelalternativ som lämnades, sparas sedan i hoverData-arrayen som ett objekt med egenskaperna option och hoverDuration. 
+         hoverData.push({
+           option: id,
+           hoverDuration: duration,
+         });
+        //Efter att ha sparat hoverdata, återställs texten i beskrivningsrutan till det ursprungliga meddelandet "Hover over an option to see details.", vilket uppmanar deltagaren att fortsätta interagera med cirkelalternativen.
+         document.getElementById("description-box").textContent =
+          "Hover over an option to see details.";
+       });
+       });
+     },
+     //när användaren klickar på continue körs on_finish funktionen som lägger till hoverData som en egenskap i jsPsychs dataobjekt
+     on_finish: function () {
+       jsPsych.data.addProperties({ hoverData });
+     },
+  };
+    //surveyn på sista sidan där användaren får svara på frågor om rekryteringsbelsut och vilka informationskällor som var mest relevanta för beslutet. Denna del använder sig av en textbaserad enkät där deltagaren kan skriva sina svar i textfält. Svaren sparas som experimentets data i csv-filen.
+    var survey = {
+        type: jsPsychSurveyText,
+        questions: [{ 
+          prompt: "Do you want to recruit the candidate?"}, 
+        { prompt: "Motivate your decision.", rows: 5}, 
+        {prompt: "In the prior page, you were able to find information about the candidate's experience, motivation, skills, and education. Please write these sources down in a list from 1 to 4, in order of the relevance you believe they had to the recruitment decision.", 
+        rows: 2}]
+    };
+
+    // timeline är en inbyggd funktion i jspsych som används för att köra experimentet. Den tar en array som arguemtn, där varje element i arrayen representerar en del av experimentet.
+    timeline.push(welcome, grading_scale, circle_page, survey);
+    //kör experimentet genom att anropa jsPsych.run() och skicka in timeline-arrayen som argument. Detta startar experimentet och visar varje del i den ordning de är definierade i timeline.
+    jsPsych.run(timeline);
+
+</script>
+</html>
