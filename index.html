@@ -200,7 +200,7 @@
           type: jsPsychHtmlButtonResponse,
           stimulus: `<div style="max-width: 700px; text-align: left; line-height: 1.8; font-size: 16px;">${selectedText.content}</div>`,
           choices: ["Continue"],
-          //sparar vilket textalternativ deltagaren fick i datan
+          save_trial_parameters: { stimulus: false },
           data: { assigned_text: selectedText.id }
         };
 
