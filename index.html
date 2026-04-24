@@ -2,7 +2,6 @@
 <html>
   <head>
     <title>My experiment</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--Länkar till jspsych biblioteket och de plugins som behövs för att skapa och köra experimentet. De specifika versionerna av jspsych och dess plugins anges i URL:erna-->
     <script src="https://unpkg.com/jspsych@7.3.4"></script>
     <link href="https://unpkg.com/jspsych@7.3.4/css/jspsych.css" rel="stylesheet" type="text/css" />
@@ -12,94 +11,60 @@
     <script src="https://unpkg.com/@jspsych/plugin-survey-likert@1.1.3"></script>
 
 <style>
-        /* Grundinställning för att text ska vara läsbar på mobil */
-        body {
-            font-size: 18px; 
-        }
+  .circle-container {
+        width: 400px;
+        height: 400px;
+        border-radius: 50%;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-        /* Behållaren för cirkeln görs responsiv med variabler */
-        :root {
-            --circle-size: 350px;
-            --option-size: 80px;
-            --distance: 140px;
-        }
+  .circle-container .circle-option {
+        width: 80px;
+        height: 80px;
+        position: absolute;
+        border-radius: 50%;
+        line-height: 80px;
+        text-align: center;
+        font-size: 14px;
+    }
 
-        /* Justering för riktigt små skärmar */
-        @media (max-width: 450px) {
-            :root {
-                --circle-size: 280px;
-                --option-size: 65px;
-                --distance: 110px;
-            }
-            .circle-container .circle-option {
-                font-size: 11px !important;
-            }
-            #description-box {
-                font-size: 14px !important;
-                width: 140px !important;
-            }
-            .jspsych-content {
-                font-size: 16px; /* Gör välkomsttexten lagom stor */
-            }
-        }
+  .option1 { transform: rotate(0deg) translate(170px) rotate(0deg); }
+  .option2 { transform: rotate(45deg) translate(170px) rotate(-45deg); }
+  .option3 { transform: rotate(90deg) translate(170px) rotate(-90deg); }
+  .option4 { transform: rotate(135deg) translate(170px) rotate(-135deg); }
+  .option5 { transform: rotate(180deg) translate(170px) rotate(-180deg); }
+  .option6 { transform: rotate(225deg) translate(170px) rotate(-225deg); }
+  .option7 { transform: rotate(270deg) translate(170px) rotate(-270deg); }
+  .option8 { transform: rotate(315deg) translate(170px) rotate(-315deg); }
 
-        .circle-container {
-            width: var(--circle-size);
-            height: var(--circle-size);
-            border-radius: 50%;
-            position: relative; /* Ändrat från fixed till relative för bättre flöde */
-            margin: 50px auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+  
+  #description-box {
+     position: absolute;
+     width: 200px;
+     height: auto;
+     text-align: center;
+     font-size: 16px;
+     background-color: white;
+     border: 1px solid black;
+     border-radius: 10px;
+     padding: 10px;
+  }
 
-        .circle-container .circle-option {
-            width: var(--option-size);
-            height: var(--option-size);
-            position: absolute;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            font-size: 13px;
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            cursor: pointer;
-            z-index: 10;
-        }
+  .jspsych-btn {
+    position: fixed;
+    z-index: 1000;
+    bottom: 10%;
+    left: 50%;
+  }
 
-        /* Positionering baserat på variabler */
-        .option1 { transform: rotate(0deg) translate(var(--distance)) rotate(0deg); }
-        .option2 { transform: rotate(45deg) translate(var(--distance)) rotate(-45deg); }
-        .option3 { transform: rotate(90deg) translate(var(--distance)) rotate(-90deg); }
-        .option4 { transform: rotate(135deg) translate(var(--distance)) rotate(-135deg); }
-        .option5 { transform: rotate(180deg) translate(var(--distance)) rotate(-180deg); }
-        .option6 { transform: rotate(225deg) translate(var(--distance)) rotate(-225deg); }
-        .option7 { transform: rotate(270deg) translate(var(--distance)) rotate(-270deg); }
-        .option8 { transform: rotate(315deg) translate(var(--distance)) rotate(-315deg); }
 
-        #description-box {
-            position: absolute;
-            width: 180px;
-            height: auto;
-            text-align: center;
-            font-size: 16px;
-            background-color: white;
-            border: 1px solid black;
-            border-radius: 10px;
-            padding: 10px;
-            z-index: 5;
-        }
-
-        /* Gör "Continue"-knappen tydligare på mobil */
-        .jspsych-btn {
-            padding: 12px 25px !important;
-            font-size: 18px !important;
-            margin-top: 20px;
-        }
-    </style>
+</style>
 
  </head>
   <body>
@@ -125,6 +90,8 @@
         stimulus: "Välkommen. Du kommer nu att få delta i ett experiment om beslutsfattande. Du kommer att få läsa en text och sedan svara på frågor... LÄGG TILL RÄTT TEXT",
         choices: ["Continue"]
     };
+
+    var text_page;
 
     /*!!!!! här ska texten komma in emellan welcome och grading_scale*/
 
@@ -182,24 +149,27 @@
       //document söker i htmln, queryselectorAll väljer det element som har klassen circle-option, for each loopar igenom alla dessa element
      document.querySelectorAll(".circle-option").forEach((option) => {
        let startTime = 0;
-       // För mobil: Använd 'touchstart' istället för bara hover
-       const startAction = (e) => {
-         const id = option.id;
+       //och lägger till event listeners för mouseover
+       option.addEventListener("mouseover", (event) => {
+         const id = event.target.id;
          startTime = Date.now();
+         //Hittar diven med idt description box oxh lägger in texten som motsvarar det cirkelalternativ som musen hovrar över. Texten hämtas från infoData-objektet där nyckeln är id:t för det cirkelalternativ som hovras över. 
          document.getElementById("description-box").textContent = infoData[id];
-       };
-
-       const endAction = (e) => {
-         const id = option.id;
+       });
+       //och lägger till event listeners för mouseout
+       option.addEventListener("mouseout", (event) => {
+         const id = event.target.id;
          const duration = Date.now() - startTime;
-         hoverData.push({ option: id, hoverDuration: duration });
-         document.getElementById("description-box").textContent = "Touch an option.";
-       };
-
-       option.addEventListener("mouseover", startAction);
-       option.addEventListener("mouseout", endAction);
-       option.addEventListener("touchstart", startAction);
-       option.addEventListener("touchend", endAction);
+        
+         //När musen lämnar ett cirkelalternativ, beräknas hur länge den har hovrat över det genom att ta skillnaden mellan det aktuella datumet och startTime. Denna information, tillsammans med id:t för det cirkelalternativ som lämnades, sparas sedan i hoverData-arrayen som ett objekt med egenskaperna option och hoverDuration. 
+         hoverData.push({
+           option: id,
+           hoverDuration: duration,
+         });
+        //Efter att ha sparat hoverdata, återställs texten i beskrivningsrutan till det ursprungliga meddelandet "Hover over an option to see details.", vilket uppmanar deltagaren att fortsätta interagera med cirkelalternativen.
+         document.getElementById("description-box").textContent =
+          "Hover over an option to see details.";
+       });
        });
      },
      //när användaren klickar på continue körs on_finish funktionen som lägger till hoverData som en egenskap i jsPsychs dataobjekt
@@ -217,10 +187,27 @@
         rows: 2}]
     };
 
-    // timeline är en inbyggd funktion i jspsych som används för att köra experimentet. Den tar en array som arguemtn, där varje element i arrayen representerar en del av experimentet.
-    timeline.push(welcome, grading_scale, circle_page, survey);
-    //kör experimentet genom att anropa jsPsych.run() och skicka in timeline-arrayen som argument. Detta startar experimentet och visar varje del i den ordning de är definierade i timeline.
-    jsPsych.run(timeline);
+    //hämtar texterna från JSON-filen
+    fetch('texts.json')
+      .then(response => response.json())
+      .then(data => {
+        //slumpar vilket av de två textalternativen deltagaren får se
+        const randomIndex = Math.floor(Math.random() * data.texts.length);
+        const selectedText = data.texts[randomIndex];
+
+        //skapar textsidan med den slumpade texten
+        text_page = {
+          type: jsPsychHtmlButtonResponse,
+          stimulus: `<div style="max-width: 700px; text-align: left; line-height: 1.8; font-size: 16px;">${selectedText.content}</div>`,
+          choices: ["Continue"],
+          //sparar vilket textalternativ deltagaren fick i datan
+          data: { assigned_text: selectedText.id }
+        };
+
+        //lägger till alla sidor i rätt ordning och startar experimentet
+        timeline.push(welcome, text_page, grading_scale, circle_page, survey);
+        jsPsych.run(timeline);
+      });
 
 </script>
 </html>
