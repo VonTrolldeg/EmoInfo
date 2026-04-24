@@ -122,7 +122,7 @@
      variabeln definieras som ett objekt med innehållet på den första sidan i experimentet*/
     var welcome = {
         type: jsPsychHtmlButtonResponse,
-        stimulus: "Welcome. In this experiment, you are going to be engage in a decision-making task. Specifically, you will be tasked with evaluating a candidate's fit for a particular position. In the next step, you will be given a brief description of the candidate based on your first encounter. Later, you will get to see all the information collected throughout the recruitment process, so that you can make a well-informed decision.",
+        stimulus: "Välkommen. Du kommer nu att få delta i ett experiment om beslutsfattande. Du kommer att få läsa en text och sedan svara på frågor... LÄGG TILL RÄTT TEXT",
         choices: ["Continue"]
     };
 
@@ -153,14 +153,14 @@
      //detta står på knapparna
      stimulus: `
        <div class="circle-container">
-       <div class="circle-option option1" id="Experience">Experience</div>
-       <div class="circle-option option2" id="References">References</div>
-       <div class="circle-option option3" id="Education">Education</div>
-       <div class="circle-option option4" id="Leadership">Leadership</div>
-       <div class="circle-option option5" id="Motivation">Motivation</div>
-       <div class="circle-option option6" id="Communication">Communication</div>
-       <div class="circle-option option7" id="Skills">Skills</div>
-       <div class="circle-option option8" id="Teamwork">Teamwork</div>
+       <div class="circle-option option1" id="Minoriteten">Minoriteten</div>
+       <div class="circle-option option2" id="Regeringen">Regeringen</div>
+       <div class="circle-option option3" id="Åtgärder">Åtgärder</div>
+       <div class="circle-option option4" id="Polarisering">Polarisering</div>
+       <div class="circle-option option5" id="Identitetshandlingar">Identitetshandlingar</div>
+       <div class="circle-option option6" id="Dialekt">Dialekt</div>
+       <div class="circle-option option7" id="Arresteringar">Arresteringar</div>
+       <div class="circle-option option8" id="Krigsbrott">Krigsbrott</div>
        <div id="description-box">Touch/Hover to see details.</div>
      </div>
     `,
@@ -170,14 +170,14 @@
     on_load: function () {
       //Konstanten infoData är ett objekt som innehåller texten som visas när man hovrar över varje corkelalternativ. Varje nyckel i objektet motsvarar id:t för ett cirkelalternativ, och värdet är den text som ska visas i beskrivnings
       const infoData = {
-        Experience: "0 years in industry",
-        References: "Strong references from previous employers",
-        Education: "Master's degree",
-        Leadership: "Led teams of 10+ people",
-        Motivation: "Highly motivated",
-        Communication: "Excellent written and verbal skills",
-        Skills: "Proficient at JAVA",
-        Teamwork: "Collaborative team player",
+        Minoriteten: "Det finns en muslimsk minoritet bland tigreanerna. ",
+        Regeringen: "Hur starkt Etiopiens regering har agerat mot tigreaner har ändrat sig över tid, bland annat beroende på det tillfälliga läget i kriget i Tigray. Det kan alltså lätt förvärras igen. ",
+        Åtgärder: "Enligt den senaste landinformationen om Etiopien har statens åtgärder mot tigreaner utanför Tigray främst handlat om arresteringar och kvarhållanden. Man har också använt sig av ekonomiska sanktioner och försvårat resor.",
+        Polarisering: "Enligt den senaste landinformationen om Etiopien har polariseringen i det etiopiska samhället börjat öka, liksom samhällets fokus på etnicitet. ",
+        Identitetshandlingar: "I Haile Gebremedhin identitetshandlingar framgår inte att hans etnicitet är tigreansk. ",
+        Dialekt: "Haile Gebremedhin har ingen tigreansk dialekt, trots att det är känt att man i Tigray har en utpräglad och lättigenkännlig dialekt. ",
+        Arresteringar: "Andelen arresteringar och kvarhållningar av tigreaner har enligt landinformationen minskat sedan början av 2022. Efter hösten 2022 finns ingen information om mass-arresteringar av tigreaner i Etiopien.",
+        Krigsbrott: "Det är enbart i regionen Tigray det finns kännedom om grova krigsbrott i dagsläget.",
       };
       //document söker i htmln, queryselectorAll väljer det element som har klassen circle-option, for each loopar igenom alla dessa element
      document.querySelectorAll(".circle-option").forEach((option) => {
