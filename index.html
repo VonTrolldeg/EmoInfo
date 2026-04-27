@@ -143,8 +143,13 @@
     var jsPsych = initJsPsych({
       //on_finish funktionen kommer att spara all data som samlats in under experimentet i en CSV-fil med namnet 'mouselab_data.csv'. Den hämtar all data från jsPsychs dataobjekt, konverterar det till CSV-format och sparar det lokalt på användarens dator.
       on_finish: () => {
-        jsPsych.data.get().localSave('csv', 'mouselab_data.csv');
-        console.log("funktionen initJsPsych körs");
+        jsPsych.data.get()
+        .ignore('stimulus')
+        .ignore('trial_index')
+        .ignore('time_elapsed')
+        .ignore('internal_node_id')
+        .ignore('question_order')
+        .localSave('csv', 'mouselab_data.csv');
       },
     });
 
@@ -249,9 +254,7 @@
             /* Varje knapp öppnar modalen med sin matchande text från infoData */
             document.querySelectorAll(".circle-option").forEach((option) => {
               option.addEventListener("click", () => {
-                if (!clickOrder.includes(option.id)) {
-                  clickOrder.push(option.id);
-                }
+                clickOrder.push(option.id); /* Sparar varje klick, även upprepade */
                 currentStartTime = Date.now();
                 document.getElementById("modal-text").textContent = infoData[option.id];
                 document.getElementById("info-modal").style.display = "flex";
@@ -262,12 +265,20 @@
             document.getElementById("modal-close").addEventListener("click", () => {
               const duration = Date.now() - currentStartTime;
               const currentOption = clickOrder[clickOrder.length - 1];
-              clickData.push({ option: currentOption, order: clickOrder.indexOf(currentOption) + 1, duration });
+              clickData.push({ option: currentOption, duration });
               document.getElementById("info-modal").style.display = "none";
             });
           },
-          on_finish: function () {
-            jsPsych.data.addProperties({ clickData, clickOrder });
+          /* on_finish körs när deltagaren klickar på Fortsätt.
+             Vi skriver direkt till det här trialens data-objekt istället för
+             att använda addProperties(), som skulle lägga till värdena på
+             alla rader i CSV-filen. */
+          on_finish: function (data) {
+            /* Konverterar clickData-arrayen till en JSON-sträng så att hela
+               listan med {option, order, duration}-objekt får plats i en cell */
+            data.clickData = JSON.stringify(clickData);
+            /* Sparar klickordningen som en läsbar sträng, t.ex. "Minoriteten > Dialekt > Arresteringar" */
+            data.clickOrder = clickOrder.join(' > ');
           }
         };
 
