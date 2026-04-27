@@ -158,8 +158,10 @@
       ],
       choices: ["Continue"]
     };
-    /* variabeln hoverData definieras som en tom array som kommer att användas för att lagra data om hur länge deltagaren hovrar över varje cirkelalternativ i den kommande delen av experimentet. När deltagaren interagerar med cirkelalternativen, kommer information om vilken cirkel de hovrar över och hur länge de gör det att sparas i denna array.*/
-    let hoverData = [];
+    /* variabeln clickData definieras som en tom array som kommer att användas för att lagra data om hur länge deltagaren klickar på varje cirkelalternativ i den kommande delen av experimentet. När deltagaren interagerar med cirkelalternativen, kommer information om vilken cirkel de klickar på och hur länge de gör det att sparas i denna array.*/
+    let clickData = [];
+    let clickOrder = []; // Ny array för att spåra ordning av klick
+    let currentStartTime = 0; // För att mäta tid per modal
 
     //circle_page objektet definieras
     var circle_page = {
@@ -191,7 +193,7 @@
     choices: ["Continue"],
     //on_load funktionen ligger inne i objeketet circle_page för att köras när den sidan laddas
     on_load: function () {
-      //Konstanten infoData är ett objekt som innehåller texten som visas när man hovrar över varje corkelalternativ. Varje nyckel i objektet motsvarar id:t för ett cirkelalternativ, och värdet är den text som ska visas i beskrivnings
+      //Konstanten infoData är ett objekt som innehåller texten som visas när man klickar över varje informationsknapp Varje nyckel i objektet motsvarar id:t för en knapp, och värdet är den text som ska visas i beskrivnings
       const infoData = {
         Minoriteten: "Det finns en muslimsk minoritet bland tigreanerna. ",
         Regeringen: "Hur starkt Etiopiens regering har agerat mot tigreaner har ändrat sig över tid, bland annat beroende på det tillfälliga läget i kriget i Tigray. Det kan alltså lätt förvärras igen. ",
@@ -205,19 +207,34 @@
       /* Varje knapp öppnar modalen med sin matchande text från infoData */
       document.querySelectorAll(".circle-option").forEach((option) => {
         option.addEventListener("click", () => {
+          // Spåra ordning: lägg till i clickOrder om inte redan där
+          if (!clickOrder.includes(option.id)) {
+            clickOrder.push(option.id);
+          }
+          // Starta tidtagning
+          currentStartTime = Date.now();
           document.getElementById("modal-text").textContent = infoData[option.id];
           document.getElementById("info-modal").style.display = "flex";
         });
       });
 
-      /* Stängknappen stänger modalen */
+      /* Stängknappen stänger modalen och sparar tiden */
       document.getElementById("modal-close").addEventListener("click", () => {
+        // Beräkna tiden och spara i clickData
+        const duration = Date.now() - currentStartTime;
+        const currentOption = clickOrder[clickOrder.length - 1]; // Senaste klickade
+        const order = clickOrder.indexOf(currentOption) + 1; // 1-baserad ordning
+        clickData.push({
+          option: currentOption,
+          order: order,
+          duration: duration
+        });
         document.getElementById("info-modal").style.display = "none";
       });
      },
-     //när användaren klickar på continue körs on_finish funktionen som lägger till hoverData som en egenskap i jsPsychs dataobjekt
+     //när användaren klickar på continue körs on_finish funktionen som lägger till clickData som en egenskap i jsPsychs dataobjekt
      on_finish: function () {
-       jsPsych.data.addProperties({ hoverData });
+       jsPsych.data.addProperties({ clickData, clickOrder });
      },
   };
     //surveyn på sista sidan där användaren får svara på frågor om rekryteringsbelsut och vilka informationskällor som var mest relevanta för beslutet. Denna del använder sig av en textbaserad enkät där deltagaren kan skriva sina svar i textfält. Svaren sparas som experimentets data i csv-filen.
