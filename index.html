@@ -182,80 +182,10 @@
     let clickOrder = []; // Ny array för att spåra ordning av klick
     let currentStartTime = 0; // För att mäta tid per modal
 
-    //circle_page objektet definieras
-    var circle_page = {
-      //egenskapen type sätts till en jspsych funktion som skapar knappar
-     type: jsPsychHtmlButtonResponse,
-     //detta står på knapparna
-     /* Rutnät med 8 knappar och en tom mittcell. Modalen läggs in i samma stimulus
-        så att JS kan komma åt den via on_load. */
-     stimulus: `
-       <div class="grid-container">
-         <div class="circle-option" id="Minoriteten">Minoriteten</div>
-         <div class="circle-option" id="Regeringen">Regeringen</div>
-         <div class="circle-option" id="Åtgärder">Åtgärder</div>
-         <div class="circle-option" id="Polarisering">Polarisering</div>
-         <div class="grid-center">Tryck på en knapp för att få info</div>
-         <div class="circle-option" id="Identitetshandlingar">Identitetshandlingar</div>
-         <div class="circle-option" id="Dialekt">Dialekt</div>
-         <div class="circle-option" id="Arresteringar">Arresteringar</div>
-         <div class="circle-option" id="Krigsbrott">Krigsbrott</div>
-       </div>
-       <div id="info-modal">
-         <div id="modal-content">
-           <p id="modal-text"></p>
-           <button id="modal-close">Stäng</button>
-         </div>
-       </div>
-     `,
-  
-    choices: ["Fortsätt"],
-    //on_load funktionen ligger inne i objeketet circle_page för att köras när den sidan laddas
-    on_load: function () {
-      //Konstanten infoData är ett objekt som innehåller texten som visas när man klickar över varje informationsknapp Varje nyckel i objektet motsvarar id:t för en knapp, och värdet är den text som ska visas i beskrivnings
-      const infoData = {
-        Minoriteten: "Det finns en muslimsk minoritet bland tigreanerna. ",
-        Regeringen: "Hur starkt Etiopiens regering har agerat mot tigreaner har ändrat sig över tid, bland annat beroende på det tillfälliga läget i kriget i Tigray. Det kan alltså lätt förvärras igen. ",
-        Åtgärder: "Enligt den senaste landinformationen om Etiopien har statens åtgärder mot tigreaner utanför Tigray främst handlat om arresteringar och kvarhållanden. Man har också använt sig av ekonomiska sanktioner och försvårat resor.",
-        Polarisering: "Enligt den senaste landinformationen om Etiopien har polariseringen i det etiopiska samhället börjat öka, liksom samhällets fokus på etnicitet. ",
-        Identitetshandlingar: "I Haile Gebremedhin identitetshandlingar framgår inte att hans etnicitet är tigreansk. ",
-        Dialekt: "Haile Gebremedhin har ingen tigreansk dialekt, trots att det är känt att man i Tigray har en utpräglad och lättigenkännlig dialekt. ",
-        Arresteringar: "Andelen arresteringar och kvarhållningar av tigreaner har enligt landinformationen minskat sedan början av 2022. Efter hösten 2022 finns ingen information om mass-arresteringar av tigreaner i Etiopien.",
-        Krigsbrott: "Det är enbart i regionen Tigray det finns kännedom om grova krigsbrott i dagsläget.",
-      };
-      /* Varje knapp öppnar modalen med sin matchande text från infoData */
-      document.querySelectorAll(".circle-option").forEach((option) => {
-        option.addEventListener("click", () => {
-          // Spåra ordning: lägg till i clickOrder om inte redan där
-          if (!clickOrder.includes(option.id)) {
-            clickOrder.push(option.id);
-          }
-          // Starta tidtagning
-          currentStartTime = Date.now();
-          document.getElementById("modal-text").textContent = infoData[option.id];
-          document.getElementById("info-modal").style.display = "flex";
-        });
-      });
-
-      /* Stängknappen stänger modalen och sparar tiden */
-      document.getElementById("modal-close").addEventListener("click", () => {
-        // Beräkna tiden och spara i clickData
-        const duration = Date.now() - currentStartTime;
-        const currentOption = clickOrder[clickOrder.length - 1]; // Senaste klickade
-        const order = clickOrder.indexOf(currentOption) + 1; // 1-baserad ordning
-        clickData.push({
-          option: currentOption,
-          order: order,
-          duration: duration
-        });
-        document.getElementById("info-modal").style.display = "none";
-      });
-     },
-     //när användaren klickar på continue körs on_finish funktionen som lägger till clickData som en egenskap i jsPsychs dataobjekt
-     on_finish: function () {
-       jsPsych.data.addProperties({ clickData, clickOrder });
-     },
-  };
+    /* circle_page definieras inuti fetch-callbacken eftersom knapparna och deras
+       beskrivningar läses från JSON-filen. Variabeln deklareras här så att den
+       är tillgänglig när timeline byggs. */
+    var circle_page;
     //surveyn på sista sidan där användaren får svara på frågor om rekryteringsbelsut och vilka informationskällor som var mest relevanta för beslutet. Denna del använder sig av en textbaserad enkät där deltagaren kan skriva sina svar i textfält. Svaren sparas som experimentets data i csv-filen.
     var survey = {
         type: jsPsychSurveyText,
@@ -283,6 +213,62 @@
           choices: ["Fortsätt"],
           save_trial_parameters: { stimulus: false },
           data: { assigned_text: selectedText.id }
+        };
+
+        /* Bygg infoData som ett objekt från options-arrayen i JSON.
+           Nyckeln är knappens id och värdet är beskrivningstexten. */
+        const infoData = {};
+        data.options.forEach(opt => {
+          infoData[opt.id] = opt.description;
+        });
+
+        /* Bygg HTML för varje knapp från options-arrayen.
+           Lägg in mittcellen (index 4) mellan de 4 första och 4 sista knapparna. */
+        const optionDivs = data.options.map(opt =>
+          `<div class="circle-option" id="${opt.id}">${opt.id}</div>`
+        );
+        optionDivs.splice(4, 0, '<div class="grid-center">Tryck på en knapp för att få info</div>');
+
+        /* Definiera circle_page med det dynamiskt byggda stimulus och
+           on_load som använder infoData via closure från fetch-callbacken. */
+        circle_page = {
+          type: jsPsychHtmlButtonResponse,
+          stimulus: `
+            <div class="grid-container">
+              ${optionDivs.join('\n              ')}
+            </div>
+            <div id="info-modal">
+              <div id="modal-content">
+                <p id="modal-text"></p>
+                <button id="modal-close">Stäng</button>
+              </div>
+            </div>
+          `,
+          choices: ["Fortsätt"],
+          on_load: function () {
+            /* Varje knapp öppnar modalen med sin matchande text från infoData */
+            document.querySelectorAll(".circle-option").forEach((option) => {
+              option.addEventListener("click", () => {
+                if (!clickOrder.includes(option.id)) {
+                  clickOrder.push(option.id);
+                }
+                currentStartTime = Date.now();
+                document.getElementById("modal-text").textContent = infoData[option.id];
+                document.getElementById("info-modal").style.display = "flex";
+              });
+            });
+
+            /* Stängknappen sparar hur länge modalen var öppen och stänger den */
+            document.getElementById("modal-close").addEventListener("click", () => {
+              const duration = Date.now() - currentStartTime;
+              const currentOption = clickOrder[clickOrder.length - 1];
+              clickData.push({ option: currentOption, order: clickOrder.indexOf(currentOption) + 1, duration });
+              document.getElementById("info-modal").style.display = "none";
+            });
+          },
+          on_finish: function () {
+            jsPsych.data.addProperties({ clickData, clickOrder });
+          }
         };
 
         //lägger till alla sidor i rätt ordning och startar experimentet
