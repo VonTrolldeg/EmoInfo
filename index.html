@@ -25,6 +25,32 @@
     padding: 0 20px;
   }
 
+  /* Continue-knappen - centrerad och stor nog för touch (minst 44px enligt Apples riktlinjer) */
+  .jspsych-btn {
+    display: block !important;
+    margin: 20px auto 0 !important;
+    font-size: 16px !important;
+    min-height: 44px;
+    background-color: #875E29;
+    color: white;
+    width: 140px;
+    height: 36px;
+    border: none;
+    border-radius: 0;
+    line-height: 36px;
+  }
+  /* hover färgen över fortsättknappen*/
+  .jspsych-btn:hover {
+  background-color: #6C4B21;
+  text-decoration: underline;
+  }
+
+  /* Centrerar knapp-containern för html-button-response-sidor (påverkar inte survey-likert) */
+  #jspsych-html-button-response-btngroup {
+    display: flex;
+    justify-content: center;
+  }
+
   /* Textsidan - läsbar på alla skärmstorlekar */
   .text-content {
     line-height: 1.8;
@@ -106,14 +132,6 @@
     min-height: 44px;
   }
 
-  /* Continue-knappen - centrerad och stor nog för touch (minst 44px enligt Apples riktlinjer) */
-  .jspsych-btn {
-    display: block !important;
-    margin: 20px auto 0 !important;
-    padding: 14px 28px !important;
-    font-size: 16px !important;
-    min-height: 44px;
-  }
 </style>
 
  </head>
@@ -138,9 +156,10 @@
     var welcome = {
         type: jsPsychHtmlButtonResponse,
         stimulus: "Välkommen. Du kommer nu att få delta i ett experiment om beslutsfattande. Du kommer att få läsa en text och sedan svara på frågor... LÄGG TILL RÄTT TEXT",
-        choices: ["Continue"]
+        choices: ["Fortsätt"]
     };
 
+    /* här definieras objektet text page som är delen i experimentet som randomiserar och visar den neútrala eller emotionella berättelsen. Den hämtar texten med fetch som är en asynkron funktion och körs sist. */
     var text_page;
 
     /* variabeln grading_scale definieras som ett objekt som beskriver en del av experimentet där deltagaren får bedöma sin attityd till kandidaten baserat på sin första intryck. Denna del använder sig av en Likert-skala där deltagaren kan välja mellan fem olika alternativ, från "Very negative" till "Very positive". När deltagaren har gjort sitt val och klickar på "Continue", kommer experimentet att gå vidare till nästa del.*/
@@ -156,7 +175,7 @@
           required: true
         }
       ],
-      choices: ["Continue"]
+      button_label: "Fortsätt"
     };
     /* variabeln clickData definieras som en tom array som kommer att användas för att lagra data om hur länge deltagaren klickar på varje cirkelalternativ i den kommande delen av experimentet. När deltagaren interagerar med cirkelalternativen, kommer information om vilken cirkel de klickar på och hur länge de gör det att sparas i denna array.*/
     let clickData = [];
@@ -190,7 +209,7 @@
        </div>
      `,
   
-    choices: ["Continue"],
+    choices: ["Fortsätt"],
     //on_load funktionen ligger inne i objeketet circle_page för att köras när den sidan laddas
     on_load: function () {
       //Konstanten infoData är ett objekt som innehåller texten som visas när man klickar över varje informationsknapp Varje nyckel i objektet motsvarar id:t för en knapp, och värdet är den text som ska visas i beskrivnings
@@ -244,7 +263,8 @@
           prompt: "Do you want to recruit the candidate?"}, 
         { prompt: "Motivate your decision.", rows: 5}, 
         {prompt: "In the prior page, you were able to find information about the candidate's experience, motivation, skills, and education. Please write these sources down in a list from 1 to 4, in order of the relevance you believe they had to the recruitment decision.", 
-        rows: 2}]
+        rows: 2}],
+      button_label: "Fortsätt"
     };
 
     //hämtar texterna från JSON-filen
@@ -260,7 +280,7 @@
           type: jsPsychHtmlButtonResponse,
           /* Delar upp texten i stycken vid \n och renderar dem som <p>-taggar */
           stimulus: `<div class="text-content"><p>${selectedText.content.replace(/\n/g, '</p><p>')}</p></div>`,
-          choices: ["Continue"],
+          choices: ["Fortsätt"],
           save_trial_parameters: { stimulus: false },
           data: { assigned_text: selectedText.id }
         };
