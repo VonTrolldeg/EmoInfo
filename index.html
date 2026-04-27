@@ -34,99 +34,84 @@
     margin-bottom: 1em; /* Tydliga styckebrytningar */
   }
 
-  /* Cirkelns storlek styrs av CSS-variabler som ändras per skärmstorlek.
-     Basvärden gäller för mobil (mobile first). */
-  :root {
-    --circle-size: min(82vw, 320px);   /* Får plats på smal mobilskärm */
-    --option-size: min(18vw, 68px);
-    --distance: min(36vw, 132px);      /* Avstånd från centrum till knapp */
-    --option-font: clamp(10px, 2.8vw, 13px);
-    --desc-width: min(34vw, 130px);
-    --desc-font: clamp(11px, 2vw, 14px);
-  }
-
-  /* Surfplatta */
-  @media (min-width: 600px) {
-    :root {
-      --circle-size: 370px;
-      --option-size: 74px;
-      --distance: 152px;
-      --option-font: 13px;
-      --desc-width: 145px;
-      --desc-font: 14px;
-    }
-  }
-
-  /* Dator */
-  @media (min-width: 900px) {
-    :root {
-      --circle-size: 400px;
-      --option-size: 80px;
-      --distance: 170px;
-      --option-font: 14px;
-      --desc-width: 160px;
-      --desc-font: 15px;
-    }
-  }
-
-  /* Cirkelbehållaren placeras i dokumentflödet (inte fixed) för att fungera bra på mobil */
-  .circle-container {
-    width: var(--circle-size);
-    height: var(--circle-size);
-    border-radius: 50%;
-    position: relative;
+  /* Rutnätet - 3x3 grid där mittcellen är tom och de övriga 8 är knappar.
+     Fungerar på alla skärmstorlekar tack vare min() och aspect-ratio. */
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Tre lika breda kolumner */
+    gap: 8px;
+    width: min(90vw, 420px);              /* Max 420px på stora skärmar */
     margin: 20px auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 
-  /* Cirkelknapparna */
-  .circle-container .circle-option {
-    width: var(--option-size);
-    height: var(--option-size);
-    position: absolute;
-    border-radius: 50%;
+  /* Varje knapp i rutnätet */
+  .circle-option {
+    aspect-ratio: 1;                       /* Kvadratisk form på alla skärmstorlekar */
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    font-size: var(--option-font);
+    font-size: clamp(11px, 3.5vw, 15px);  /* Skalas med skärmbredd */
+    font-weight: bold;
     background-color: #f0f0f0;
     border: 1px solid #ccc;
+    border-radius: 8px;
     cursor: pointer;
-    -webkit-tap-highlight-color: transparent; /* Tar bort blå highlight vid touch på iOS */
+    padding: 6px;
+    min-height: 44px;                      /* Minst 44px för att vara bekväm att trycka på */
+    -webkit-tap-highlight-color: transparent;
   }
 
-  /* Positionerar knapparna runt cirkeln via rotation och translation */
-  .option1 { transform: rotate(0deg) translate(var(--distance)) rotate(0deg); }
-  .option2 { transform: rotate(45deg) translate(var(--distance)) rotate(-45deg); }
-  .option3 { transform: rotate(90deg) translate(var(--distance)) rotate(-90deg); }
-  .option4 { transform: rotate(135deg) translate(var(--distance)) rotate(-135deg); }
-  .option5 { transform: rotate(180deg) translate(var(--distance)) rotate(-180deg); }
-  .option6 { transform: rotate(225deg) translate(var(--distance)) rotate(-225deg); }
-  .option7 { transform: rotate(270deg) translate(var(--distance)) rotate(-270deg); }
-  .option8 { transform: rotate(315deg) translate(var(--distance)) rotate(-315deg); }
-
-  /* Beskrivningsrutan i mitten av cirkeln */
-  #description-box {
-    position: absolute;
-    width: var(--desc-width);
-    height: auto;
+  /* Den tomma mittcellen i rutnätet */
+  .grid-center {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    font-size: var(--desc-font);
-    background-color: white;
-    border: 1px solid black;
-    border-radius: 10px;
-    padding: 8px;
-    z-index: 5;
+    font-size: clamp(11px, 3.5vw, 15px);
+    padding: 6px;
   }
 
-  /* Continue-knappen - stor nog för touch (minst 44px enligt Apples riktlinjer) */
+  /* Modalen - täcker hela skärmen med en halvtransparent bakgrund */
+  #info-modal {
+    display: none;                         /* Dold som standard, visas via JS */
+    position: fixed;
+    inset: 0;                              /* Täcker hela viewport */
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  /* Modalens innehållsruta */
+  #modal-content {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    max-width: 500px;
+    width: 100%;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* Stängknappen i modalen */
+  #modal-close {
+    display: block;
+    margin: 16px auto 0;
+    padding: 10px 24px;
+    font-size: 16px;
+    cursor: pointer;
+    min-height: 44px;
+  }
+
+  /* Continue-knappen - centrerad och stor nog för touch (minst 44px enligt Apples riktlinjer) */
   .jspsych-btn {
+    display: block !important;
+    margin: 20px auto 0 !important;
     padding: 14px 28px !important;
     font-size: 16px !important;
-    margin-top: 20px;
     min-height: 44px;
   }
 </style>
@@ -181,19 +166,27 @@
       //egenskapen type sätts till en jspsych funktion som skapar knappar
      type: jsPsychHtmlButtonResponse,
      //detta står på knapparna
+     /* Rutnät med 8 knappar och en tom mittcell. Modalen läggs in i samma stimulus
+        så att JS kan komma åt den via on_load. */
      stimulus: `
-       <div class="circle-container">
-       <div class="circle-option option1" id="Minoriteten">Minoriteten</div>
-       <div class="circle-option option2" id="Regeringen">Regeringen</div>
-       <div class="circle-option option3" id="Åtgärder">Åtgärder</div>
-       <div class="circle-option option4" id="Polarisering">Polarisering</div>
-       <div class="circle-option option5" id="Identitetshandlingar">Identitetshandlingar</div>
-       <div class="circle-option option6" id="Dialekt">Dialekt</div>
-       <div class="circle-option option7" id="Arresteringar">Arresteringar</div>
-       <div class="circle-option option8" id="Krigsbrott">Krigsbrott</div>
-       <div id="description-box">Touch/Hover to see details.</div>
-     </div>
-    `,
+       <div class="grid-container">
+         <div class="circle-option" id="Minoriteten">Minoriteten</div>
+         <div class="circle-option" id="Regeringen">Regeringen</div>
+         <div class="circle-option" id="Åtgärder">Åtgärder</div>
+         <div class="circle-option" id="Polarisering">Polarisering</div>
+         <div class="grid-center">Tryck på en knapp för att få info</div>
+         <div class="circle-option" id="Identitetshandlingar">Identitetshandlingar</div>
+         <div class="circle-option" id="Dialekt">Dialekt</div>
+         <div class="circle-option" id="Arresteringar">Arresteringar</div>
+         <div class="circle-option" id="Krigsbrott">Krigsbrott</div>
+       </div>
+       <div id="info-modal">
+         <div id="modal-content">
+           <p id="modal-text"></p>
+           <button id="modal-close">Stäng</button>
+         </div>
+       </div>
+     `,
   
     choices: ["Continue"],
     //on_load funktionen ligger inne i objeketet circle_page för att köras när den sidan laddas
@@ -209,31 +202,18 @@
         Arresteringar: "Andelen arresteringar och kvarhållningar av tigreaner har enligt landinformationen minskat sedan början av 2022. Efter hösten 2022 finns ingen information om mass-arresteringar av tigreaner i Etiopien.",
         Krigsbrott: "Det är enbart i regionen Tigray det finns kännedom om grova krigsbrott i dagsläget.",
       };
-      //document söker i htmln, queryselectorAll väljer det element som har klassen circle-option, for each loopar igenom alla dessa element
-     document.querySelectorAll(".circle-option").forEach((option) => {
-       let startTime = 0;
-       //och lägger till event listeners för mouseover
-       option.addEventListener("mouseover", (event) => {
-         const id = event.target.id;
-         startTime = Date.now();
-         //Hittar diven med idt description box oxh lägger in texten som motsvarar det cirkelalternativ som musen hovrar över. Texten hämtas från infoData-objektet där nyckeln är id:t för det cirkelalternativ som hovras över. 
-         document.getElementById("description-box").textContent = infoData[id];
-       });
-       //och lägger till event listeners för mouseout
-       option.addEventListener("mouseout", (event) => {
-         const id = event.target.id;
-         const duration = Date.now() - startTime;
-        
-         //När musen lämnar ett cirkelalternativ, beräknas hur länge den har hovrat över det genom att ta skillnaden mellan det aktuella datumet och startTime. Denna information, tillsammans med id:t för det cirkelalternativ som lämnades, sparas sedan i hoverData-arrayen som ett objekt med egenskaperna option och hoverDuration. 
-         hoverData.push({
-           option: id,
-           hoverDuration: duration,
-         });
-        //Efter att ha sparat hoverdata, återställs texten i beskrivningsrutan till det ursprungliga meddelandet "Hover over an option to see details.", vilket uppmanar deltagaren att fortsätta interagera med cirkelalternativen.
-         document.getElementById("description-box").textContent =
-          "Hover over an option to see details.";
-       });
-       });
+      /* Varje knapp öppnar modalen med sin matchande text från infoData */
+      document.querySelectorAll(".circle-option").forEach((option) => {
+        option.addEventListener("click", () => {
+          document.getElementById("modal-text").textContent = infoData[option.id];
+          document.getElementById("info-modal").style.display = "flex";
+        });
+      });
+
+      /* Stängknappen stänger modalen */
+      document.getElementById("modal-close").addEventListener("click", () => {
+        document.getElementById("info-modal").style.display = "none";
+      });
      },
      //när användaren klickar på continue körs on_finish funktionen som lägger till hoverData som en egenskap i jsPsychs dataobjekt
      on_finish: function () {
