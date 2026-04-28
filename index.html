@@ -60,43 +60,40 @@
     margin-bottom: 1em; /* Tydliga styckebrytningar */
   }
 
-  /* Rutnätet - 3x3 grid där mittcellen är tom och de övriga 8 är knappar.
-     Fungerar på alla skärmstorlekar tack vare min() och aspect-ratio. */
-  .grid-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Tre lika breda kolumner */
-    gap: 8px;
-    width: min(90vw, 420px);              /* Max 420px på stora skärmar */
+  /* Lista med alternativ istället för rutnät */
+  .option-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: min(90vw, 420px);
     margin: 20px auto;
   }
 
-  /* Varje knapp i rutnätet */
   .circle-option {
-    aspect-ratio: 1;                       /* Kvadratisk form på alla skärmstorlekar */
     display: flex;
     align-items: center;
-    justify-content: center;
-    text-align: center;
-    font-size: clamp(11px, 3.5vw, 15px);  /* Skalas med skärmbredd */
-    font-weight: bold;
-    background-color: #f0f0f0;
+    justify-content: space-between;
+    text-align: left;
+    font-size: 16px;
+    font-weight: 700;
+    background-color: #f8f8f6;
     border: 1px solid #ccc;
-    border-radius: 8px;
+    border-radius: 12px;
     cursor: pointer;
-    padding: 6px;
-    min-height: 44px;                      /* Minst 44px för att vara bekväm att trycka på */
+    padding: 16px 18px;
+    min-height: 56px;
+    color: #222;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
     -webkit-tap-highlight-color: transparent;
   }
 
-  /* Den tomma mittcellen i rutnätet */
-  .grid-center {
-    aspect-ratio: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    font-size: clamp(11px, 3.5vw, 15px);
-    padding: 6px;
+  .circle-option:hover {
+    background-color: #f0ede5;
+    border-color: #9d6114;
+  }
+
+  .circle-option span {
+    flex: 1;
   }
 
   /* Modalen - täcker hela skärmen med en halvtransparent bakgrund */
@@ -126,10 +123,21 @@
   #modal-close {
     display: block;
     margin: 16px auto 0;
-    padding: 10px 24px;
     font-size: 16px;
     cursor: pointer;
     min-height: 44px;
+    background-color: #875E29;
+    color: white;
+    width: 140px;
+    height: 36px;
+    border: none;
+    border-radius: 0;
+    line-height: 36px;
+  }
+
+  #modal-close:hover {
+    background-color: #6C4B21;
+    text-decoration: underline;
   }
 
 </style>
@@ -227,25 +235,25 @@
           infoData[opt.id] = opt.description;
         });
 
-        /* Bygg HTML för varje knapp från options-arrayen.
-           Lägg in mittcellen (index 4) mellan de 4 första och 4 sista knapparna. */
+        /* Bygg HTML för varje knapp från options-arrayen. */
         const optionDivs = data.options.map(opt =>
-          `<div class="circle-option" id="${opt.id}">${opt.id}</div>`
+          `<button class="circle-option" id="${opt.id}" type="button"><span>${opt.id}</span></button>`
         );
-        optionDivs.splice(4, 0, '<div class="grid-center">Tryck på en knapp för att få info</div>');
 
         /* Definiera circle_page med det dynamiskt byggda stimulus och
            on_load som använder infoData via closure från fetch-callbacken. */
         circle_page = {
           type: jsPsychHtmlButtonResponse,
           stimulus: `
-            <div class="grid-container">
+            <h3>Ytterligare information relaterat till berättelsen</h3>
+            <p>Tryck på knapparna för att ta del av informationen</p>
+            <div class="option-list">
               ${optionDivs.join('\n              ')}
             </div>
             <div id="info-modal">
               <div id="modal-content">
                 <p id="modal-text"></p>
-                <button id="modal-close">Stäng</button>
+                <button id="modal-close" type="button">Stäng</button>
               </div>
             </div>
           `,
