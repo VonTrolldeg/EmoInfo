@@ -8,7 +8,6 @@
     <link href="https://unpkg.com/jspsych@7.3.4/css/jspsych.css" rel="stylesheet" type="text/css" />
 
     <script src="https://unpkg.com/@jspsych/plugin-html-button-response@1.1.3"></script>
-    <script src="https://unpkg.com/@jspsych/plugin-survey-text@1.1.3"></script>
     <script src="https://unpkg.com/@jspsych/plugin-survey-likert@1.1.3"></script>
 
 <style>
@@ -38,7 +37,6 @@
     border: none;
     border-radius: 0;
     line-height: 36px;
-    padding-bottom: 50px;
   }
   /* hover färgen över fortsättknappen*/
   .jspsych-btn:hover {
@@ -70,7 +68,7 @@
     margin: 20px auto;
   }
 
-  .circle-option {
+  .mouselab-option {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -88,12 +86,12 @@
     -webkit-tap-highlight-color: transparent;
   }
 
-  .circle-option:hover {
+  .mouselab-option:hover {
     background-color: #f0ede5;
     border-color: #9d6114;
   }
 
-  .circle-option span {
+  .mouselab-option span {
     flex: 1;
   }
 
@@ -257,14 +255,14 @@
       button_label: "Fortsätt"
     };
     /* variabeln clickData definieras som en tom array som kommer att användas för att lagra data om hur länge deltagaren klickar på varje cirkelalternativ i den kommande delen av experimentet. När deltagaren interagerar med cirkelalternativen, kommer information om vilken cirkel de klickar på och hur länge de gör det att sparas i denna array.*/
-    let clickData = [];
-    let clickOrder = []; // Ny array för att spåra ordning av klick
-    let currentStartTime = 0; // För att mäta tid per modal
+    var clickData = [];
+    var clickOrder = [];
+    var currentStartTime = 0;
 
-    /* circle_page definieras inuti fetch-callbacken eftersom knapparna och deras
-       beskrivningar läses från JSON-filen. Variabeln deklareras här så att den
-       är tillgänglig när timeline byggs. */
-    var circle_page;
+    /* mouselab_list och survey definieras inuti fetch-callbacken eftersom de
+       bygger på data från JSON-filen. Variablerna deklareras här så att de
+       är tillgängliga när timeline byggs. */
+    var mouselab_list;
     //surveyn på sista sidan där användaren får svara på frågor om rekryteringsbelsut och vilka informationskällor som var mest relevanta för beslutet. Denna del använder sig av en textbaserad enkät där deltagaren kan skriva sina svar i textfält. Svaren sparas som experimentets data i csv-filen.
     var survey;
 
@@ -308,12 +306,12 @@
 
         /* Bygg HTML för varje knapp från den randomiserade options-arrayen. */
         const optionDivs = randomizedOptions.map(opt =>
-          `<button class="circle-option" id="${opt.id}" type="button"><span>${opt.id}</span></button>`
+          `<button class="mouselab-option" id="${opt.id}" type="button"><span>${opt.id}</span></button>`
         );
 
-        /* Definiera circle_page med det dynamiskt byggda stimulus och
+        /* Definiera mouselab_list med det dynamiskt byggda stimulus och
            on_load som använder infoData via closure från fetch-callbacken. */
-        circle_page = {
+        mouselab_list = {
           type: jsPsychHtmlButtonResponse,
           stimulus: `
             <h3>Ytterligare information relaterat till berättelsen</h3>
@@ -331,7 +329,7 @@
           choices: ["Fortsätt"],
           on_load: function () {
             /* Varje knapp öppnar modalen med sin matchande text från infoData */
-            document.querySelectorAll(".circle-option").forEach((option) => {
+            document.querySelectorAll(".mouselab-option").forEach((option) => {
               option.addEventListener("click", () => {
                 clickOrder.push(option.id); /* Sparar varje klick, även upprepade */
                 currentStartTime = Date.now();
@@ -354,7 +352,7 @@
              alla rader i CSV-filen. */
           on_finish: function (data) {
             /* Konverterar clickData-arrayen till en JSON-sträng så att hela
-               listan med {option, order, duration}-objekt får plats i en cell */
+               listan med {option, duration}-objekt får plats i en cell */
             data.clickData = JSON.stringify(clickData);
             /* Sparar klickordningen som en läsbar sträng, t.ex. "Minoriteten > Dialekt > Arresteringar" */
             data.clickOrder = clickOrder.join(' > ');
@@ -363,7 +361,7 @@
 
         /* Bygg en slider per alternativ: rubrik, beskrivning och range-input
            med etiketterna "Inte viktig" och "Mycket viktig" i ändarna */
-        const infoList = randomizedOptions.map(opt => `
+        const sliderList = randomizedOptions.map(opt => `
           <div class="info-item">
             <strong>${opt.id}</strong>
             <p>${opt.description}</p>
@@ -389,7 +387,7 @@
 
         survey = {
           type: jsPsychHtmlButtonResponse,
-          stimulus: `<h3>Hur viktig tycker du att den här biten information var för ditt beslut?</h3><div class="text-content">${infoList}</div><p id="slider-warning" style="color:#b22020; display:none; margin-top: 10px;">Du måste justera alla reglage innan du kan gå vidare.</p>`,
+          stimulus: `<h3>Hur viktig tycker du att den här biten information var för ditt beslut?</h3><div class="text-content">${sliderList}</div><p id="slider-warning" style="color:#b22020; display:none; margin-top: 10px;">Du måste justera alla reglage innan du kan gå vidare.</p>`,
           choices: ["Fortsätt"],
           /* Lyssnar på varje slider i realtid och uppdaterar surveySliderValues.
              on_finish läser DOM:en för sent – den är redan borta då. */
@@ -435,7 +433,7 @@
         };
 
         //lägger till alla sidor i rätt ordning och startar experimentet
-        timeline.push(welcome, text_page, grading_scale, circle_page, survey);
+        timeline.push(welcome, text_page, grading_scale, mouselab_list, survey);
         jsPsych.run(timeline);
       });
 
