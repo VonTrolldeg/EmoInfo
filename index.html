@@ -38,6 +38,7 @@
     border: none;
     border-radius: 0;
     line-height: 36px;
+    padding-bottom: 50px;
   }
   /* hover färgen över fortsättknappen*/
   .jspsych-btn:hover {
@@ -117,6 +118,52 @@
     width: 100%;
     font-size: 16px;
     line-height: 1.6;
+  }
+
+  /* Varje informationsbit med sin slider */
+  .info-item {
+    margin-bottom: 40px;
+  }
+
+  /* Slider-container: input ovanför, etiketter under */
+  .slider-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-top: 8px;
+  }
+
+  .slider-wrapper input[type="range"] {
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+  }
+
+  /* Spåret – tunn grå linje */
+  .slider-wrapper input[type="range"]::-webkit-slider-runnable-track {
+    height: 2px;
+    background: #333;
+    border-radius: 0;
+  }
+
+  /* Tummen – vit cirkel med grå kant */
+  .slider-wrapper input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid #333;
+    margin-top: -9px;
+  }
+
+  /* Etiketter under slidern, utspridda till ändarna */
+  .slider-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #444;
+    margin-top: 4px;
   }
 
   /* Stängknappen i modalen */
@@ -200,15 +247,7 @@
        är tillgänglig när timeline byggs. */
     var circle_page;
     //surveyn på sista sidan där användaren får svara på frågor om rekryteringsbelsut och vilka informationskällor som var mest relevanta för beslutet. Denna del använder sig av en textbaserad enkät där deltagaren kan skriva sina svar i textfält. Svaren sparas som experimentets data i csv-filen.
-    var survey = {
-        type: jsPsychSurveyText,
-        questions: [{ 
-          prompt: "Do you want to recruit the candidate?"}, 
-        { prompt: "Motivate your decision.", rows: 5}, 
-        {prompt: "In the prior page, you were able to find information about the candidate's experience, motivation, skills, and education. Please write these sources down in a list from 1 to 4, in order of the relevance you believe they had to the recruitment decision.", 
-        rows: 2}],
-      button_label: "Fortsätt"
-    };
+    var survey;
 
     //hämtar texterna från JSON-filen
     fetch('texts.json')
@@ -287,6 +326,45 @@
             data.clickData = JSON.stringify(clickData);
             /* Sparar klickordningen som en läsbar sträng, t.ex. "Minoriteten > Dialekt > Arresteringar" */
             data.clickOrder = clickOrder.join(' > ');
+          }
+        };
+
+        /* Bygg en slider per alternativ: rubrik, beskrivning och range-input
+           med etiketterna "Inte viktig" och "Mycket viktig" i ändarna */
+        const infoList = data.options.map(opt => `
+          <div class="info-item">
+            <strong>${opt.id}</strong>
+            <p>${opt.description}</p>
+            <div class="slider-wrapper">
+              <input type="range" id="slider-${opt.id}" min="1" max="10" value="5.5" step="any">
+              <div class="slider-labels">
+                <span>Inte viktig</span>
+                <span>Mycket viktig</span>
+              </div>
+            </div>
+          </div>`
+        ).join('');
+
+        /* Initiera med startvärdet 5 för alla alternativ så att något sparas
+           även om deltagaren inte rör en slider */
+        const surveySliderValues = {};
+        data.options.forEach(opt => { surveySliderValues[opt.id] = 5.5; });
+
+        survey = {
+          type: jsPsychHtmlButtonResponse,
+          stimulus: `<h3>Hur viktig tycker du att den här biten information var för ditt beslut?</h3><div class="text-content">${infoList}</div>`,
+          choices: ["Fortsätt"],
+          /* Lyssnar på varje slider i realtid och uppdaterar surveySliderValues.
+             on_finish läser DOM:en för sent – den är redan borta då. */
+          on_load: function() {
+            document.querySelectorAll('[id^="slider-"]').forEach(slider => {
+              slider.addEventListener('input', () => {
+                surveySliderValues[slider.id.replace('slider-', '')] = parseFloat(parseFloat(slider.value).toFixed(2));
+              });
+            });
+          },
+          on_finish: function(data) {
+            data.sliderValues = JSON.stringify(surveySliderValues);
           }
         };
 
