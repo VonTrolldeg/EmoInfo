@@ -241,21 +241,8 @@
     /* här definieras objektet text page som är delen i experimentet som randomiserar och visar den neútrala eller emotionella berättelsen. Den hämtar texten med fetch som är en asynkron funktion och körs sist. */
     var text_page;
 
-    /* variabeln grading_scale definieras som ett objekt som beskriver en del av experimentet där deltagaren får bedöma sin attityd till kandidaten baserat på sin första intryck. Denna del använder sig av en Likert-skala där deltagaren kan välja mellan fem olika alternativ, från "Very negative" till "Very positive". När deltagaren har gjort sitt val och klickar på "Continue", kommer experimentet att gå vidare till nästa del.*/
-    /*!!!! eventuellt ska vu byta dem mot en slide*/
-    var grading_scale = {
-      type: jsPsychSurveyLikert,
-      preamble: "<h3>Based on your initial impression of the candidate, what is attitude towards hiring the person?</h3>",
-      questions: [
-        {
-          prompt: "Rate your attitude towards hiring the person from negative to positive, in accordance with your first impression.",
-          /*!!!Hur sparas denna variabel?*/
-          labels: ["Very negative", "Negative", "Neutral", "Positive", "Very positive"],
-          required: true
-        }
-      ],
-      button_label: "Fortsätt"
-    };
+    /* Ny sida för trovärdighet och flyktingstatus med sliders */
+    var credibility_page;
     /* variabeln clickData definieras som en tom array som kommer att användas för att lagra data om hur länge deltagaren klickar på varje cirkelalternativ i den kommande delen av experimentet. När deltagaren interagerar med cirkelalternativen, kommer information om vilken cirkel de klickar på och hur länge de gör det att sparas i denna array.*/
     let clickData = [];
     let clickOrder = []; // Ny array för att spåra ordning av klick
@@ -284,6 +271,156 @@
           choices: ["Fortsätt"],
           save_trial_parameters: { stimulus: false },
           data: { assigned_text: selectedText.id }
+        };
+
+        /* Skapa credibility_page med sliders för trovärdighet och flyktingstatus */
+        let credibilityValue = 5.5;
+        let refugeeValue = 5.5;
+        const credibilityHTML = `
+          <div class="info-item">
+            <p>Hur trovärdig tyckte du att Haile Gebremedhin verkade?</p>
+            <div class="slider-wrapper">
+              <input type="range" id="credibility-slider" min="1" max="10" value="5.5" step="any">
+              <div class="slider-labels">
+                <span>Inte alls trovärdig</span>
+                <span>Mycket trovärdig</span>
+              </div>
+            </div>
+          </div>
+          <div class="info-item">
+            <p>Baserat på det du läst - anser du att Haile Gebremedhin bör få flyktingstatus i Sverige?</p>
+            <div class="slider-wrapper">
+              <input type="range" id="refugee-slider" min="1" max="10" value="5.5" step="any">
+              <div class="slider-labels">
+                <span>Nej</span>
+                <span>Ja</span>
+              </div>
+            </div>
+          </div>
+        `;
+        credibility_page = {
+          type: jsPsychHtmlButtonResponse,
+          stimulus: `<h3>Vänligen svara på följande frågor</h3><div class="text-content">${credibilityHTML}</div><p id="credibility-warning" style="color:#b22020; display:none; margin-top: 10px;">Du måste justera alla reglage innan du kan gå vidare.</p>`,
+          choices: ["Fortsätt"],
+          on_load: function() {
+            const continueButton = document.querySelector('#jspsych-html-button-response-btngroup button');
+            const warning = document.getElementById('credibility-warning');
+            let credibilityTouched = false;
+            let refugeeTouched = false;
+
+            function updateContinueState() {
+              const allTouched = credibilityTouched && refugeeTouched;
+              continueButton.disabled = !allTouched;
+              if (!allTouched) {
+                continueButton.style.opacity = '0.6';
+                continueButton.style.cursor = 'not-allowed';
+              } else {
+                continueButton.style.opacity = '1';
+                continueButton.style.cursor = 'pointer';
+                warning.style.display = 'none';
+              }
+            }
+
+            updateContinueState();
+
+            document.getElementById('credibility-slider').addEventListener('input', (event) => {
+              credibilityValue = parseFloat(parseFloat(event.target.value).toFixed(2));
+              credibilityTouched = true;
+              updateContinueState();
+            });
+
+            document.getElementById('refugee-slider').addEventListener('input', (event) => {
+              refugeeValue = parseFloat(parseFloat(event.target.value).toFixed(2));
+              refugeeTouched = true;
+              updateContinueState();
+            });
+
+            continueButton.addEventListener('click', (event) => {
+              if (!(credibilityTouched && refugeeTouched)) {
+                event.preventDefault();
+                warning.style.display = 'block';
+              }
+            });
+          },
+          on_finish: function(data) {
+            data.credibility = credibilityValue;
+            data.refugee_status = refugeeValue;
+          }
+        };
+
+        /* Skapa en andra credibility_page efter survey */
+        let credibilityValue2 = 5.5;
+        let refugeeValue2 = 5.5;
+        const credibilityHTML2 = `
+          <div class="info-item">
+            <p>Hur trovärdig tyckte du att Haile Gebremedhin verkade?</p>
+            <div class="slider-wrapper">
+              <input type="range" id="credibility-slider2" min="1" max="10" value="5.5" step="any">
+              <div class="slider-labels">
+                <span>Inte alls trovärdig</span>
+                <span>Mycket trovärdig</span>
+              </div>
+            </div>
+          </div>
+          <div class="info-item">
+            <p>Baserat på det du läst - anser du att Haile Gebremedhin bör få flyktingstatus i Sverige?</p>
+            <div class="slider-wrapper">
+              <input type="range" id="refugee-slider2" min="1" max="10" value="5.5" step="any">
+              <div class="slider-labels">
+                <span>Nej</span>
+                <span>Ja</span>
+              </div>
+            </div>
+          </div>
+        `;
+        const credibility_page2 = {
+          type: jsPsychHtmlButtonResponse,
+          stimulus: `<h3>Vänligen svara på följande frågor</h3><div class="text-content">${credibilityHTML2}</div><p id="credibility-warning2" style="color:#b22020; display:none; margin-top: 10px;">Du måste justera alla reglage innan du kan gå vidare.</p>`,
+          choices: ["Fortsätt"],
+          on_load: function() {
+            const continueButton = document.querySelector('#jspsych-html-button-response-btngroup button');
+            const warning = document.getElementById('credibility-warning2');
+            let credibilityTouched2 = false;
+            let refugeeTouched2 = false;
+
+            function updateContinueState() {
+              const allTouched = credibilityTouched2 && refugeeTouched2;
+              continueButton.disabled = !allTouched;
+              if (!allTouched) {
+                continueButton.style.opacity = '0.6';
+                continueButton.style.cursor = 'not-allowed';
+              } else {
+                continueButton.style.opacity = '1';
+                continueButton.style.cursor = 'pointer';
+                warning.style.display = 'none';
+              }
+            }
+
+            updateContinueState();
+
+            document.getElementById('credibility-slider2').addEventListener('input', (event) => {
+              credibilityValue2 = parseFloat(parseFloat(event.target.value).toFixed(2));
+              credibilityTouched2 = true;
+              updateContinueState();
+            });
+
+            document.getElementById('refugee-slider2').addEventListener('input', (event) => {
+              refugeeValue2 = parseFloat(parseFloat(event.target.value).toFixed(2));
+              refugeeTouched2 = true;
+              updateContinueState();
+            });
+
+            continueButton.addEventListener('click', (event) => {
+              if (!(credibilityTouched2 && refugeeTouched2)) {
+                event.preventDefault();
+                warning.style.display = 'block';
+              }
+            });
+          },
+          on_finish: function(data) {
+            data.credibility_post = credibilityValue2;
+            data.refugee_status_post = refugeeValue2;
+          }
         };
 
         /* Helper: blandar en array in-place med Fisher-Yates. */
@@ -435,7 +572,7 @@
         };
 
         //lägger till alla sidor i rätt ordning och startar experimentet
-        timeline.push(welcome, text_page, grading_scale, circle_page, survey);
+        timeline.push(welcome, text_page, credibility_page, circle_page, credibility_page2, survey);
         jsPsych.run(timeline);
       });
 
