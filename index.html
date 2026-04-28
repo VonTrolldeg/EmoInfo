@@ -267,15 +267,28 @@
           data: { assigned_text: selectedText.id }
         };
 
-        /* Bygg infoData som ett objekt från options-arrayen i JSON.
+        /* Helper: blandar en array in-place med Fisher-Yates. */
+        function shuffleArray(array) {
+          for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+          }
+          return array;
+        }
+
+        /* Slumpa om options så att varje deltagare får ny ordning, men samma ordning
+           används både i listan och på slider-sidan. */
+        const randomizedOptions = shuffleArray(data.options.slice());
+
+        /* Bygg infoData som ett objekt från den randomiserade options-arrayen.
            Nyckeln är knappens id och värdet är beskrivningstexten. */
         const infoData = {};
-        data.options.forEach(opt => {
+        randomizedOptions.forEach(opt => {
           infoData[opt.id] = opt.description;
         });
 
-        /* Bygg HTML för varje knapp från options-arrayen. */
-        const optionDivs = data.options.map(opt =>
+        /* Bygg HTML för varje knapp från den randomiserade options-arrayen. */
+        const optionDivs = randomizedOptions.map(opt =>
           `<button class="circle-option" id="${opt.id}" type="button"><span>${opt.id}</span></button>`
         );
 
@@ -331,7 +344,7 @@
 
         /* Bygg en slider per alternativ: rubrik, beskrivning och range-input
            med etiketterna "Inte viktig" och "Mycket viktig" i ändarna */
-        const infoList = data.options.map(opt => `
+        const infoList = randomizedOptions.map(opt => `
           <div class="info-item">
             <strong>${opt.id}</strong>
             <p>${opt.description}</p>
@@ -346,21 +359,55 @@
         ).join('');
 
         /* Initiera med startvärdet 5 för alla alternativ så att något sparas
-           även om deltagaren inte rör en slider */
+           även om deltagaren inte rör en slider, men vi kräver aktiv interaktion.
+           Det betyder att varje slider måste flyttas innan Fortsätt aktiveras. */
         const surveySliderValues = {};
-        data.options.forEach(opt => { surveySliderValues[opt.id] = 5.5; });
+        const sliderTouched = {};
+        data.options.forEach(opt => {
+          surveySliderValues[opt.id] = 5.5;
+          sliderTouched[opt.id] = false;
+        });
 
         survey = {
           type: jsPsychHtmlButtonResponse,
-          stimulus: `<h3>Hur viktig tycker du att den här biten information var för ditt beslut?</h3><div class="text-content">${infoList}</div>`,
+          stimulus: `<h3>Hur viktig tycker du att den här biten information var för ditt beslut?</h3><div class="text-content">${infoList}</div><p id="slider-warning" style="color:#b22020; display:none; margin-top: 10px;">Du måste justera alla reglage innan du kan gå vidare.</p>`,
           choices: ["Fortsätt"],
           /* Lyssnar på varje slider i realtid och uppdaterar surveySliderValues.
              on_finish läser DOM:en för sent – den är redan borta då. */
           on_load: function() {
+            const continueButton = document.querySelector('#jspsych-html-button-response-btngroup button');
+            const warning = document.getElementById('slider-warning');
+
+            function updateContinueState() {
+              const allTouched = Object.values(sliderTouched).every(v => v === true);
+              continueButton.disabled = !allTouched;
+              if (!allTouched) {
+                continueButton.style.opacity = '0.6';
+                continueButton.style.cursor = 'not-allowed';
+              } else {
+                continueButton.style.opacity = '1';
+                continueButton.style.cursor = 'pointer';
+                warning.style.display = 'none';
+              }
+            }
+
+            updateContinueState();
+
             document.querySelectorAll('[id^="slider-"]').forEach(slider => {
               slider.addEventListener('input', () => {
-                surveySliderValues[slider.id.replace('slider-', '')] = parseFloat(parseFloat(slider.value).toFixed(2));
+                const id = slider.id.replace('slider-', '');
+                surveySliderValues[id] = parseFloat(parseFloat(slider.value).toFixed(2));
+                sliderTouched[id] = true;
+                updateContinueState();
               });
+            });
+
+            continueButton.addEventListener('click', (event) => {
+              const allTouched = Object.values(sliderTouched).every(v => v === true);
+              if (!allTouched) {
+                event.preventDefault();
+                warning.style.display = 'block';
+              }
             });
           },
           on_finish: function(data) {
