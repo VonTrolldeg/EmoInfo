@@ -122,14 +122,33 @@
 
   /* Varje informationsbit med sin slider */
   .info-item {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
+    background-color: #f8f8f6;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 16px 18px;
+    min-height: 72px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+  }
+
+  .info-item strong {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #222;
+  }
+
+  .info-item p {
+    margin: 0 0 18px;
+    color: #444;
+    line-height: 1.5;
   }
 
   /* Slider-container: input ovanför, etiketter under */
   .slider-wrapper {
     display: flex;
     flex-direction: column;
-    margin-top: 8px;
+    margin-top: 20px;
   }
 
   .slider-wrapper input[type="range"] {
