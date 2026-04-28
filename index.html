@@ -27,7 +27,7 @@
   /* Continue-knappen - centrerad och stor nog för touch (minst 44px enligt Apples riktlinjer) */
   .jspsych-btn {
     display: block !important;
-    margin: 20px auto 0 !important;
+    margin: 20px auto 50px !important;
     font-size: 16px !important;
     min-height: 44px;
     background-color: #875E29;
@@ -83,8 +83,7 @@
   }
 
   .mouselab-option:hover {
-    background-color: #f0ede5;
-    border-color: #9d6114;
+    background-color: #F1F7F9;
   }
 
   .mouselab-option span {
@@ -239,6 +238,7 @@
     var clickData = [];
     var clickOrder = [];
     var currentStartTime = 0;
+    var currentWordCount = 0;
 
     /* mouselab_list och survey definieras inuti fetch-callbacken eftersom de
        bygger på data från JSON-filen. Variablerna deklareras här så att de
@@ -464,7 +464,9 @@
               option.addEventListener("click", () => {
                 clickOrder.push(option.id); /* Sparar varje klick, även upprepade */
                 currentStartTime = Date.now();
-                document.getElementById("modal-text").textContent = infoData[option.id];
+                const text = infoData[option.id];
+                currentWordCount = text.trim().split(/\s+/).length;
+                document.getElementById("modal-text").textContent = text;
                 document.getElementById("info-modal").style.display = "flex";
               });
             });
@@ -473,7 +475,7 @@
             document.getElementById("modal-close").addEventListener("click", () => {
               const duration = Date.now() - currentStartTime;
               const currentOption = clickOrder[clickOrder.length - 1];
-              clickData.push({ option: currentOption, duration });
+              clickData.push({ option: currentOption, duration, wordCount: currentWordCount });
               document.getElementById("info-modal").style.display = "none";
             });
           },
