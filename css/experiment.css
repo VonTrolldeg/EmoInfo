@@ -1,0 +1,261 @@
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'EB Garamond', serif;
+  color: #875E29;
+}
+
+h1 { font-size: 24px; }
+h2 { font-size: 22px; }
+h3 { font-size: 20px; font-weight: bold; }
+
+/* Grundstorlek och typsnitt för alla enheter */
+body {
+  font-size: 16px;
+  font-family: 'Source Sans 3', sans-serif;
+}
+
+.info-item {
+  font-family: initial;
+}
+
+#jspsych-display-element {
+  max-width: 768px;
+  margin: 0 auto;
+}
+
+/* jsPsych centrerar text som standard - vi skriver över det så allt är vänsterställt */
+.jspsych-content {
+  text-align: left;
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 20px 20px 0;
+}
+
+/* Continue-knappen - centrerad och stor nog för touch (minst 44px enligt Apples riktlinjer) */
+.jspsych-btn {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto 50px !important;
+  font-size: 16px !important;
+  min-height: 44px;
+  background-color: #9c6114;
+  color: white;
+  min-width: 140px;
+  border: none;
+  border-radius: 2px;
+  padding: 0 20px;
+}
+/* hover färgen över fortsättknappen*/
+.jspsych-btn:hover {
+background-color: #6C4B21;
+text-decoration: underline;
+}
+
+
+/* Centrerar knapp-containern för html-button-response-sidor (påverkar inte survey-likert) */
+#jspsych-html-button-response-btngroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Textsidan - läsbar på alla skärmstorlekar */
+.text-content {
+  line-height: 1.8;
+}
+
+.text-content p {
+  margin-bottom: 1em; /* Tydliga styckebrytningar */
+}
+
+/* Lista med alternativ istället för rutnät */
+.option-list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 12px;
+  width: 100%;
+  margin: 20px auto;
+}
+
+.mouselab-option {
+  position: relative;
+  text-align: center;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #DCEBF0;
+  cursor: pointer;
+  padding: 32px 14px 14px;
+  min-height: 100px;
+  -webkit-tap-highlight-color: transparent;
+  border: none;
+  height: 100%;
+  gap: 8px;
+  border-radius: 2px;
+}
+
+.mouselab-option:hover {
+  background-color: #F1F7F9;
+}
+
+.mouselab-option.visited {
+  background-color: #d6c4aa;
+}
+
+.card-symbol {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #888;
+}
+
+.card-label {
+  font-weight: 700;
+}
+
+
+/* Mid-modal — visas efter 4 unika kort, täcker mouselabsidan */
+#mid-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+#mid-modal-content {
+  background: white;
+  border-radius: 2px;
+  padding: 24px;
+  max-width: 500px;
+  width: 100%;
+  line-height: 1.6;
+}
+
+.mid-question {
+  margin-bottom: 54px;
+}
+
+#mid-modal-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 16px auto 0;
+  font-size: 16px;
+  cursor: pointer;
+  min-height: 44px;
+  background-color: #875E29;
+  color: white;
+  width: 140px;
+  border: none;
+  border-radius: 2px;
+}
+
+#mid-modal-close:hover {
+  background-color: #6C4B21;
+  text-decoration: underline;
+}
+
+/* Modalen - täcker hela skärmen med en halvtransparent bakgrund */
+#info-modal {
+  display: none;                         /* Dold som standard, visas via JS */
+  position: fixed;
+  inset: 0;                              /* Täcker hela viewport */
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Modalens innehållsruta */
+#modal-content {
+  background: white;
+  border-radius: 2px;
+  padding: 24px;
+  max-width: 500px;
+  width: 100%;
+  line-height: 1.6;
+}
+
+#modal-text {
+  padding: 30px 0px 50px 0;
+}
+
+/* Varje informationsbit med sin slider */
+.info-item {
+  margin-bottom: 20px;
+  background-color: #DCEBF0;
+  padding: 16px 18px;
+  min-height: 72px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+}
+
+.info-item strong {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #222;
+}
+
+.info-item p {
+  margin: 0 0 18px;
+  color: #444;
+  line-height: 1.5;
+}
+
+/* Slider-container: input ovanför, etiketter under */
+.slider-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px auto 0;
+  width: 200px;
+}
+
+/* Etiketter under slidern, utspridda till ändarna */
+.slider-labels {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 13px;
+  color: #444;
+  margin-top: 4px;
+}
+
+.slider-labels span:first-child {
+  text-align: left;
+}
+
+.slider-labels span:last-child {
+  text-align: right;
+}
+
+/* Stängknappen i modalen */
+#modal-close {
+  display: block;
+  margin: 16px auto 0;
+  font-size: 16px;
+  cursor: pointer;
+  min-height: 44px;
+  background-color: #875E29;
+  color: white;
+  width: 140px;
+  height: 36px;
+  border: none;
+  border-radius: 2px;
+  line-height: 36px;
+}
+
+#modal-close:hover {
+  background-color: #6C4B21;
+  text-decoration: underline;
+}
