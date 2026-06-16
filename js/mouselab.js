@@ -14,27 +14,29 @@ function shuffleArray(array) {
   return array;
 }
 
-const positives = shuffleArray(stimuli.options.filter(opt => opt.type === 'positive'));
-const negatives = shuffleArray(stimuli.options.filter(opt => opt.type === 'negative'));
-const randomizedOptions = positives.flatMap((opt, i) => [opt, negatives[i]]);
-
 const infoData = {};
 const labelData = {};
-randomizedOptions.forEach(opt => {
-  infoData[opt.id] = opt.description;
-  labelData[opt.id] = opt.label;
-});
-
-const optionDivs = randomizedOptions.map(opt =>
-  `<button class="mouselab-option" id="${opt.id}" type="button">
-    <span class="card-symbol">${opt.type === 'positive' ? '+' : '−'}</span>
-    <span class="card-label">${opt.label}</span>
-  </button>`
-);
 
 var mouselab_list = {
   type: jsPsychHtmlButtonResponse,
-  stimulus: `
+  stimulus: function() {
+    const positives = shuffleArray(stimuli.options.filter(opt => opt.type === 'positive'));
+    const negatives = shuffleArray(stimuli.options.filter(opt => opt.type === 'negative'));
+    const randomizedOptions = positives.flatMap((opt, i) => [opt, negatives[i]]);
+
+    randomizedOptions.forEach(opt => {
+      infoData[opt.id] = opt.description;
+      labelData[opt.id] = opt.label;
+    });
+
+    const optionDivs = randomizedOptions.map(opt =>
+      `<button class="mouselab-option" id="${opt.id}" type="button">
+        <span class="card-symbol">${opt.type === 'positive' ? '+' : '−'}</span>
+        <span class="card-label">${opt.label}</span>
+      </button>`
+    );
+
+    return `
     <h2>${stimuli.mouselab.heading}</h2>
     <p>${stimuli.mouselab.instructions}</p>
     <div class="option-list">
@@ -74,7 +76,8 @@ var mouselab_list = {
         <button id="mid-modal-close" type="button">Fortsätt</button>
       </div>
     </div>
-  `,
+  `;
+  },
   choices: ["Fortsätt"],
   on_load: function () {
     let totalClicks = 0;
