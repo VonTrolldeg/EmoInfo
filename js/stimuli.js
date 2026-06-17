@@ -12,14 +12,14 @@ var stimuli = {
     }
   ],
   "options": [
-    { "id": "religios_tillhorighet",          "label": "Religiös tillhörighet",          "type": "positive", "description": "Det finns en muslimsk minoritet bland tigreanerna." },
+    { "id": "religios_tillhorighet",          "label": "Religion etnicitet",          "type": "positive", "description": "Det finns en muslimsk minoritet bland tigreanerna." },
     { "id": "situationsutveckling_tigreaner", "label": "Situationsutveckling tigreaner",  "type": "positive", "description": "Hur starkt Etiopiens regering har agerat mot tigreaner har ändrat sig över tid, bland annat beroende på det tillfälliga läget i kriget i Tigray. Det kan alltså lätt förvärras igen." },
     { "id": "rorelsefrihet_sanktioner",       "label": "Rörelsefrihet sanktioner",        "type": "positive", "description": "Enligt den senaste landinformationen om Etiopien har statens åtgärder mot tigreaner utanför Tigray främst handlat om arresteringar och kvarhållanden. Man har också använt sig av ekonomiska sanktioner och försvårat resor." },
     { "id": "etnisk_polarisering",            "label": "Etnisk polarisering",             "type": "positive", "description": "Enligt den senaste landinformationen om Etiopien har polariseringen i det etiopiska samhället börjat öka, liksom samhällets fokus på etnicitet." },
-    { "id": "identitetshandlingar_etnicitet", "label": "Identitetshandlingar etnicitet",  "type": "negative", "description": "I Haile Gebremdhins identitetshandlingar framgår inte att hans etnicitet är tigreansk." },
+    { "id": "identitetshandlingar_etnicitet", "label": "Identitetshandlingar",  "type": "negative", "description": "I Haile Gebremdhins identitetshandlingar framgår inte att hans etnicitet är tigreansk." },
     { "id": "sprak_etnicitet",                "label": "Språk etnicitet",                 "type": "negative", "description": "Haile Gebremedhin har ingen tigreansk dialekt, trots att det är känt att man i Tigray har en utpräglad och lättigenkännlig dialekt." },
-    { "id": "arresteringar_tigreaner",        "label": "Arresteringar tigreaner",         "type": "negative", "description": "Andelen arresteringar och kvarhållningar av tigreaner har enligt landinformationen minskat sedan början av 2022. Efter hösten 2022 finns ingen information om mass-arresteringar av tigreaner i Etiopien." },
-    { "id": "sakerhetssituation_tigray",      "label": "Säkerhetssituation Tigray",       "type": "negative", "description": "Det är enbart i regionen Tigray det finns kännedom om grova krigsbrott i dagsläget." }
+    { "id": "arresteringar_tigreaner",        "label": "Arresteringar: utveckling ",         "type": "negative", "description": "Andelen arresteringar och kvarhållningar av tigreaner har enligt landinformationen minskat sedan början av 2022. Efter hösten 2022 finns ingen information om mass-arresteringar av tigreaner i Etiopien." },
+    { "id": "sakerhetssituation_tigray",      "label": "Krigsbrott i Tigray",       "type": "negative", "description": "Det är enbart i regionen Tigray det finns kännedom om grova krigsbrott i dagsläget." }
   ],
   "main_questions": {
     "credibility":    "Hur trovärdig tyckte du att Haile Gebremedhin verkade?",
@@ -27,6 +27,6 @@ var stimuli = {
   },
   "mouselab": {
     "heading":      "Ytterligare information om fallet",
-    "instructions": "Bakom knapparna döljer sig ytterligare information om Hailes fall. Där finns information som stödjer hans berättelse (+) och information som går emot hans berättelse (−). Din uppgift är att skapa dig en så bra bild av fallet att du kan göra ett motiverat beslut"
+    "instructions": "Du har nu tagit del av Hailes egen redogörelse. Här följer ytterligare uppgifter i fallet, där vissa stödjer hans version (+) och vissa går emot den (−). Läs uppgifterna i den ordning du vill och bilda dig en uppfattning om huruvida Haile bör beviljas flyktingstatus, och varför."
   }
 };
