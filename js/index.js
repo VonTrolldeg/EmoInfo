@@ -42,7 +42,7 @@ const consent_info = {
     </div>
   `,
   choices: ["Fortsätt till medgivande"],
-  button_html: '<button class="consent-btn">%choice%</button>',
+  button_html: (choice) => `<button class="consent-btn">${choice}</button>`,
   data: { category: "consent" }
 };
 
@@ -60,10 +60,13 @@ const consent_provide = {
     </div>
   `,
   choices: ["ja", "nej"],
-  button_html: [
-    '<button class="consent-btn"><u>Ja</u>, jag samtycker till att delta</button>',
-    '<button class="consent-btn"><u>Nej</u>, jag samtycker inte till att delta</button>'
-  ],
+  button_html: (choice, choice_index) => {
+    const labels = [
+      '<u>Ja</u>, jag samtycker till att delta',
+      '<u>Nej</u>, jag samtycker inte till att delta'
+    ];
+    return `<button class="consent-btn">${labels[choice_index]}</button>`;
+  },
   data: { category: "consent" },
   on_finish: function (data) {
     if (data.response == 1) {
