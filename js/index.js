@@ -65,8 +65,9 @@ const instructions = {
   stimulus: `
     <div class="text-content">
       <h2>Instruktioner till studien</h2>
-      <p>Tack för att du vill delta. I det här experimentet kommer du att läsa en berättelse av en person. Vi vill att du läser den noga för att sedan kunna svara på frågor kopplat till den. Därefter får du tillgång till ytterligare information om personen och situationen där du väljer själv vilken information du vill ta del av och i vilken ordning.</p>
-       <p>Du kommer sedan att få svara på fler frågor. Det finns inga rätta eller felaktiga svar, vi är nyfikna på hur just du tänker. När du är redo trycker du på knappen nedan för att börja.</p>
+      <p>Tack för att du vill delta.</p>
+      <p>I det här experimentet kommer du att läsa en berättelse av en person där de beskriver en situation utifrån sitt perspektiv. Vi vill att du läser den noga för att sedan kunna svara på frågor kopplat till den. Därefter får du tillgång till ytterligare information om personen och situationen för att själv skapa dig en uppfattning om händelsen. Du får välja själv vilken information du vill ta del av och i vilken ordning.</p>
+      <p>Det finns inga rätta eller felaktiga svar, vi är nyfikna på hur just du tänker. När du är redo trycker du på knappen nedan för att börja.</p>
     </div>
   `,
   choices: ["Starta"]
