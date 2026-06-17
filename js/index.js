@@ -1,15 +1,5 @@
 // === STEG 1: Initiera jsPsych ===
-var jsPsych = initJsPsych({
-  on_finish: () => {
-    jsPsych.data.get()
-    .ignore('stimulus')
-    .ignore('trial_index')
-    .ignore('time_elapsed')
-    .ignore('internal_node_id')
-    .ignore('question_order')
-    .localSave('csv', 'mouselab_data.csv');
-  },
-});
+var jsPsych = initJsPsych();
 
 var timeline = [];
 
