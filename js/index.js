@@ -112,7 +112,14 @@ const pre_main_q_2 = {
 
 const pre_main_questions = [pre_main_q_1, pre_main_q_2];
 
-// === STEG 5: mouselabben ===
+// === STEG 5: Instruktioner inför mouselab ===
+const pre_mouselab_instructions = {
+  type: jsPsychHtmlButtonResponse,
+  stimulus: `<div class="text-content"><p>${stimuli.pre_mouselab_instructions}</p></div>`,
+  choices: ["Fortsätt"]
+};
+
+// === STEG 6: mouselabben ===
 
 // === STEG 6: Post main questions — efter mouselab ===
 // TODO: Om fler frågor läggs till här — överväg att samla alla på en sida med custom HTML istället för en jsPsych-trial per fråga.
@@ -140,5 +147,5 @@ const post_main_questions = [post_main_q_1, post_main_q_2];
 
 
 // === FLÖDE ===
-timeline.push(consent_info, consent_provide, instructions, narrative_page, ...pre_main_questions, mouselab_list, ...post_main_questions);
+timeline.push(consent_info, consent_provide, instructions, narrative_page, ...pre_main_questions, pre_mouselab_instructions, mouselab_list, ...post_main_questions);
 jsPsych.run(timeline);
