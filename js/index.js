@@ -32,7 +32,6 @@ const consent_info = {
     </div>
   `,
   choices: ["Fortsätt till medgivande"],
-  button_html: '<button class="consent-btn">%choice%</button>',
   data: { category: "consent" }
 };
 
@@ -50,7 +49,6 @@ const consent_provide = {
     </div>
   `,
   choices: ["Ja, jag samtycker till att delta", "Nej, jag samtycker inte till att delta"],
-  button_html: '<button class="consent-btn">%choice%</button>',
   data: { category: "consent" },
   on_finish: function (data) {
     if (data.response == 1) {
