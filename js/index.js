@@ -32,7 +32,7 @@ const consent_info = {
     </div>
   `,
   choices: ["Fortsätt till medgivande"],
-  button_html: (choice) => `<button class="consent-btn">${choice}</button>`,
+  button_html: '<button class="consent-btn">%choice%</button>',
   data: { category: "consent" }
 };
 
@@ -49,14 +49,8 @@ const consent_provide = {
       </div>
     </div>
   `,
-  choices: ["ja", "nej"],
-  button_html: (choice, choice_index) => {
-    const labels = [
-      '<u>Ja</u>, jag samtycker till att delta',
-      '<u>Nej</u>, jag samtycker inte till att delta'
-    ];
-    return `<button class="consent-btn">${labels[choice_index]}</button>`;
-  },
+  choices: ["Ja, jag samtycker till att delta", "Nej, jag samtycker inte till att delta"],
+  button_html: '<button class="consent-btn">%choice%</button>',
   data: { category: "consent" },
   on_finish: function (data) {
     if (data.response == 1) {
@@ -72,7 +66,7 @@ const instructions = {
     <div class="text-content">
       <h2>Instruktioner till studien</h2>
       <p>Tack för att du vill delta. I det här experimentet kommer du att läsa en berättelse av en person. Vi vill att du läser den noga för att sedan kunna svara på frågor kopplat till den. Därefter får du tillgång till ytterligare information om personen och situationen där du väljer själv vilken information du vill ta del av och i vilken ordning.</p>
-       <p>Du kommer sedan att få svara på fler frågor. Det finns inga rätta eller felaktiga svar, vi är bara nyfikna på hur just du tänker i den här situationen. När du är redo trycker du på knappen nedan för att börja.</p>
+       <p>Du kommer sedan att få svara på fler frågor. Det finns inga rätta eller felaktiga svar, vi är nyfikna på hur just du tänker. När du är redo trycker du på knappen nedan för att börja.</p>
     </div>
   `,
   choices: ["Starta"]
