@@ -65,6 +65,7 @@ var mouselab_list = {
     <!-- Mittfråga som visas automatiskt efter 4 klick -->
     <div id="mid-modal">
       <div id="mid-modal-content">
+        <h3>Efter 4 kort ber vi dig besvara frågorna igen</h3>
         <div class="mid-question">
           <p>${stimuli.main_questions.credibility}</p>
           <div class="slider-wrapper">
