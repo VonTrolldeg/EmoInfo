@@ -1,7 +1,7 @@
 // === STEG 1: Initiera jsPsych ===
 var jsPsych = initJsPsych({
   on_finish: function() {
-    jsPsych.getDisplayElement().innerHTML = '<div class="text-content"><h2>Tack för ditt deltagande. Du kan nu stänga fönstret.</h2></div>';
+    window.close();
   }
 });
 
@@ -141,6 +141,13 @@ const post_main_q_2 = {
 const post_main_questions = [post_main_q_1, post_main_q_2];
 
 
+// === STEG 8: Avslutningssida ===
+const thank_you = {
+  type: jsPsychHtmlButtonResponse,
+  stimulus: `<div class="text-content"><h2>Tack för ditt deltagande.</h2></div>`,
+  choices: ["Stäng fönstret"]
+};
+
 // === FLÖDE ===
-timeline.push(consent_info, consent_provide, instructions, narrative_page, ...pre_main_questions, pre_mouselab_instructions, mouselab_list, ...post_main_questions);
+timeline.push(consent_info, consent_provide, instructions, narrative_page, ...pre_main_questions, pre_mouselab_instructions, mouselab_list, ...post_main_questions, thank_you);
 jsPsych.run(timeline);
