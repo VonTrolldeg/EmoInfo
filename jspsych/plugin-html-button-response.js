@@ -1,2 +1,214 @@
-var jsPsychHtmlButtonResponse=function(t){"use strict";function e(t,e){for(var r=0;r<e.length;r++){var n=e[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(t,(i=n.key,s=void 0,"symbol"==typeof(s=function(t,e){if("object"!=typeof t||null===t)return t;var r=t[Symbol.toPrimitive];if(void 0!==r){var n=r.call(t,e||"default");if("object"!=typeof n)return n;throw new TypeError("@@toPrimitive must return a primitive value.")}return("string"===e?String:Number)(t)}(i,"string"))?s:String(s)),n)}var i,s}var r={name:"html-button-response",parameters:{stimulus:{type:t.ParameterType.HTML_STRING,pretty_name:"Stimulus",default:void 0},choices:{type:t.ParameterType.STRING,pretty_name:"Choices",default:void 0,array:!0},button_html:{type:t.ParameterType.HTML_STRING,pretty_name:"Button HTML",default:'<button class="jspsych-btn">%choice%</button>',array:!0},prompt:{type:t.ParameterType.HTML_STRING,pretty_name:"Prompt",default:null},stimulus_duration:{type:t.ParameterType.INT,pretty_name:"Stimulus duration",default:null},trial_duration:{type:t.ParameterType.INT,pretty_name:"Trial duration",default:null},margin_vertical:{type:t.ParameterType.STRING,pretty_name:"Margin vertical",default:"0px"},margin_horizontal:{type:t.ParameterType.STRING,pretty_name:"Margin horizontal",default:"8px"},response_ends_trial:{type:t.ParameterType.BOOL,pretty_name:"Response ends trial",default:!0}}},n=function(){function t(e){!function(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}(this,t),this.jsPsych=e}var r,n,i;return r=t,(n=[{key:"trial",value:function(t,e){var r=this,n='<div id="jspsych-html-button-response-stimulus">'+e.stimulus+"</div>",i=[];if(Array.isArray(e.button_html))e.button_html.length==e.choices.length?i=e.button_html:console.error("Error in html-button-response plugin. The length of the button_html array does not equal the length of the choices array");else for(var s=0;s<e.choices.length;s++)i.push(e.button_html);for(n+='<div id="jspsych-html-button-response-btngroup">',s=0;s<e.choices.length;s++){var a=i[s].replace(/%choice%/g,e.choices[s]);n+='<div class="jspsych-html-button-response-button" style="display: inline-block; margin:'+e.margin_vertical+" "+e.margin_horizontal+'" id="jspsych-html-button-response-button-'+s+'" data-choice="'+s+'">'+a+"</div>"}n+="</div>",null!==e.prompt&&(n+=e.prompt),t.innerHTML=n;var o=performance.now();for(s=0;s<e.choices.length;s++)t.querySelector("#jspsych-html-button-response-button-"+s).addEventListener("click",(function(t){c(t.currentTarget.getAttribute("data-choice"))}));var l={rt:null,button:null},u=function(){r.jsPsych.pluginAPI.clearAllTimeouts();var n={rt:l.rt,stimulus:e.stimulus,response:l.button};t.innerHTML="",r.jsPsych.finishTrial(n)};function c(r){var n=performance.now(),i=Math.round(n-o);l.button=parseInt(r),l.rt=i,t.querySelector("#jspsych-html-button-response-stimulus").className+=" responded";for(var s=document.querySelectorAll(".jspsych-html-button-response-button button"),a=0;a<s.length;a++)s[a].setAttribute("disabled","disabled");e.response_ends_trial&&u()}null!==e.stimulus_duration&&this.jsPsych.pluginAPI.setTimeout((function(){t.querySelector("#jspsych-html-button-response-stimulus").style.visibility="hidden"}),e.stimulus_duration),null!==e.trial_duration&&this.jsPsych.pluginAPI.setTimeout(u,e.trial_duration)}},{key:"simulate",value:function(t,e,r,n){"data-only"==e&&(n(),this.simulate_data_only(t,r)),"visual"==e&&this.simulate_visual(t,r,n)}},{key:"create_simulation_data",value:function(t,e){var r={stimulus:t.stimulus,rt:this.jsPsych.randomization.sampleExGaussian(500,50,1/150,!0),response:this.jsPsych.randomization.randomInt(0,t.choices.length-1)},n=this.jsPsych.pluginAPI.mergeSimulationData(r,e);return this.jsPsych.pluginAPI.ensureSimulationDataConsistency(t,n),n}},{key:"simulate_data_only",value:function(t,e){var r=this.create_simulation_data(t,e);this.jsPsych.finishTrial(r)}},{key:"simulate_visual",value:function(t,e,r){var n=this.create_simulation_data(t,e),i=this.jsPsych.getDisplayElement();this.trial(i,t),r(),null!==n.rt&&this.jsPsych.pluginAPI.clickTarget(i.querySelector('div[data-choice="'.concat(n.response,'"] button')),n.rt)}}])&&e(r.prototype,n),i&&e(r,i),Object.defineProperty(r,"prototype",{writable:!1}),t}();return n.info=r,n}(jsPsychModule);
-//# sourceMappingURL=https://unpkg.com/@jspsych/plugin-html-button-response@1.1.3/dist/index.browser.min.js.map
+import { ParameterType } from 'jspsych';
+
+const info = {
+    name: "html-button-response",
+    parameters: {
+        /** The HTML string to be displayed */
+        stimulus: {
+            type: ParameterType.HTML_STRING,
+            pretty_name: "Stimulus",
+            default: undefined,
+        },
+        /** Array containing the label(s) for the button(s). */
+        choices: {
+            type: ParameterType.STRING,
+            pretty_name: "Choices",
+            default: undefined,
+            array: true,
+        },
+        /** The HTML for creating button. Can create own style. Use the "%choice%" string to indicate where the label from the choices parameter should be inserted. */
+        button_html: {
+            type: ParameterType.HTML_STRING,
+            pretty_name: "Button HTML",
+            default: '<button class="jspsych-btn">%choice%</button>',
+            array: true,
+        },
+        /** Any content here will be displayed under the button(s). */
+        prompt: {
+            type: ParameterType.HTML_STRING,
+            pretty_name: "Prompt",
+            default: null,
+        },
+        /** How long to show the stimulus. */
+        stimulus_duration: {
+            type: ParameterType.INT,
+            pretty_name: "Stimulus duration",
+            default: null,
+        },
+        /** How long to show the trial. */
+        trial_duration: {
+            type: ParameterType.INT,
+            pretty_name: "Trial duration",
+            default: null,
+        },
+        /** The vertical margin of the button. */
+        margin_vertical: {
+            type: ParameterType.STRING,
+            pretty_name: "Margin vertical",
+            default: "0px",
+        },
+        /** The horizontal margin of the button. */
+        margin_horizontal: {
+            type: ParameterType.STRING,
+            pretty_name: "Margin horizontal",
+            default: "8px",
+        },
+        /** If true, then trial will end when user responds. */
+        response_ends_trial: {
+            type: ParameterType.BOOL,
+            pretty_name: "Response ends trial",
+            default: true,
+        },
+    },
+};
+/**
+ * html-button-response
+ * jsPsych plugin for displaying a stimulus and getting a button response
+ * @author Josh de Leeuw
+ * @see {@link https://www.jspsych.org/plugins/jspsych-html-button-response/ html-button-response plugin documentation on jspsych.org}
+ */
+class HtmlButtonResponsePlugin {
+    constructor(jsPsych) {
+        this.jsPsych = jsPsych;
+    }
+    trial(display_element, trial) {
+        // display stimulus
+        var html = '<div id="jspsych-html-button-response-stimulus">' + trial.stimulus + "</div>";
+        //display buttons
+        var buttons = [];
+        if (Array.isArray(trial.button_html)) {
+            if (trial.button_html.length == trial.choices.length) {
+                buttons = trial.button_html;
+            }
+            else {
+                console.error("Error in html-button-response plugin. The length of the button_html array does not equal the length of the choices array");
+            }
+        }
+        else {
+            for (var i = 0; i < trial.choices.length; i++) {
+                buttons.push(trial.button_html);
+            }
+        }
+        html += '<div id="jspsych-html-button-response-btngroup">';
+        for (var i = 0; i < trial.choices.length; i++) {
+            var str = buttons[i].replace(/%choice%/g, trial.choices[i]);
+            html +=
+                '<div class="jspsych-html-button-response-button" style="display: inline-block; margin:' +
+                    trial.margin_vertical +
+                    " " +
+                    trial.margin_horizontal +
+                    '" id="jspsych-html-button-response-button-' +
+                    i +
+                    '" data-choice="' +
+                    i +
+                    '">' +
+                    str +
+                    "</div>";
+        }
+        html += "</div>";
+        //show prompt if there is one
+        if (trial.prompt !== null) {
+            html += trial.prompt;
+        }
+        display_element.innerHTML = html;
+        // start time
+        var start_time = performance.now();
+        // add event listeners to buttons
+        for (var i = 0; i < trial.choices.length; i++) {
+            display_element
+                .querySelector("#jspsych-html-button-response-button-" + i)
+                .addEventListener("click", (e) => {
+                var btn_el = e.currentTarget;
+                var choice = btn_el.getAttribute("data-choice"); // don't use dataset for jsdom compatibility
+                after_response(choice);
+            });
+        }
+        // store response
+        var response = {
+            rt: null,
+            button: null,
+        };
+        // function to end trial when it is time
+        const end_trial = () => {
+            // kill any remaining setTimeout handlers
+            this.jsPsych.pluginAPI.clearAllTimeouts();
+            // gather the data to store for the trial
+            var trial_data = {
+                rt: response.rt,
+                stimulus: trial.stimulus,
+                response: response.button,
+            };
+            // clear the display
+            display_element.innerHTML = "";
+            // move on to the next trial
+            this.jsPsych.finishTrial(trial_data);
+        };
+        // function to handle responses by the subject
+        function after_response(choice) {
+            // measure rt
+            var end_time = performance.now();
+            var rt = Math.round(end_time - start_time);
+            response.button = parseInt(choice);
+            response.rt = rt;
+            // after a valid response, the stimulus will have the CSS class 'responded'
+            // which can be used to provide visual feedback that a response was recorded
+            display_element.querySelector("#jspsych-html-button-response-stimulus").className +=
+                " responded";
+            // disable all the buttons after a response
+            var btns = document.querySelectorAll(".jspsych-html-button-response-button button");
+            for (var i = 0; i < btns.length; i++) {
+                //btns[i].removeEventListener('click');
+                btns[i].setAttribute("disabled", "disabled");
+            }
+            if (trial.response_ends_trial) {
+                end_trial();
+            }
+        }
+        // hide image if timing is set
+        if (trial.stimulus_duration !== null) {
+            this.jsPsych.pluginAPI.setTimeout(() => {
+                display_element.querySelector("#jspsych-html-button-response-stimulus").style.visibility = "hidden";
+            }, trial.stimulus_duration);
+        }
+        // end trial if time limit is set
+        if (trial.trial_duration !== null) {
+            this.jsPsych.pluginAPI.setTimeout(end_trial, trial.trial_duration);
+        }
+    }
+    simulate(trial, simulation_mode, simulation_options, load_callback) {
+        if (simulation_mode == "data-only") {
+            load_callback();
+            this.simulate_data_only(trial, simulation_options);
+        }
+        if (simulation_mode == "visual") {
+            this.simulate_visual(trial, simulation_options, load_callback);
+        }
+    }
+    create_simulation_data(trial, simulation_options) {
+        const default_data = {
+            stimulus: trial.stimulus,
+            rt: this.jsPsych.randomization.sampleExGaussian(500, 50, 1 / 150, true),
+            response: this.jsPsych.randomization.randomInt(0, trial.choices.length - 1),
+        };
+        const data = this.jsPsych.pluginAPI.mergeSimulationData(default_data, simulation_options);
+        this.jsPsych.pluginAPI.ensureSimulationDataConsistency(trial, data);
+        return data;
+    }
+    simulate_data_only(trial, simulation_options) {
+        const data = this.create_simulation_data(trial, simulation_options);
+        this.jsPsych.finishTrial(data);
+    }
+    simulate_visual(trial, simulation_options, load_callback) {
+        const data = this.create_simulation_data(trial, simulation_options);
+        const display_element = this.jsPsych.getDisplayElement();
+        this.trial(display_element, trial);
+        load_callback();
+        if (data.rt !== null) {
+            this.jsPsych.pluginAPI.clickTarget(display_element.querySelector(`div[data-choice="${data.response}"] button`), data.rt);
+        }
+    }
+}
+HtmlButtonResponsePlugin.info = info;
+
+export { HtmlButtonResponsePlugin as default };
+//# sourceMappingURL=index.js.map
