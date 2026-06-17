@@ -27,7 +27,7 @@ var stimuli = {
   },
   "mouselab": {
     "heading":      "Ytterligare information om fallet",
-    "instructions": "Välj vilken information du vill ta del där + stödjer Hailes berättelse och - går emot den. "
+    "instructions": "Välj vilka kort med information du vill läsa. Korten med + stödjer Hailes berättelse och - går emot den. "
   },
   "pre_mouselab_instructions": "Du har nu tagit del av Haile Gebremedhins egen redogörelse för varför han bör få flyktingstatus. Nu kommer du att få möjlighet att ta del av ytterligare uppgifter rörande fallet, där några uppgifter stödjer hans version (+) och några går emot den (−). Du kommer få läsa uppgifterna på de olika korten i den ordning du vill och bilda dig en uppfattning om huruvida Haile bör beviljas flyktingstatus, och varför. Du kommer få möjlighet att läsa alla korten."
 };
