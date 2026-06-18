@@ -1,6 +1,8 @@
 // === STEG 1: Initiera jsPsych ===
 var jsPsych = initJsPsych();
 
+var mouselab_list = buildMouselabTrial();
+
 var timeline = [];
 
 // === STEG 2: Consent ===

@@ -21,7 +21,8 @@ function shuffleArray(array) {
 const infoData = {};
 const labelData = {};
 
-var mouselab_list = {
+function buildMouselabTrial() {
+  return {
   type: jsPsychHtmlButtonResponse,
 
   // stimulus körs precis innan trialen visas och bygger upp hela HTML-strukturen
@@ -187,4 +188,5 @@ var mouselab_list = {
     data.mid_main_q_credibility = midAnswers.credibility;
     data.mid_main_q_refugee_status = midAnswers.refugee_status;
   }
-};
+  };
+}
