@@ -60,6 +60,14 @@ text-decoration: underline;
   gap: 20px;
 }
 
+/* När flera knappar staplas: ta bort marginalen mellan dem så gap (20px) styr avståndet */
+.jspsych-html-button-response-button:not(:last-child) .jspsych-btn {
+  margin-bottom: 0 !important;
+}
+.jspsych-html-button-response-button + .jspsych-html-button-response-button .jspsych-btn {
+  margin-top: 0 !important;
+}
+
 /* Textsidan - läsbar på alla skärmstorlekar */
 .text-content {
   line-height: 1.8;
