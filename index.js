@@ -63,7 +63,7 @@ var narrative_page;
 
 const data = stimuli;
 
-// === STEG 3: Narrativsidan (slumpar emotionell eller neutral berättelse) ===
+// === STEG 4: Narrativsidan (slumpar emotionell eller neutral berättelse) ===
 const randomIndex = Math.floor(Math.random() * data.narratives.length);
 const selectedNarrative = data.narratives[randomIndex];
 
@@ -75,7 +75,7 @@ narrative_page = {
   data: { assigned_narrative: selectedNarrative.id }
 };
 
-// === STEG 4: Pre main questions — före mouselab ===
+// === STEG 5: Pre main questions — före mouselab ===
 // TODO: Om fler frågor läggs till här — överväg att samla alla på en sida med custom HTML istället för en jsPsych-trial per fråga.
 const pre_main_q_1 = {
   type: jsPsychHtmlSliderResponse,
@@ -99,17 +99,24 @@ const pre_main_q_2 = {
 
 const pre_main_questions = [pre_main_q_1, pre_main_q_2];
 
-// === STEG 5: Instruktioner inför mouselab ===
+// === STEG 6: pre binary question ===
+const pre_binary_q = {
+  type: jsPsychHtmlButtonResponse,
+  stimulus: `<div class="text-content"><p>${stimuli.binary_questions.pre}</p></div>`,
+  choices: stimuli.binary_questions.buttons,
+  data: { question: "refugee_status_binary_pre" }
+};
+
+// === STEG 7: Instruktioner inför mouselab ===
 const pre_mouselab_instructions = {
   type: jsPsychHtmlButtonResponse,
   stimulus: `<div class="text-content"><h2>${stimuli.mouselab.heading}</h2><p>${stimuli.pre_mouselab_instructions}</p></div>`,
   choices: ["Fortsätt"]
 };
 
-// === STEG 6: mouselabben ===
+// === STEG 8: mouselabben and mid main questions ===
 
-// === STEG 7: Post main questions — efter mouselab ===
-// TODO: Om fler frågor läggs till här — överväg att samla alla på en sida med custom HTML istället för en jsPsych-trial per fråga.
+// === STEG 9: Post main questions — efter mouselab ===
 const post_main_q_1 = {
   type: jsPsychHtmlSliderResponse,
   stimulus: `<p>${stimuli.main_questions.credibility}</p>`,
@@ -131,8 +138,10 @@ const post_main_q_2 = {
 };
 
 const post_main_questions = [post_main_q_1, post_main_q_2];
+// === STEG 10: post binary question ===
 
+// === STEG 11: memory questions ===
 
 // === FLÖDE ===
-timeline.push(consent_info, consent_provide, instructions, narrative_page, ...pre_main_questions, pre_mouselab_instructions, mouselab_list, ...post_main_questions);
+timeline.push(consent_info, consent_provide, instructions, narrative_page, ...pre_main_questions, pre_binary_q, pre_mouselab_instructions, mouselab_list, ...post_main_questions);
 jsPsych.run(timeline);
