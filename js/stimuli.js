@@ -25,6 +25,11 @@ var stimuli = {
     "credibility":    "Hur trovärdig tyckte du att Haile Gebremedhin verkade?",
     "refugee_status": "Anser du att Haile Gebremedhin bör få flyktingstatus i Sverige?"
   },
+  "instructions": {
+    "heading": "Instruktioner till studien",
+    "body": "Tack för att du vill delta.\n\nI det här experimentet kommer du att läsa en berättelse av en person där de beskriver en situation utifrån sitt perspektiv. Vi vill att du läser den noga för att sedan kunna svara på frågor kopplat till den. Därefter får du tillgång till ytterligare information om personen och situationen för att själv skapa dig en uppfattning om händelsen. Du får välja själv vilken information du vill ta del av och i vilken ordning.\n\nDet finns inga rätta eller felaktiga svar, vi är nyfikna på hur just du tänker. När du är redo trycker du på knappen nedan för att börja.",
+    "button": "Starta"
+  },
   "mouselab": {
     "heading":      "Ytterligare information om fallet",
     "instructions": "Välj vilka kort med information du vill läsa. Korten med + stödjer Hailes berättelse och - går emot den. "

@@ -1,11 +1,11 @@
-// === STEG 1: Initiera jsPsych ===
+// === STEG 0: Initiera jsPsych ===
 var jsPsych = initJsPsych();
 
 var mouselab_list = buildMouselabTrial();
 
 var timeline = [];
 
-// === STEG 2: Consent ===
+// === STEG 1: Consent information ===
 const consent_info = {
   type: jsPsychHtmlButtonResponse,
   stimulus: `
@@ -33,6 +33,7 @@ const consent_info = {
   data: { category: "consent" }
 };
 
+// === STEG 2: Consent  ===
 const consent_provide = {
   type: jsPsychHtmlButtonResponse,
   stimulus: `
@@ -51,18 +52,11 @@ const consent_provide = {
   }
 };
 
-// === STEG 2b: Instruktionssida ===
+// === STEG 3: Introduction to experiment ===
 const instructions = {
   type: jsPsychHtmlButtonResponse,
-  stimulus: `
-    <div class="text-content">
-      <h2>Instruktioner till studien</h2>
-      <p>Tack för att du vill delta.</p>
-      <p>I det här experimentet kommer du att läsa en berättelse av en person där de beskriver en situation utifrån sitt perspektiv. Vi vill att du läser den noga för att sedan kunna svara på frågor kopplat till den. Därefter får du tillgång till ytterligare information om personen och situationen för att själv skapa dig en uppfattning om händelsen. Du får välja själv vilken information du vill ta del av och i vilken ordning.</p>
-      <p>Det finns inga rätta eller felaktiga svar, vi är nyfikna på hur just du tänker. När du är redo trycker du på knappen nedan för att börja.</p>
-    </div>
-  `,
-  choices: ["Starta"]
+  stimulus: `<div class="text-content"><h2>${stimuli.instructions.heading}</h2>${stimuli.instructions.body.split('\n\n').map(p => `<p>${p}</p>`).join('')}</div>`,
+  choices: [stimuli.instructions.button]
 };
 
 var narrative_page;
