@@ -22,8 +22,6 @@ const infoData = {};
 const labelData = {};
 
 function buildMouselabTrial() {
-  let positiveOnLeft; // sätts i stimulus, används i on_finish
-
   return {
   type: jsPsychHtmlButtonResponse,
 
@@ -32,10 +30,7 @@ function buildMouselabTrial() {
     // Para ihop positiva och negativa alternativ slumpmässigt (ett par per rad)
     const positives = shuffleArray(stimuli.options.filter(opt => opt.type === 'positive'));
     const negatives = shuffleArray(stimuli.options.filter(opt => opt.type === 'negative'));
-    positiveOnLeft = Math.random() < 0.5;
-    const randomizedOptions = positives.flatMap((opt, i) =>
-      positiveOnLeft ? [opt, negatives[i]] : [negatives[i], opt]
-    );
+    const randomizedOptions = positives.flatMap((opt, i) => [opt, negatives[i]]);
 
     // Bygg uppslagstabeller så on_load kan visa rätt text när ett kort klickas
     randomizedOptions.forEach(opt => {
@@ -192,7 +187,6 @@ function buildMouselabTrial() {
     data.post_click_durations = JSON.stringify(postClickData);
     data.mid_main_q_credibility = midAnswers.credibility;
     data.mid_main_q_refugee_status = midAnswers.refugee_status;
-    data.positive_column_side = positiveOnLeft ? 'left' : 'right';
   }
   };
 }
