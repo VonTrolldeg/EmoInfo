@@ -26,7 +26,8 @@ var stimuli = {
     "refugee_status": "Anser du att Haile Gebremedhin bör få flyktingstatus i Sverige?"
   },
   "binary_questions": {
-    "pre":  "Ta ett ögonblick och tänk igenom allt du fått veta om Haile Gebremedhins fall. Anser du att Haile Gebremedhin bör få flyktingstatus i Sverige?",
+    "pre":     "Ta ett ögonblick och tänk igenom allt du fått veta om Haile Gebremedhins fall. Anser du att Haile Gebremedhin bör få flyktingstatus i Sverige?",
+    "post":    "Slutligen, anser du att Haile Gebremedhin bör få flyktingstatus i Sverige?",
     "buttons": ["Ja", "Nej"]
   },
   "instructions": {

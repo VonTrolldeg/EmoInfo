@@ -142,9 +142,18 @@ const post_main_q_2 = {
 
 const post_main_questions = [post_main_q_1, post_main_q_2];
 // === STEG 10: post binary question ===
+const post_binary_q = {
+  type: jsPsychHtmlButtonResponse,
+  stimulus: `<div class="text-content"><p>${stimuli.binary_questions.post}</p></div>`,
+  choices: stimuli.binary_questions.buttons,
+  data: { question: "refugee_status_binary_post" },
+  on_load: function() {
+    document.getElementById('jspsych-html-button-response-btngroup').classList.add('btn-row');
+  }
+};
 
 // === STEG 11: memory questions ===
 
 // === FLÖDE ===
-timeline.push(consent_info, consent_provide, instructions, narrative_page, ...pre_main_questions, pre_binary_q, pre_mouselab_instructions, mouselab_list, ...post_main_questions);
+timeline.push(consent_info, consent_provide, instructions, narrative_page, ...pre_main_questions, pre_binary_q, pre_mouselab_instructions, mouselab_list, ...post_main_questions, post_binary_q);
 jsPsych.run(timeline);
