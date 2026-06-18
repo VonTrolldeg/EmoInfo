@@ -27,7 +27,7 @@ var stimuli = {
   },
   "instructions": {
     "heading": "Instruktioner till studien",
-    "body": "Tack för att du vill delta.\n\nI det här experimentet kommer du att läsa en berättelse av en person där de beskriver en situation utifrån sitt perspektiv. Vi vill att du läser den noga för att sedan kunna svara på frågor kopplat till den. Därefter får du tillgång till ytterligare information om personen och situationen för att själv skapa dig en uppfattning om händelsen. Du får välja själv vilken information du vill ta del av och i vilken ordning.\n\nDet finns inga rätta eller felaktiga svar, vi är nyfikna på hur just du tänker. När du är redo trycker du på knappen nedan för att börja.",
+    "body": "Tack för att du vill delta.\n\n Du kommer strax att få läsa en berättelse från en person som söker asyl i Sverige. Tänk dig att du arbetar på Migrationsverket. Din uppgift är att avgöra om du tror att personen talar sanning eller inte. Du ska också bedöma om personen bör få flyktingstatus i Sverige eller inte. \n\nBakgrund: Haile Gebremedhin anländer från Addis Abeba och säger sig tillhöra den tigreanska etniska minoriteten i huvudstaden. Han har identifierat sig med ett etiopiskt id-kort utfärdat i Addis Abeba som verkar vara äkta. Var snäll och  läs texten noggrant. Du kommer få svara på flera frågor om den efter att du läst klart.",
     "button": "Starta"
   },
   "mouselab": {
