@@ -152,8 +152,24 @@ const post_binary_q = {
   }
 };
 
-// === STEG 11: memory questions ===
+// === STEG 11: motivation ===
+const motivation_q = {
+  type: jsPsychSurveyText,
+  preamble: function() {
+    const lastBinary = jsPsych.data.get().filter({ question: "refugee_status_binary_post" }).last(1).values()[0];
+    const answer = lastBinary ? stimuli.binary_questions.buttons[lastBinary.response] : '–';
+    return `
+      <div class="text-content">
+        <h2>${stimuli.motivation.heading}</h2>
+        <p>${stimuli.motivation.instruction}</p>
+        <p>${stimuli.motivation.decision} <strong>${answer}</strong>.</p>
+      </div>`;
+  },
+  questions: [{ prompt: stimuli.motivation.prompt, rows: 8, name: 'motivation' }],
+  button_label: stimuli.motivation.button
+};
+
 
 // === FLÖDE ===
-timeline.push(consent_info, consent_provide, instructions, narrative_page, ...pre_main_questions, pre_binary_q, pre_mouselab_instructions, mouselab_list, ...post_main_questions, post_binary_q);
+timeline.push(consent_info, consent_provide, instructions, narrative_page, ...pre_main_questions, pre_binary_q, pre_mouselab_instructions, mouselab_list, ...post_main_questions, post_binary_q, motivation_q);
 jsPsych.run(timeline);

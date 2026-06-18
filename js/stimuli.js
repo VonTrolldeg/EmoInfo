@@ -30,6 +30,13 @@ var stimuli = {
     "post":    "Slutligen, anser du att Haile Gebremedhin bör få flyktingstatus i Sverige?",
     "buttons": ["Ja", "Nej"]
   },
+  "motivation": {
+    "heading":     "Motivering av beslut",
+    "instruction": "Som beslutsfattare på Migrationsverket var din uppgift att avgöra om du tror att personen talar sanning eller inte och bedöma om personen bör få flyktingstatus i Sverige eller inte.",
+    "decision":    "Ditt slutgiltiga beslut var",
+    "prompt":      "Motivera varför du valde det beslutet:",
+    "button":      "Fortsätt"
+  },
   "instructions": {
     "heading": "Instruktioner till studien",
     "body": "Tack för att du vill delta.\n\n Du kommer strax att få läsa en berättelse från en person som söker asyl i Sverige. Tänk dig att du arbetar på Migrationsverket. Din uppgift är att avgöra om du tror att personen talar sanning eller inte. Du ska också bedöma om personen bör få flyktingstatus i Sverige eller inte. \n\nBakgrund: Haile Gebremedhin anländer från Addis Abeba och säger sig tillhöra den tigreanska etniska minoriteten i huvudstaden. Han har identifierat sig med ett etiopiskt id-kort utfärdat i Addis Abeba som verkar vara äkta. Var snäll och  läs texten noggrant. Du kommer få svara på flera frågor om den efter att du läst klart.",
