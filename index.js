@@ -104,7 +104,10 @@ const pre_binary_q = {
   type: jsPsychHtmlButtonResponse,
   stimulus: `<div class="text-content"><p>${stimuli.binary_questions.pre}</p></div>`,
   choices: stimuli.binary_questions.buttons,
-  data: { question: "refugee_status_binary_pre" }
+  data: { question: "refugee_status_binary_pre" },
+  on_load: function() {
+    document.getElementById('jspsych-html-button-response-btngroup').classList.add('btn-row');
+  }
 };
 
 // === STEG 7: Instruktioner inför mouselab ===

@@ -66,6 +66,15 @@ text-decoration: underline;
   margin: 0 auto !important;
 }
 
+/* Horisontell knapp-layout för binära frågor (Ja/Nej bredvid varandra) */
+#jspsych-html-button-response-btngroup.btn-row {
+  flex-direction: row;
+  justify-content: center;
+}
+#jspsych-html-button-response-btngroup.btn-row .jspsych-btn {
+  margin: 0 !important;
+}
+
 /* Textsidan - läsbar på alla skärmstorlekar */
 .text-content {
   line-height: 1.8;
