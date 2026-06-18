@@ -58,14 +58,12 @@ text-decoration: underline;
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  padding-bottom: 50px;
 }
 
-/* När flera knappar staplas: ta bort marginalen mellan dem så gap (20px) styr avståndet */
-.jspsych-html-button-response-button:not(:last-child) .jspsych-btn {
-  margin-bottom: 0 !important;
-}
-.jspsych-html-button-response-button + .jspsych-html-button-response-button .jspsych-btn {
-  margin-top: 0 !important;
+/* Nollställ margin på knappar inuti btngroup — gap och padding-bottom sköter avstånden */
+#jspsych-html-button-response-btngroup .jspsych-btn {
+  margin: 0 auto !important;
 }
 
 /* Textsidan - läsbar på alla skärmstorlekar */
