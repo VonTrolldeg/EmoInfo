@@ -166,7 +166,13 @@ const motivation_q = {
     const prompt = isYes ? stimuli.motivation.prompt_yes : stimuli.motivation.prompt_no;
     return [{ prompt, rows: 8, name: 'motivation' }];
   },
-  button_label: stimuli.motivation.button
+  button_label: stimuli.motivation.button,
+  on_finish: function() {
+    jsPsych.endExperiment(`
+      <div class="text-content">
+        <p>Tack för ditt deltagande! Du kan nu stänga fönstret.</p>
+      </div>`);
+  }
 };
 
 
