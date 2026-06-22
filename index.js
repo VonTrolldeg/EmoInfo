@@ -75,39 +75,26 @@ narrative_page = {
   data: { assigned_narrative: selectedNarrative.id }
 };
 
-// Sätter slider-bredden till 75% av skärmbredden, max 500px
-// Tvingar också wrapper-divar med inline-bredd att hålla sig inom viewporten
-function sliderOnLoad() {
-  const w = Math.min(Math.round(window.innerWidth * 0.75), 500);
-  document.querySelectorAll('input[type="range"]').forEach(el => {
-    el.style.width = w + 'px';
-  });
-  document.querySelectorAll('div[style*="width"]').forEach(el => {
-    el.style.maxWidth = '100%';
-    el.style.boxSizing = 'border-box';
-  });
-}
-
 // === STEG 5: Pre main questions — före mouselab ===
 // TODO: Om fler frågor läggs till här — överväg att samla alla på en sida med custom HTML istället för en jsPsych-trial per fråga.
 const pre_main_q_1 = {
   type: jsPsychHtmlSliderResponse,
   stimulus: `<p>${stimuli.main_questions.credibility}</p>`,
   labels: ["Inte alls trovärdig", "Mycket trovärdig"],
+  slider_width: 200,
   require_movement: true,
   button_label: "Fortsätt",
-  data: { question: "credibility_pre" },
-  on_load: sliderOnLoad
+  data: { question: "credibility_pre" }
 };
 
 const pre_main_q_2 = {
   type: jsPsychHtmlSliderResponse,
   stimulus: `<p>${stimuli.main_questions.refugee_status}</p>`,
   labels: ["Nej", "Ja"],
+  slider_width: 200,
   require_movement: true,
   button_label: "Fortsätt",
-  data: { question: "refugee_status_pre" },
-  on_load: sliderOnLoad
+  data: { question: "refugee_status_pre" }
 };
 
 const pre_main_questions = [pre_main_q_1, pre_main_q_2];
@@ -137,20 +124,20 @@ const post_main_q_1 = {
   type: jsPsychHtmlSliderResponse,
   stimulus: `<p>${stimuli.main_questions.credibility}</p>`,
   labels: ["Inte alls trovärdig", "Mycket trovärdig"],
+  slider_width: 200,
   require_movement: true,
   button_label: "Fortsätt",
-  data: { question: "credibility_post" },
-  on_load: sliderOnLoad
+  data: { question: "credibility_post" }
 };
 
 const post_main_q_2 = {
   type: jsPsychHtmlSliderResponse,
   stimulus: `<p>${stimuli.main_questions.refugee_status}</p>`,
   labels: ["Nej", "Ja"],
+  slider_width: 200,
   require_movement: true,
   button_label: "Fortsätt",
-  data: { question: "refugee_status_post" },
-  on_load: sliderOnLoad
+  data: { question: "refugee_status_post" }
 };
 
 const post_main_questions = [post_main_q_1, post_main_q_2];
