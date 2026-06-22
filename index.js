@@ -169,17 +169,17 @@ const motivation_q = {
   button_label: stimuli.motivation.button
 };
 
-// === STEG 12: tack-skärm ===
-const thank_you = {
+// === STEG 12: avslutningsskärm ===
+const finish_screen = {
   type: jsPsychHtmlButtonResponse,
   stimulus: `
     <div class="text-content">
-      <p>Tack för ditt deltagande! Du kan nu stänga fönstret.</p>
+      <p>Tack för ditt deltagande! Tryck på <strong>Avsluta</strong> för att avsluta studien och registrera ditt deltagande.</p>
     </div>`,
-  choices: [],
-  trial_duration: 0
+  choices: ['Avsluta'],
+  data: { category: 'finish' }
 };
 
 // === FLÖDE ===
-timeline.push(consent_info, consent_provide, instructions, narrative_page, ...pre_main_questions, pre_binary_q, pre_mouselab_instructions, mouselab_list, ...post_main_questions, post_binary_q, motivation_q, thank_you);
+timeline.push(consent_info, consent_provide, instructions, narrative_page, ...pre_main_questions, pre_binary_q, pre_mouselab_instructions, mouselab_list, ...post_main_questions, post_binary_q, motivation_q, finish_screen);
 jsPsych.run(timeline);
