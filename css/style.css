@@ -17,11 +17,6 @@ body {
   font-family: initial;
 }
 
-html, body {
-  overflow-x: hidden;
-  max-width: 100%;
-}
-
 #jspsych-display-element {
   width: 100%;
   max-width: 768px;
