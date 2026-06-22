@@ -81,6 +81,7 @@ const pre_main_q_1 = {
   type: jsPsychHtmlSliderResponse,
   stimulus: `<p>${stimuli.main_questions.credibility}</p>`,
   labels: ["Inte alls trovärdig", "Mycket trovärdig"],
+  slider_width: 200,
   require_movement: true,
   button_label: "Fortsätt",
   data: { question: "credibility_pre" }
@@ -90,6 +91,7 @@ const pre_main_q_2 = {
   type: jsPsychHtmlSliderResponse,
   stimulus: `<p>${stimuli.main_questions.refugee_status}</p>`,
   labels: ["Nej", "Ja"],
+  slider_width: 200,
   require_movement: true,
   button_label: "Fortsätt",
   data: { question: "refugee_status_pre" }
@@ -122,6 +124,7 @@ const post_main_q_1 = {
   type: jsPsychHtmlSliderResponse,
   stimulus: `<p>${stimuli.main_questions.credibility}</p>`,
   labels: ["Inte alls trovärdig", "Mycket trovärdig"],
+  slider_width: 200,
   require_movement: true,
   button_label: "Fortsätt",
   data: { question: "credibility_post" }
@@ -131,6 +134,7 @@ const post_main_q_2 = {
   type: jsPsychHtmlSliderResponse,
   stimulus: `<p>${stimuli.main_questions.refugee_status}</p>`,
   labels: ["Nej", "Ja"],
+  slider_width: 200,
   require_movement: true,
   button_label: "Fortsätt",
   data: { question: "refugee_status_post" }
