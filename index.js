@@ -173,8 +173,12 @@ const motivation_q = {
 const finish_screen = {
   type: jsPsychHtmlButtonResponse,
   stimulus: `
-    <div class="text-content">
-      <p>Tack för ditt deltagande! Tryck på <strong>Avsluta</strong> för att avsluta studien och registrera ditt deltagande.</p>
+    <div class='box-1;' text-align: left'> <p> Tack för att du har varit med i vår studie. Den handlar om hur vi bedömer andras trovärdighet, och hur detta påverkas av, bland annat, hur känslosam en berättelse eller en berättare är. Resultaten kommer att användas i vetenskaplig forskning. </p>
+    <p> Projektet är finansierat av Riksbankens Jubileumsfond, och vill du veta mer om det kan du läsa här: </p>
+    <p> <a href="https://www.rj.se/bidrag/2023/hur-paverkar-kanslomassiga-berattelser-informationssokning-i-juridiskt-relevanta-beslut/" target="_blank"> Projektinformation på RJs hemsida. </a> </p>
+    <p> Har du frågor om projektet eller av annan anledning vill komma i kontakt med oss når du ansvarig forskare på: annika.wallin@lucs.lu.se </p>
+    <p> Tack igen för ditt bidrag! </p>
+    <p><strong> Tryck avsluta för att avsluta studien och registrera ditt deltagande. </strong> </p>
     </div>`,
   choices: ['Avsluta'],
   data: { category: 'finish' }
