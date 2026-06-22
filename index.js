@@ -166,16 +166,20 @@ const motivation_q = {
     const prompt = isYes ? stimuli.motivation.prompt_yes : stimuli.motivation.prompt_no;
     return [{ prompt, rows: 8, name: 'motivation' }];
   },
-  button_label: stimuli.motivation.button,
-  on_finish: function() {
-    jsPsych.endExperiment(`
-      <div class="text-content">
-        <p>Tack för ditt deltagande! Du kan nu stänga fönstret.</p>
-      </div>`);
-  }
+  button_label: stimuli.motivation.button
 };
 
+// === STEG 12: tack-skärm ===
+const thank_you = {
+  type: jsPsychHtmlButtonResponse,
+  stimulus: `
+    <div class="text-content">
+      <p>Tack för ditt deltagande! Du kan nu stänga fönstret.</p>
+    </div>`,
+  choices: [],
+  trial_duration: 0
+};
 
 // === FLÖDE ===
-timeline.push(consent_info, consent_provide, instructions, narrative_page, ...pre_main_questions, pre_binary_q, pre_mouselab_instructions, mouselab_list, ...post_main_questions, post_binary_q, motivation_q);
+timeline.push(consent_info, consent_provide, instructions, narrative_page, ...pre_main_questions, pre_binary_q, pre_mouselab_instructions, mouselab_list, ...post_main_questions, post_binary_q, motivation_q, thank_you);
 jsPsych.run(timeline);
