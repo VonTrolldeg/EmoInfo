@@ -76,10 +76,15 @@ narrative_page = {
 };
 
 // Sätter slider-bredden till 75% av skärmbredden, max 500px
+// Tvingar också wrapper-divar med inline-bredd att hålla sig inom viewporten
 function sliderOnLoad() {
   const w = Math.min(Math.round(window.innerWidth * 0.75), 500);
   document.querySelectorAll('input[type="range"]').forEach(el => {
     el.style.width = w + 'px';
+  });
+  document.querySelectorAll('div[style*="width"]').forEach(el => {
+    el.style.maxWidth = '100%';
+    el.style.boxSizing = 'border-box';
   });
 }
 
