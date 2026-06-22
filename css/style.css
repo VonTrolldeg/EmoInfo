@@ -17,9 +17,34 @@ body {
   font-family: initial;
 }
 
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
 #jspsych-display-element {
+  width: 100%;
   max-width: 768px;
   margin: 0 auto;
+  overflow-x: hidden;
+}
+
+/* Hindra slider-containern från att svälla utanför skärmen på mobil */
+#jspsych-html-slider-response-wrapper,
+.jspsych-html-slider-response-container {
+  max-width: 100% !important;
+  box-sizing: border-box;
+}
+
+input[type="range"] {
+  max-width: 100%;
+}
+
+/* Survey-text (motivationsfrågan) */
+.jspsych-survey-text-question textarea,
+.jspsych-survey-text-question input[type="text"] {
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 /* jsPsych centrerar text som standard - vi skriver över det så allt är vänsterställt */
