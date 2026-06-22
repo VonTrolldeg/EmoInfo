@@ -33,8 +33,8 @@ var stimuli = {
   "motivation": {
     "heading":     "Motivering av beslut",
     "instruction": "Som beslutsfattare på Migrationsverket var din uppgift att avgöra om du tror att personen talar sanning eller inte och bedöma om personen bör få flyktingstatus i Sverige eller inte.",
-    "decision":    "Ditt slutgiltiga beslut var",
-    "prompt":      "Motivera varför du valde det beslutet:",
+    "prompt_yes":  "Du valde att bevilja Haile flyktingstatus baserat på hans berättelse och den ytterligare informationen. Motivera vad som gjorde att du valde det beslutet:",
+    "prompt_no":   "Du valde att neka Haile flyktingstatus baserat på hans berättelse och den ytterligare informationen. Motivera vad som gjorde att du valde det beslutet:",
     "button":      "Fortsätt"
   },
   "instructions": {
