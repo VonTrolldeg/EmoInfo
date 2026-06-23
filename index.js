@@ -1,5 +1,13 @@
+// Säkerställ korrekt skalning på mobil — måste ske innan jsPsych renderar något
+document.head.insertAdjacentHTML('beforeend', '<meta name="viewport" content="width=device-width, initial-scale=1.0">');
+
 // === STEG 0: Initiera jsPsych ===
 var jsPsych = initJsPsych();
+
+// Cognition.run sätter CONDITION automatiskt; URL-parameter (?condition=N) används för lokal testning
+if (typeof CONDITION === 'undefined') {
+  CONDITION = parseInt(jsPsych.data.getURLVariable('condition')) || 1;
+}
 
 var mouselab_list = buildMouselabTrial();
 
@@ -55,24 +63,26 @@ const consent_provide = {
 // === STEG 3: Introduction to experiment ===
 const instructions = {
   type: jsPsychHtmlButtonResponse,
-  stimulus: `<div class="text-content"><h2>${stimuli.instructions.heading}</h2>${stimuli.instructions.body.split('\n\n').map(p => `<p>${p}</p>`).join('')}</div>`,
-  choices: [stimuli.instructions.button]
+  stimulus: function() {
+    const body = jsPsych.evaluateTimelineVariable('instructions_body');
+    return `<div class="text-content"><h2>Instruktioner till studien</h2>${body.split('\n\n').map(p => `<p>${p}</p>`).join('')}</div>`;
+  },
+  choices: ["Starta"]
 };
 
-var narrative_page;
-
-const data = stimuli;
-
-// === STEG 4: Narrativsidan (slumpar emotionell eller neutral berättelse) ===
-const randomIndex = Math.floor(Math.random() * data.narratives.length);
-const selectedNarrative = data.narratives[randomIndex];
-
-narrative_page = {
+// === STEG 4: Narrativsidan ===
+const narrative_page = {
   type: jsPsychHtmlButtonResponse,
-  stimulus: `<div class="text-content"><h2>${selectedNarrative.heading}</h2><p>${selectedNarrative.content.replace(/\n/g, '</p><p>')}</p></div>`,
+  stimulus: function() {
+    const heading = jsPsych.evaluateTimelineVariable('narrative_heading');
+    const content = jsPsych.evaluateTimelineVariable('narrative_content');
+    return `<div class="text-content"><h2>${heading}</h2><p>${content.replace(/\n/g, '</p><p>')}</p></div>`;
+  },
   choices: ["Fortsätt"],
   save_trial_parameters: { stimulus: false },
-  data: { assigned_narrative: selectedNarrative.id }
+  data: function() {
+    return { assigned_narrative: jsPsych.evaluateTimelineVariable('stimulus_id') };
+  }
 };
 
 // === STEG 5: Pre main questions — före mouselab ===
@@ -185,5 +195,14 @@ const finish_screen = {
 };
 
 // === FLÖDE ===
-timeline.push(consent_info, consent_provide, instructions, narrative_page, ...pre_main_questions, pre_binary_q, pre_mouselab_instructions, mouselab_list, ...post_main_questions, post_binary_q, motivation_q, finish_screen);
+const narrative_procedure = {
+  timeline: [instructions, narrative_page, ...pre_main_questions, pre_binary_q, pre_mouselab_instructions, mouselab_list, ...post_main_questions, post_binary_q, motivation_q],
+  timeline_variables: stimuli_narrative,
+  sample: {
+    type: "custom",
+    fn: function() { return [CONDITION - 1]; }
+  }
+};
+
+timeline.push(consent_info, consent_provide, narrative_procedure, finish_screen);
 jsPsych.run(timeline);

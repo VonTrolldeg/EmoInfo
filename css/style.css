@@ -11,6 +11,7 @@ h3 { font-size: 20px; font-weight: bold; }
 body {
   font-size: 16px;
   font-family: 'Source Sans 3', sans-serif;
+  -webkit-text-size-adjust: 100%; /* Förhindrar att iOS Safari zoomar upp text automatiskt */
 }
 
 .info-item {
