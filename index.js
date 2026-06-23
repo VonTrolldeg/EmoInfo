@@ -103,7 +103,9 @@ const pre_main_q_2 = {
   stimulus: function() {
     return `<p>Anser du att ${jsPsych.evaluateTimelineVariable('person_name')} ${jsPsych.evaluateTimelineVariable('bigQ')}</p>`;
   },
-  labels: ["Nej", "Ja"],
+  labels: function() {
+    return [jsPsych.evaluateTimelineVariable('low_label'), jsPsych.evaluateTimelineVariable('high_label')];
+  },
   slider_width: 200,
   require_movement: true,
   button_label: "Fortsätt",
@@ -133,8 +135,7 @@ const pre_mouselab_instructions = {
   stimulus: function() {
     const name = jsPsych.evaluateTimelineVariable('person_name');
     const bigQ = jsPsych.evaluateTimelineVariable('bigQ');
-    const heading = jsPsych.evaluateTimelineVariable('mouselab_heading');
-    return `<div class="text-content"><h2>${heading}</h2><p>Nu har du läst ${name}s berättelse. På nästa sida får du mer information om fallet. En del information stödjer ${name}s berättelse och markeras med <strong>+</strong>. Annat talar emot den <strong>−</strong>. När du läst så mycket information du tycker du behöver om fallet gör du en ny bedömning om ${name} ${bigQ} Du kan läsa informationen i vilken ordning du vill.</p></div>`;
+    return `<div class="text-content"><h2>Ytterligare information om fallet</h2><p>Nu har du läst ${name}s berättelse. På nästa sida får du mer information om fallet. En del information stödjer ${name}s berättelse och markeras med <strong>+</strong>. Annat talar emot den <strong>−</strong>. När du läst så mycket information du tycker du behöver om fallet gör du en ny bedömning om ${name} ${bigQ} Du kan läsa informationen i vilken ordning du vill.</p></div>`;
   },
   choices: ["Fortsätt"]
 };
@@ -159,7 +160,9 @@ const post_main_q_2 = {
   stimulus: function() {
     return `<p>Anser du att ${jsPsych.evaluateTimelineVariable('person_name')} ${jsPsych.evaluateTimelineVariable('bigQ')}</p>`;
   },
-  labels: ["Nej", "Ja"],
+  labels: function() {
+    return [jsPsych.evaluateTimelineVariable('low_label'), jsPsych.evaluateTimelineVariable('high_label')];
+  },
   slider_width: 200,
   require_movement: true,
   button_label: "Fortsätt",

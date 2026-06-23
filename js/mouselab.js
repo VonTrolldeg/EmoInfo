@@ -33,6 +33,8 @@ function buildMouselabTrial() {
     const name        = jsPsych.evaluateTimelineVariable('person_name');
     const personName  = jsPsych.evaluateTimelineVariable('person_name');
     const bigQ        = jsPsych.evaluateTimelineVariable('bigQ');
+    const lowLabel    = jsPsych.evaluateTimelineVariable('low_label');
+    const highLabel   = jsPsych.evaluateTimelineVariable('high_label');
 
     // Para ihop positiva och negativa alternativ slumpmässigt (ett par per rad)
     const positives = shuffleArray(options.filter(opt => opt.type === 'positive'));
@@ -91,8 +93,8 @@ function buildMouselabTrial() {
           <div class="slider-wrapper">
             <input type="range" class="jspsych-slider" id="mid-refugee-slider" min="0" max="100" value="50" step="1">
             <div class="slider-labels">
-              <span>Nej</span>
-              <span>Ja</span>
+              <span>${lowLabel}</span>
+              <span>${highLabel}</span>
             </div>
           </div>
         </div>

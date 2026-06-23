@@ -22,6 +22,8 @@ var stimuli_narrative = [
       { id: "sakerhetssituation_tigray",      label: "Krigsbrott i Tigray",            type: "negative", description: "Det är enbart i regionen Tigray det finns kännedom om grova krigsbrott i dagsläget." }
     ],
     bigQ: "bör få flyktingstatus i Sverige?",
+    low_label: "Bör inte få flyktingstatus",
+    high_label: "Bör få flyktingstatus",
     motivation_prompt_yes: "Du valde att bevilja Haile flyktingstatus baserat på hans berättelse och den ytterligare informationen. Motivera vad som gjorde att du valde det beslutet:",
     motivation_prompt_no: "Du valde att neka Haile flyktingstatus baserat på hans berättelse och den ytterligare informationen. Motivera vad som gjorde att du valde det beslutet:"
   },
@@ -44,6 +46,8 @@ var stimuli_narrative = [
       { id: "sakerhetssituation_tigray",      label: "Krigsbrott i Tigray",            type: "negative", description: "Det är enbart i regionen Tigray det finns kännedom om grova krigsbrott i dagsläget." }
     ],
     bigQ: "bör få flyktingstatus i Sverige?",
+    low_label: "Bör inte få flyktingstatus",
+    high_label: "Bör få flyktingstatus",
     motivation_prompt_yes: "Du valde att bevilja Haile flyktingstatus baserat på hans berättelse och den ytterligare informationen. Motivera vad som gjorde att du valde det beslutet:",
     motivation_prompt_no: "Du valde att neka Haile flyktingstatus baserat på hans berättelse och den ytterligare informationen. Motivera vad som gjorde att du valde det beslutet:"
   },
@@ -66,6 +70,8 @@ var stimuli_narrative = [
       { id: "hasse_neg_2b", label: "Kriminella kontakter",type: "negative", description: "Hasse arresterades för ett lägenhetsinbrott i sin ungdom, och är fortfarande kompis med flera av de figurer han hade samröre med då. Två av dessa är hälare som är kända av polisen." }
     ],
     bigQ: "är skyldig?",
+    low_label: "Är inte skyldig",
+    high_label: "Är skyldig",
     motivation_prompt_yes: "Du bedömde Hasse som skyldig till stölden baserat på hans berättelse och den ytterligare informationen. Motivera vad som gjorde att du valde det beslutet:",
     motivation_prompt_no: "Du bedömde Hasse som oskyldig till stölden baserat på hans berättelse och den ytterligare informationen. Motivera vad som gjorde att du valde det beslutet:"
   },
@@ -88,52 +94,58 @@ var stimuli_narrative = [
       { id: "hasse_neg_2b", label: "Kriminella kontakter",type: "negative", description: "Hasse arresterades för ett lägenhetsinbrott i sin ungdom, och är fortfarande kompis med flera av de figurer han hade samröre med då. Två av dessa är hälare som är kända av polisen." }
     ],
     bigQ: "är skyldig?",
+    low_label: "Är inte skyldig",
+    high_label: "Är skyldig",
     motivation_prompt_yes: "Du bedömde Hasse som skyldig till stölden baserat på hans berättelse och den ytterligare informationen. Motivera vad som gjorde att du valde det beslutet:",
     motivation_prompt_no: "Du bedömde Hasse som oskyldig till stölden baserat på hans berättelse och den ytterligare informationen. Motivera vad som gjorde att du valde det beslutet:"
   },
 
-  // === KONDITION 5: Narrativ 3 — neutral (PLATSHÅLLARE) ===
+  // === KONDITION 5: Sanna — neutral ===
   {
-    stimulus_id: "narrativ_3_neutral",
-    person_name: "[NAMN SAKNAS]",
-    narrative_heading: "[RUBRIK SAKNAS]",
-    narrative_content: "[NARRATIVTEXT SAKNAS]",
-    instructions_body: "[INSTRUKTIONSTEXT SAKNAS]",
+    stimulus_id: "sanna_neutral",
+    person_name: "Sanna",
+    narrative_heading: "Sanna berättar",
+    narrative_content: "Förra året var inget roligt år. Min man och jag separerade och jag blev ensamstående med två barn. Jag har aldrig sökt några bidrag tidigare, men nu blev det svårt att få vardagen att gå ihop med vår förändrade ekonomi. Jag var tvungen att snabbt hitta en hyresrätt med plats åt oss alla.\nJag letade länge, och till slut hittade jag en i närheten av barnens förskola. Det är viktigt för mig att de kan känna att livet fortsätter som vanligt. Hyresrätter i det området är svåra att klara av på en inkomst, vilket jag upplevde försvårade det hela för mig.\nVi var ju och pratade med familjerådgivningen och de sa att jag kunde söka bostadsbidrag. Jag var lättad när jag beviljades bidraget och förstod att jag hade hittat vårt nya hem. Där kan vi leva. Barnen trivs och vi har en så fin balkong, det är trevligt att kunna vistas ute på den. Jag har alltid varit noga när jag kontaktat Försäkringskassan, jag vill inte göra fel.\nNär jag fick extra inkomster i och med att min faster dog och jag fick ett litet arv ringde jag min handläggare och hörde hur jag skulle göra. Då sa hon att arvet var så litet att de inte skulle påverka mitt bidrag. Vad jag vet har jag inte gjort något fel. Jag har i och för sig fått löneförhöjning, men det borde väl rapporteras in automatiskt till Försäkringskassan?\nJag tycker inte att det är rätt att jag ska bli återbetalningsskyldig när jag har varit så tydlig med min handläggare om min situation. Jag har verkligen försökt att göra rätt, och jag har inte pengar över för att betala tillbaka ett felaktigt bostadsbidrag. Det har tagit tid för mina barn att vänja sig vid den nya situationen, och jag vill inte behöva flytta och göra livet osäkert för dem igen.",
+    instructions_body: "Du kommer strax att få läsa en berättelse från en person som eventuellt kommer att behöva betala tillbaka ett bostadsbidrag från Försäkringskassan. Föreställ dig att du arbetar på Försäkringskassan och att din uppgift är att avgöra om du tror att personen talar sanning eller inte. Du ska också bedöma ifall du tycker att personen ska behöva betala tillbaka bidraget.\n\nBakgrund: Vid en kontroll upptäcker Försäkringskassan att Sanna, som tagit emot bostadsbidrag, har haft högre inkomst än vad hon angett till Försäkringskassan och det kan innebära att hon blir återbetalningsskyldig. Om Försäkringskassan bedömer att eventuella felaktiga utbetalningar inte beror på att någon avsiktligt misslett dem, och ifall det blir finansiellt svårt för personen att betala tillbaka, kan man ibland sänka eller i enstaka fall helt ta bort återbetalningskravet.\n\nVar snäll och läs texten noggrant. Du kommer få svara på flera frågor om den efter att du läst klart.",
     options: [
-      { id: "n3_pos_1", label: "[ETIKETT SAKNAS]", type: "positive", description: "[TEXT SAKNAS]" },
-      { id: "n3_pos_2", label: "[ETIKETT SAKNAS]", type: "positive", description: "[TEXT SAKNAS]" },
-      { id: "n3_pos_3", label: "[ETIKETT SAKNAS]", type: "positive", description: "[TEXT SAKNAS]" },
-      { id: "n3_pos_4", label: "[ETIKETT SAKNAS]", type: "positive", description: "[TEXT SAKNAS]" },
-      { id: "n3_neg_1", label: "[ETIKETT SAKNAS]", type: "negative", description: "[TEXT SAKNAS]" },
-      { id: "n3_neg_2", label: "[ETIKETT SAKNAS]", type: "negative", description: "[TEXT SAKNAS]" },
-      { id: "n3_neg_3", label: "[ETIKETT SAKNAS]", type: "negative", description: "[TEXT SAKNAS]" },
-      { id: "n3_neg_4", label: "[ETIKETT SAKNAS]", type: "negative", description: "[TEXT SAKNAS]" }
+      { id: "sanna_pos_1",  label: "Inga anmärkningar",      type: "positive", description: "Sanna har inga tidigare anmärkningar kopplade till bidragsansökningar eller andra former av ekonomiskt stöd. Hon har inte heller några betalningsanmärkningar." },
+      { id: "sanna_pos_2",  label: "Handläggarens misstag",  type: "positive", description: "Det finns underlag för att den utredare Sanna pratade med när hon rapporterade in sin inkomst är ny på jobbet och har missat att lägga in flera uppgifter på ett korrekt sätt i systemet." },
+      { id: "sanna_pos_1b", label: "Inga anmärkningar",      type: "positive", description: "Sanna har inga tidigare anmärkningar kopplade till bidragsansökningar eller andra former av ekonomiskt stöd. Hon har inte heller några betalningsanmärkningar." },
+      { id: "sanna_pos_2b", label: "Handläggarens misstag",  type: "positive", description: "Det finns underlag för att den utredare Sanna pratade med när hon rapporterade in sin inkomst är ny på jobbet och har missat att lägga in flera uppgifter på ett korrekt sätt i systemet." },
+      { id: "sanna_neg_1",  label: "Ekonomisk förbättring",  type: "negative", description: "Sannas ekonomi har blivit bättre efter skilsmässan. Bland annat har makens fonder fördelats mellan de två följande regeln om bodelning inom äktenskapsbalken. Detta har inte rapporterats in till Försäkringskassan." },
+      { id: "sanna_neg_4",  label: "Missade samtal",         type: "negative", description: "Sanna har missat flera bokade samtal med sin handläggare där hon hade kunnat få hjälp att hantera sitt bostadsbidrag." },
+      { id: "sanna_neg_1b", label: "Ekonomisk förbättring",  type: "negative", description: "Sannas ekonomi har blivit bättre efter skilsmässan. Bland annat har makens fonder fördelats mellan de två följande regeln om bodelning inom äktenskapsbalken. Detta har inte rapporterats in till Försäkringskassan." },
+      { id: "sanna_neg_4b", label: "Missade samtal",         type: "negative", description: "Sanna har missat flera bokade samtal med sin handläggare där hon hade kunnat få hjälp att hantera sitt bostadsbidrag." }
     ],
-    bigQ: "[FRÅGA SAKNAS]",
-    motivation_prompt_yes: "[TEXT SAKNAS]",
-    motivation_prompt_no: "[TEXT SAKNAS]"
+    bigQ: "bör betala tillbaka sitt bostadsbidrag?",
+    low_label: "Absolut inte återbetalningsskyldig",
+    high_label: "Absolut återbetalningsskyldig",
+    motivation_prompt_yes: "Du valde att bedöma Sanna som återbetalningsskyldig baserat på hennes berättelse och den ytterligare informationen. Motivera vad som gjorde att du valde det beslutet:",
+    motivation_prompt_no: "Du valde att bedöma Sanna som inte återbetalningsskyldig baserat på hennes berättelse och den ytterligare informationen. Motivera vad som gjorde att du valde det beslutet:"
   },
 
-  // === KONDITION 6: Narrativ 3 — emotionell (PLATSHÅLLARE) ===
+  // === KONDITION 6: Sanna — emotionell ===
   {
-    stimulus_id: "narrativ_3_emotion",
-    person_name: "[NAMN SAKNAS]",
-    narrative_heading: "[RUBRIK SAKNAS]",
-    narrative_content: "[NARRATIVTEXT SAKNAS]",
-    instructions_body: "[INSTRUKTIONSTEXT SAKNAS]",
+    stimulus_id: "sanna_emotion",
+    person_name: "Sanna",
+    narrative_heading: "Sanna berättar",
+    narrative_content: "Förra året rasade min värld samman när min man och jag separerade, och jag stod plötsligt ensam med två små barn. Jag har aldrig behövt söka bidrag, men nu var jag tvungen att kämpa för att hålla oss flytande ekonomiskt.\nJag letade desperat efter en hyresrätt som kunde rymma oss alla, och efter många sömnlösa nätter hittade jag äntligen en lägenhet nära barnens förskola. Det var så viktigt för mig att de skulle känna glädje och trygghet trots allt som pågick. Hyresrätter i det området är dyra, och det kändes som en omöjlighet att klara sig på en enda inkomst.\nVi gick till familjerådgivningen, och de rådde mig att söka bostadsbidrag. När jag fick beskedet att jag beviljats bidraget, kände jag en våg av lättnad skölja över mig. Jag hade hittat vårt nya hem, en plats där vi kunde börja om. Barnen älskar det här, och vi har en fantastisk balkong där vi kan njuta av soliga dagar tillsammans. Jag har alltid varit noga när jag kontaktat Försäkringskassan, jag är jätterädd för att göra fel.\nNär min älskade faster gick bort och jag fick ett litet arv ringde jag min handläggare för att fråga hur jag skulle göra. Hon försäkrade mig om att arvet var så litet att det inte skulle påverka mitt bidrag. Vad jag vet har jag inte gjort något fel. Jag har i och för sig fått löneförhöjning, men det borde väl rapporteras in automatiskt till Försäkringskassan?\nNu känns det som en kniv i hjärtat att jag ska bli återbetalningsskyldig när jag har varit så öppen och ärlig med min handläggare om min situation. Jag har verkligen gjort allt för att följa reglerna, och jag har inte pengar över för att betala tillbaka ett felaktigt bostadsbidrag. Det har tagit tid för mina barn att vänja sig vid vår nya situation, och jag vill inte behöva rycka upp dem igen och göra livet ovisst.",
+    instructions_body: "Du kommer strax att få läsa en berättelse från en person som eventuellt kommer att behöva betala tillbaka ett bostadsbidrag från Försäkringskassan. Föreställ dig att du arbetar på Försäkringskassan och att din uppgift är att avgöra om du tror att personen talar sanning eller inte. Du ska också bedöma ifall du tycker att personen ska behöva betala tillbaka bidraget.\n\nBakgrund: Vid en kontroll upptäcker Försäkringskassan att Sanna, som tagit emot bostadsbidrag, har haft högre inkomst än vad hon angett till Försäkringskassan och det kan innebära att hon blir återbetalningsskyldig. Om Försäkringskassan bedömer att eventuella felaktiga utbetalningar inte beror på att någon avsiktligt misslett dem, och ifall det blir finansiellt svårt för personen att betala tillbaka, kan man ibland sänka eller i enstaka fall helt ta bort återbetalningskravet.\n\nVar snäll och läs texten noggrant. Du kommer få svara på flera frågor om den efter att du läst klart.",
     options: [
-      { id: "n3_pos_1", label: "[ETIKETT SAKNAS]", type: "positive", description: "[TEXT SAKNAS]" },
-      { id: "n3_pos_2", label: "[ETIKETT SAKNAS]", type: "positive", description: "[TEXT SAKNAS]" },
-      { id: "n3_pos_3", label: "[ETIKETT SAKNAS]", type: "positive", description: "[TEXT SAKNAS]" },
-      { id: "n3_pos_4", label: "[ETIKETT SAKNAS]", type: "positive", description: "[TEXT SAKNAS]" },
-      { id: "n3_neg_1", label: "[ETIKETT SAKNAS]", type: "negative", description: "[TEXT SAKNAS]" },
-      { id: "n3_neg_2", label: "[ETIKETT SAKNAS]", type: "negative", description: "[TEXT SAKNAS]" },
-      { id: "n3_neg_3", label: "[ETIKETT SAKNAS]", type: "negative", description: "[TEXT SAKNAS]" },
-      { id: "n3_neg_4", label: "[ETIKETT SAKNAS]", type: "negative", description: "[TEXT SAKNAS]" }
+      { id: "sanna_pos_1",  label: "Inga anmärkningar",      type: "positive", description: "Sanna har inga tidigare anmärkningar kopplade till bidragsansökningar eller andra former av ekonomiskt stöd. Hon har inte heller några betalningsanmärkningar." },
+      { id: "sanna_pos_2",  label: "Handläggarens misstag",  type: "positive", description: "Det finns underlag för att den utredare Sanna pratade med när hon rapporterade in sin inkomst är ny på jobbet och har missat att lägga in flera uppgifter på ett korrekt sätt i systemet." },
+      { id: "sanna_pos_1b", label: "Inga anmärkningar",      type: "positive", description: "Sanna har inga tidigare anmärkningar kopplade till bidragsansökningar eller andra former av ekonomiskt stöd. Hon har inte heller några betalningsanmärkningar." },
+      { id: "sanna_pos_2b", label: "Handläggarens misstag",  type: "positive", description: "Det finns underlag för att den utredare Sanna pratade med när hon rapporterade in sin inkomst är ny på jobbet och har missat att lägga in flera uppgifter på ett korrekt sätt i systemet." },
+      { id: "sanna_neg_1",  label: "Ekonomisk förbättring",  type: "negative", description: "Sannas ekonomi har blivit bättre efter skilsmässan. Bland annat har makens fonder fördelats mellan de två följande regeln om bodelning inom äktenskapsbalken. Detta har inte rapporterats in till Försäkringskassan." },
+      { id: "sanna_neg_4",  label: "Missade samtal",         type: "negative", description: "Sanna har missat flera bokade samtal med sin handläggare där hon hade kunnat få hjälp att hantera sitt bostadsbidrag." },
+      { id: "sanna_neg_1b", label: "Ekonomisk förbättring",  type: "negative", description: "Sannas ekonomi har blivit bättre efter skilsmässan. Bland annat har makens fonder fördelats mellan de två följande regeln om bodelning inom äktenskapsbalken. Detta har inte rapporterats in till Försäkringskassan." },
+      { id: "sanna_neg_4b", label: "Missade samtal",         type: "negative", description: "Sanna har missat flera bokade samtal med sin handläggare där hon hade kunnat få hjälp att hantera sitt bostadsbidrag." }
     ],
-    bigQ: "[FRÅGA SAKNAS]",
-    motivation_prompt_yes: "[TEXT SAKNAS]",
-    motivation_prompt_no: "[TEXT SAKNAS]"
+    bigQ: "bör betala tillbaka sitt bostadsbidrag?",
+    low_label: "Absolut inte återbetalningsskyldig",
+    high_label: "Absolut återbetalningsskyldig",
+    motivation_prompt_yes: "Du valde att bedöma Sanna som återbetalningsskyldig baserat på hennes berättelse och den ytterligare informationen. Motivera vad som gjorde att du valde det beslutet:",
+    motivation_prompt_no: "Du valde att bedöma Sanna som inte återbetalningsskyldig baserat på hennes berättelse och den ytterligare informationen. Motivera vad som gjorde att du valde det beslutet:"
   }
 
 ];
