@@ -56,18 +56,18 @@ var stimuli_narrative = [
     narrative_content: "Det var mycket den där onsdagen. Jag åkte direkt från arbetet till mina barns skolpjäs. Det var stressigt, jag behövde verkligen skynda mig, men jag hann precis dit innan föreställningen började. Jag var stolt när jag såg mitt barn på scen uppträdande som Klas Klättermus. Jag vill inte missa sådana stunder.\nJag har arbetat på Bättre Bygge under många år, och det har varit en del toppar och dalar under den tiden. Jag började som byggarbetare, men sedan jag fått vissa ryggbesvär fick jag ändra på hur jag arbetade. Jag kunde inte längre arbeta fysiskt med att bygga och jag var osäker på hur mitt fortsatta arbetsliv skulle se ut.\nJag flyttades över till att leda byggprojekt istället. Jag var inte säker på att jag skulle få chansen, så jag blev positivt överraskad. Jag tycker faktiskt att min praktiska erfarenhet gör mig till en bra projektledare, och jag är glad att jag fick chansen att byta bana utan att behöva lämna byggbranschen. Jag har liksom en fot på kontoret och en på byggarbetsplatsen. Jag trivs på jobbet. Det finns inte på kartan att jag skulle göra något skadligt mot min arbetsgivare.\nDet är sant att jag har haft skulder till banken som jag nyligen betalade av, men det är för att jag var tvungen att hjälpa min syster, som haft ekonomiska problem med sin blomsteraffär. Hon har kämpat med sin affär, och kan jag hjälpa till gör jag det gärna. Jag lånade ut pengar till henne som jag precis fick tillbaka, och då kunde jag till slut reglera skulden.\nJag har inte varit i trassel med lagen på tjugo år och är rädd om min anställning. Då var jag ung och dum, nu har jag familj och ansvar och ett arbete jag trivs med. Varför skulle jag äventyra det för lite kontanter?\nDet är otrevligt att anklagas för ett brott som jag inte har begått. Det är inte roligt att vara i en domstol och jag oroar mig för vad mina barn ska tänka om mig. Jag tycker om min arbetsgivare och skulle inte stjäla från företaget.",
     instructions_body: "[INSTRUKTIONSTEXT SAKNAS]",
     options: [
-      { id: "n2_pos_1", label: "[ETIKETT SAKNAS]", type: "positive", description: "[TEXT SAKNAS]" },
-      { id: "n2_pos_2", label: "[ETIKETT SAKNAS]", type: "positive", description: "[TEXT SAKNAS]" },
-      { id: "n2_pos_3", label: "[ETIKETT SAKNAS]", type: "positive", description: "[TEXT SAKNAS]" },
-      { id: "n2_pos_4", label: "[ETIKETT SAKNAS]", type: "positive", description: "[TEXT SAKNAS]" },
-      { id: "n2_neg_1", label: "[ETIKETT SAKNAS]", type: "negative", description: "[TEXT SAKNAS]" },
-      { id: "n2_neg_2", label: "[ETIKETT SAKNAS]", type: "negative", description: "[TEXT SAKNAS]" },
-      { id: "n2_neg_3", label: "[ETIKETT SAKNAS]", type: "negative", description: "[TEXT SAKNAS]" },
-      { id: "n2_neg_4", label: "[ETIKETT SAKNAS]", type: "negative", description: "[TEXT SAKNAS]" }
+      { id: "hasse_pos_1",  label: "Alibi – Sylvia",      type: "positive", description: "Sylvia, som också arbetar på Bättre Bygge, såg Hasse på skolan klockan 20 när han gick ut ur lokalerna tillsammans med sina barn. Hon menar att det tar mellan 45 och 50 minuter att köra från Bättre Bygge till skolan vid den tiden på kvällen." },
+      { id: "hasse_pos_3",  label: "Laglydig vuxenliv",   type: "positive", description: "Under sitt vuxna liv har Hasse inte haft kontakt med polisen, inte ens för fortkörning. Han har skaffat familj och barn och anses vara en laglydig och hårt arbetande person." },
+      { id: "hasse_pos_1b", label: "Alibi – Sylvia",      type: "positive", description: "Sylvia, som också arbetar på Bättre Bygge, såg Hasse på skolan klockan 20 när han gick ut ur lokalerna tillsammans med sina barn. Hon menar att det tar mellan 45 och 50 minuter att köra från Bättre Bygge till skolan vid den tiden på kvällen." },
+      { id: "hasse_pos_3b", label: "Laglydig vuxenliv",   type: "positive", description: "Under sitt vuxna liv har Hasse inte haft kontakt med polisen, inte ens för fortkörning. Han har skaffat familj och barn och anses vara en laglydig och hårt arbetande person." },
+      { id: "hasse_neg_1",  label: "Dyr märkesklocka",    type: "negative", description: "Hasse köpte sig en dyr märkesklocka i samband med inbrottet, trots att han oftast är ganska försiktig med sina pengar." },
+      { id: "hasse_neg_2",  label: "Kriminella kontakter",type: "negative", description: "Hasse arresterades för ett lägenhetsinbrott i sin ungdom, och är fortfarande kompis med flera av de figurer han hade samröre med då. Två av dessa är hälare som är kända av polisen." },
+      { id: "hasse_neg_1b", label: "Dyr märkesklocka",    type: "negative", description: "Hasse köpte sig en dyr märkesklocka i samband med inbrottet, trots att han oftast är ganska försiktig med sina pengar." },
+      { id: "hasse_neg_2b", label: "Kriminella kontakter",type: "negative", description: "Hasse arresterades för ett lägenhetsinbrott i sin ungdom, och är fortfarande kompis med flera av de figurer han hade samröre med då. Två av dessa är hälare som är kända av polisen." }
     ],
-    bigQ: "[FRÅGA SAKNAS]",
-    motivation_prompt_yes: "[TEXT SAKNAS]",
-    motivation_prompt_no: "[TEXT SAKNAS]"
+    bigQ: "är skyldig?",
+    motivation_prompt_yes: "Du bedömde Hasse som skyldig till stölden baserat på hans berättelse och den ytterligare informationen. Motivera vad som gjorde att du valde det beslutet:",
+    motivation_prompt_no: "Du bedömde Hasse som oskyldig till stölden baserat på hans berättelse och den ytterligare informationen. Motivera vad som gjorde att du valde det beslutet:"
   },
 
   // === KONDITION 4: Narrativ 2 — emotionell (PLATSHÅLLARE) ===
@@ -78,18 +78,18 @@ var stimuli_narrative = [
     narrative_content: "Den där onsdagen var en av de mest hektiska dagarna i mitt liv. Jag åkte direkt från arbetet till mina barns skolpjäs. Jag var så stressad att jag knappt hann andas, men jag kom precis i tid innan föreställningen började. Mitt hjärta svämmade över av stolthet när jag såg mitt barn på scenen som Klas Klättermus. Det var en stund jag inte skulle missa för allt i världen.\nJag har arbetat på Bättre Bygge i många år, och min tid där har varit som en bergochdalbana. Jag började som byggarbetare, men när jag drabbades av svåra ryggbesvär kändes det som om min värld rasade samman. Jag var tvungen att lämna det fysiska arbetet bakom mig, något som jag älskade, och jag var rädd för framtiden.\nNär jag fick chansen att leda byggprojekt istället, kände jag en enorm lättnad och tacksamhet. Jag tycker faktiskt att min praktiska erfarenhet gör mig till en bra projektledare, och jag är så tacksam för möjligheten att få fortsätta arbeta inom byggbranschen, men på ett sätt som min kropp klarar av. Jag har liksom en fot på kontoret och en på byggarbetsplatsen. Jag älskar verkligen mitt jobb. Jag skulle aldrig utsätta mina kära kollegor och denna fina firma för något hemskt.\nDet är sant att jag har haft skulder till banken som jag nyligen betalade av, men det var för att jag var tvungen att hjälpa min syster som kämpade med sin blomsteraffär. Hon har haft det så svårt, och jag kunde inte stå bredvid och se henne lida. Jag lånade ut pengar till henne, och när hon äntligen kunde betala tillbaka, kunde jag till slut reglera skulden.\nJag har inte varit i trassel med lagen på tjugo år, och jag är så rädd om min anställning. Då var jag ung och dum, men nu har jag en familj och ett ansvar, och ett arbete jag verkligen trivs med. Varför skulle jag äventyra allt detta för lite kontanter?\nDet känns enormt obehagligt och fruktansvärt frustrerande att bli anklagad för ett brott jag vet att jag inte har begått. Att sitta i en domstol är en svår upplevelse, och jag oroar mig ständigt för vad mina barn ska tänka om mig. Jag känner starkt för Bättre Bygg och skulle aldrig stjäla från oss.",
     instructions_body: "[INSTRUKTIONSTEXT SAKNAS]",
     options: [
-      { id: "n2_pos_1", label: "[ETIKETT SAKNAS]", type: "positive", description: "[TEXT SAKNAS]" },
-      { id: "n2_pos_2", label: "[ETIKETT SAKNAS]", type: "positive", description: "[TEXT SAKNAS]" },
-      { id: "n2_pos_3", label: "[ETIKETT SAKNAS]", type: "positive", description: "[TEXT SAKNAS]" },
-      { id: "n2_pos_4", label: "[ETIKETT SAKNAS]", type: "positive", description: "[TEXT SAKNAS]" },
-      { id: "n2_neg_1", label: "[ETIKETT SAKNAS]", type: "negative", description: "[TEXT SAKNAS]" },
-      { id: "n2_neg_2", label: "[ETIKETT SAKNAS]", type: "negative", description: "[TEXT SAKNAS]" },
-      { id: "n2_neg_3", label: "[ETIKETT SAKNAS]", type: "negative", description: "[TEXT SAKNAS]" },
-      { id: "n2_neg_4", label: "[ETIKETT SAKNAS]", type: "negative", description: "[TEXT SAKNAS]" }
+      { id: "hasse_pos_1",  label: "Alibi – Sylvia",      type: "positive", description: "Sylvia, som också arbetar på Bättre Bygge, såg Hasse på skolan klockan 20 när han gick ut ur lokalerna tillsammans med sina barn. Hon menar att det tar mellan 45 och 50 minuter att köra från Bättre Bygge till skolan vid den tiden på kvällen." },
+      { id: "hasse_pos_3",  label: "Laglydig vuxenliv",   type: "positive", description: "Under sitt vuxna liv har Hasse inte haft kontakt med polisen, inte ens för fortkörning. Han har skaffat familj och barn och anses vara en laglydig och hårt arbetande person." },
+      { id: "hasse_pos_1b", label: "Alibi – Sylvia",      type: "positive", description: "Sylvia, som också arbetar på Bättre Bygge, såg Hasse på skolan klockan 20 när han gick ut ur lokalerna tillsammans med sina barn. Hon menar att det tar mellan 45 och 50 minuter att köra från Bättre Bygge till skolan vid den tiden på kvällen." },
+      { id: "hasse_pos_3b", label: "Laglydig vuxenliv",   type: "positive", description: "Under sitt vuxna liv har Hasse inte haft kontakt med polisen, inte ens för fortkörning. Han har skaffat familj och barn och anses vara en laglydig och hårt arbetande person." },
+      { id: "hasse_neg_1",  label: "Dyr märkesklocka",    type: "negative", description: "Hasse köpte sig en dyr märkesklocka i samband med inbrottet, trots att han oftast är ganska försiktig med sina pengar." },
+      { id: "hasse_neg_2",  label: "Kriminella kontakter",type: "negative", description: "Hasse arresterades för ett lägenhetsinbrott i sin ungdom, och är fortfarande kompis med flera av de figurer han hade samröre med då. Två av dessa är hälare som är kända av polisen." },
+      { id: "hasse_neg_1b", label: "Dyr märkesklocka",    type: "negative", description: "Hasse köpte sig en dyr märkesklocka i samband med inbrottet, trots att han oftast är ganska försiktig med sina pengar." },
+      { id: "hasse_neg_2b", label: "Kriminella kontakter",type: "negative", description: "Hasse arresterades för ett lägenhetsinbrott i sin ungdom, och är fortfarande kompis med flera av de figurer han hade samröre med då. Två av dessa är hälare som är kända av polisen." }
     ],
-    bigQ: "[FRÅGA SAKNAS]",
-    motivation_prompt_yes: "[TEXT SAKNAS]",
-    motivation_prompt_no: "[TEXT SAKNAS]"
+    bigQ: "är skyldig?",
+    motivation_prompt_yes: "Du bedömde Hasse som skyldig till stölden baserat på hans berättelse och den ytterligare informationen. Motivera vad som gjorde att du valde det beslutet:",
+    motivation_prompt_no: "Du bedömde Hasse som oskyldig till stölden baserat på hans berättelse och den ytterligare informationen. Motivera vad som gjorde att du valde det beslutet:"
   },
 
   // === KONDITION 5: Narrativ 3 — neutral (PLATSHÅLLARE) ===
