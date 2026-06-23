@@ -10,7 +10,7 @@ var stimuli_narrative = [
     person_name: "Haile Gebremedhin",
     narrative_heading: "Haile berättar",
     narrative_content: "Jag heter Haile Gebremedhin. Jag har etniciteten tigrean, men jag är inte från regionen Tigray. Min familj kommer istället från landsbygden i Afar i norra Etiopien. Under kriget flydde många tigreaner från Afar till Addis Abeba. Det anses vara säkrare för tigreaner där, men jag har ingen familj eller bekanta i staden och har därför inte flyttat dit. Jag saknar även ett giltigt Addis Abeba-id-kort, vilket innebär att jag inte kan öppna ett bankkonto där. Däremot har jag ett pass, och det är enklare att förnya det än att ansöka om ett nytt. Det är konstigt men sant.\nMedan kriget pågick i Tigray var situationen svår för tigreaner i hela landet. Det var många hårda strider i min hemregion Afar, och både jag och många andra tigreaner blev arresterade på grund av den tigreanska etniciteten. Jag satt i fängelse en längre tid under undantagstillståndet i november 2021. Det har naturligtvis påverkat mig.\nJag är tigrean men jag har ingen koppling alls till TPLF (Tigreanska folkets befrielsefront). Jag är inte en terrorist och jag har inte heller begått något brott någonsin. Trots att jag har utbildning och erfarenhet har det varit svårt för mig att få arbete, eftersom det alla vet att jag är tigrean där jag bor. Det är tydligt hur landet ser ut: det finns inga tigreaner i parlamentet, det finns inga tigreaner i polisen. Vi är inte representerade någonstans.\nUnder kriget blev flera av mina tigreanska grannar grovt misshandlade på grund av att de bodde på fel ställe eller för etniciteten på deras id-kort. Det var en otrygg tid för tigreaner i Etiopien.\nTrots fredsavtalet 2022 känner jag mig fortfarande inte säker. Medierna uttrycker ofta olika negativa åsikter om tigreaner. Jag var frihetsberövad på grund av min etnicitet, och nyligen arresterade polisen mig igen. Jag släpptes dagen därpå, men de uttryckte att de inte tyckte om tigreaner och att jag skulle akta mig. Jag finns i deras register nu. Under kriget var det många tigreaner som inte återvände efter att de hade häktats.\nJag vill helst inte lämna mitt hem i Etiopien. Jag har inga släktingar eller vänner i Addis, och i Tigray är livet inte lätt. Jag saknar alternativ och har ingen som kan hjälpa mig om jag skulle behöva hjälp av någon annan. När min bror dog i en motorcykelolycka för ett halvår sedan så ser jag ingen väg till ett gott liv i Etiopien. Jag har ingen familj kvar. Jag är på egen hand och jag har inte längre samma anknytning till landet.\nJag är muslim och har tidigare fått stöd i moskén och i min tro, men det känns inte som att det räcker. Jag behöver lämna Etiopien även om beslutet är svårt.",
-    instructions_body: "Tack för att du vill delta.\n\n Du kommer strax att få läsa en berättelse från en person som söker asyl i Sverige. Tänk dig att du arbetar på Migrationsverket. Din uppgift är att avgöra om du tror att personen talar sanning eller inte. Du ska också bedöma om personen bör få flyktingstatus i Sverige eller inte. \n\nBakgrund: Haile Gebremedhin anländer från Addis Abeba och säger sig tillhöra den tigreanska etniska minoriteten i huvudstaden. Han har identifierat sig med ett etiopiskt id-kort utfärdat i Addis Abeba som verkar vara äkta. Var snäll och läs texten noggrant. Du kommer få svara på flera frågor om den efter att du läst klart.",
+    instructions_body: "Du kommer strax att få läsa en berättelse från en person som söker asyl i Sverige. Tänk dig att du arbetar på Migrationsverket. Din uppgift är att avgöra om du tror att personen talar sanning eller inte. Du ska också bedöma om personen bör få flyktingstatus i Sverige eller inte. \n\nBakgrund: Haile Gebremedhin anländer från Addis Abeba och säger sig tillhöra den tigreanska etniska minoriteten i huvudstaden. Han har identifierat sig med ett etiopiskt id-kort utfärdat i Addis Abeba som verkar vara äkta. Var snäll och läs texten noggrant. Du kommer få svara på flera frågor om den efter att du läst klart.",
     options: [
       { id: "religios_tillhorighet",          label: "Religion etnicitet",             type: "positive", description: "Det finns en muslimsk minoritet bland tigreanerna." },
       { id: "situationsutveckling_tigreaner", label: "Situationsutveckling tigreaner", type: "positive", description: "Hur starkt Etiopiens regering har agerat mot tigreaner har ändrat sig över tid, bland annat beroende på det tillfälliga läget i kriget i Tigray. Det kan alltså lätt förvärras igen." },
@@ -24,8 +24,9 @@ var stimuli_narrative = [
     bigQ: "bör få flyktingstatus i Sverige?",
     low_label: "Bör inte få flyktingstatus",
     high_label: "Bör få flyktingstatus",
-    motivation_prompt_yes: "Du valde att bevilja Haile flyktingstatus baserat på hans berättelse och den ytterligare informationen. Motivera vad som gjorde att du valde det beslutet:",
-    motivation_prompt_no: "Du valde att neka Haile flyktingstatus baserat på hans berättelse och den ytterligare informationen. Motivera vad som gjorde att du valde det beslutet:"
+    motivation_instruction: "Som beslutsfattare på Migrationsverket var din uppgift att avgöra om du tror att Haile Gebremedhin talar sanning eller inte och bedöma om han bör få flyktingstatus i Sverige eller inte.",
+    motivation_prompt_yes: "Du ska förklara ditt beslut för Haile själv. Berätta för honom varför du valde att bevilja honom flyktingstatus, och ta med det du minns från hans berättelse och det du fick veta om hans situation.",
+    motivation_prompt_no: "Du ska förklara ditt beslut för Haile själv. Berätta för honom varför du valde att neka honom flyktingstatus, och ta med det du minns från hans berättelse och det du fick veta om hans situation."
   },
 
   // === KONDITION 2: Haile — emotionell ===
@@ -48,8 +49,9 @@ var stimuli_narrative = [
     bigQ: "bör få flyktingstatus i Sverige?",
     low_label: "Bör inte få flyktingstatus",
     high_label: "Bör få flyktingstatus",
-    motivation_prompt_yes: "Du valde att bevilja Haile flyktingstatus baserat på hans berättelse och den ytterligare informationen. Motivera vad som gjorde att du valde det beslutet:",
-    motivation_prompt_no: "Du valde att neka Haile flyktingstatus baserat på hans berättelse och den ytterligare informationen. Motivera vad som gjorde att du valde det beslutet:"
+    motivation_instruction: "Som beslutsfattare på Migrationsverket var din uppgift att avgöra om du tror att Haile Gebremedhin talar sanning eller inte och bedöma om han bör få flyktingstatus i Sverige eller inte.",
+    motivation_prompt_yes: "Du ska förklara ditt beslut för Haile själv. Berätta för honom varför du valde att bevilja honom flyktingstatus, och ta med det du minns från hans berättelse och det du fick veta om hans situation.",
+    motivation_prompt_no: "Du ska förklara ditt beslut för Haile själv. Berätta för honom varför du valde att neka honom flyktingstatus, och ta med det du minns från hans berättelse och det du fick veta om hans situation."
   },
 
   // === KONDITION 3: Narrativ 2 — neutral (PLATSHÅLLARE) ===
@@ -72,8 +74,9 @@ var stimuli_narrative = [
     bigQ: "är skyldig?",
     low_label: "Är inte skyldig",
     high_label: "Är skyldig",
-    motivation_prompt_yes: "Du bedömde Hasse som skyldig till stölden baserat på hans berättelse och den ytterligare informationen. Motivera vad som gjorde att du valde det beslutet:",
-    motivation_prompt_no: "Du bedömde Hasse som oskyldig till stölden baserat på hans berättelse och den ytterligare informationen. Motivera vad som gjorde att du valde det beslutet:"
+    motivation_instruction: "Som nämndeman i rätten var din uppgift att avgöra om du tror att Hasse talar sanning eller inte och bedöma om han är skyldig eller inte.",
+    motivation_prompt_yes: "Du ska förklara ditt beslut för Hasse själv. Berätta för honom varför du bedömde honom som skyldig till stölden, och ta med det du minns från hans berättelse och det du fick veta om händelsen.",
+    motivation_prompt_no: "Du ska förklara ditt beslut för Hasse själv. Berätta för honom varför du bedömde honom som oskyldig till stölden, och ta med det du minns från hans berättelse och det du fick veta om händelsen."
   },
 
   // === KONDITION 4: Narrativ 2 — emotionell (PLATSHÅLLARE) ===
@@ -96,8 +99,9 @@ var stimuli_narrative = [
     bigQ: "är skyldig?",
     low_label: "Är inte skyldig",
     high_label: "Är skyldig",
-    motivation_prompt_yes: "Du bedömde Hasse som skyldig till stölden baserat på hans berättelse och den ytterligare informationen. Motivera vad som gjorde att du valde det beslutet:",
-    motivation_prompt_no: "Du bedömde Hasse som oskyldig till stölden baserat på hans berättelse och den ytterligare informationen. Motivera vad som gjorde att du valde det beslutet:"
+    motivation_instruction: "Som nämndeman i rätten var din uppgift att avgöra om du tror att Hasse talar sanning eller inte och bedöma om han är skyldig eller inte.",
+    motivation_prompt_yes: "Du ska förklara ditt beslut för Hasse själv. Berätta för honom varför du bedömde honom som skyldig till stölden, och ta med det du minns från hans berättelse och det du fick veta om händelsen.",
+    motivation_prompt_no: "Du ska förklara ditt beslut för Hasse själv. Berätta för honom varför du bedömde honom som oskyldig till stölden, och ta med det du minns från hans berättelse och det du fick veta om händelsen."
   },
 
   // === KONDITION 5: Sanna — neutral ===
@@ -120,8 +124,9 @@ var stimuli_narrative = [
     bigQ: "bör betala tillbaka sitt bostadsbidrag?",
     low_label: "Absolut inte återbetalningsskyldig",
     high_label: "Absolut återbetalningsskyldig",
-    motivation_prompt_yes: "Du valde att bedöma Sanna som återbetalningsskyldig baserat på hennes berättelse och den ytterligare informationen. Motivera vad som gjorde att du valde det beslutet:",
-    motivation_prompt_no: "Du valde att bedöma Sanna som inte återbetalningsskyldig baserat på hennes berättelse och den ytterligare informationen. Motivera vad som gjorde att du valde det beslutet:"
+    motivation_instruction: "Som handläggare på Försäkringskassan var din uppgift att avgöra om du tror att Sanna talar sanning eller inte och bedöma om hon bör betala tillbaka sitt bostadsbidrag eller inte.",
+    motivation_prompt_yes: "Du ska förklara ditt beslut för Sanna själv. Berätta för henne varför du bedömde att hon ska betala tillbaka bidraget, och ta med det du minns från hennes berättelse och det du fick veta om hennes situation.",
+    motivation_prompt_no: "Du ska förklara ditt beslut för Sanna själv. Berätta för henne varför du bedömde att hon inte behvöer betala tillbaka bidraget, och ta med det du minns från hennes berättelse och det du fick veta om hennes situation."
   },
 
   // === KONDITION 6: Sanna — emotionell ===
@@ -144,8 +149,9 @@ var stimuli_narrative = [
     bigQ: "bör betala tillbaka sitt bostadsbidrag?",
     low_label: "Absolut inte återbetalningsskyldig",
     high_label: "Absolut återbetalningsskyldig",
-    motivation_prompt_yes: "Du valde att bedöma Sanna som återbetalningsskyldig baserat på hennes berättelse och den ytterligare informationen. Motivera vad som gjorde att du valde det beslutet:",
-    motivation_prompt_no: "Du valde att bedöma Sanna som inte återbetalningsskyldig baserat på hennes berättelse och den ytterligare informationen. Motivera vad som gjorde att du valde det beslutet:"
+    motivation_instruction: "Som handläggare på Försäkringskassan var din uppgift att avgöra om du tror att Sanna talar sanning eller inte och bedöma om hon bör betala tillbaka sitt bostadsbidrag eller inte.",
+    motivation_prompt_yes: "Du ska förklara ditt beslut för Sanna själv. Berätta för henne varför du bedömde att hon ska betala tillbaka bidraget, och ta med det du minns från hennes berättelse och det du fick veta om hennes situation.",
+    motivation_prompt_no: "Du ska förklara ditt beslut för Sanna själv. Berätta för henne varför du bedömde att hon inte behvöer betala tillbaka bidraget, och ta med det du minns från hennes berättelse och det du fick veta om hennes situation."
   }
 
 ];
