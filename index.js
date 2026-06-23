@@ -103,9 +103,7 @@ const pre_main_q_2 = {
   stimulus: function() {
     return `<p>Anser du att ${jsPsych.evaluateTimelineVariable('person_name')} ${jsPsych.evaluateTimelineVariable('bigQ')}</p>`;
   },
-  labels: function() {
-    return [jsPsych.evaluateTimelineVariable('low_label'), jsPsych.evaluateTimelineVariable('high_label')];
-  },
+  labels: ["Nej", "Ja"],
   slider_width: 200,
   require_movement: true,
   button_label: "Fortsätt",
@@ -161,9 +159,7 @@ const post_main_q_2 = {
   stimulus: function() {
     return `<p>Anser du att ${jsPsych.evaluateTimelineVariable('person_name')} ${jsPsych.evaluateTimelineVariable('bigQ')}</p>`;
   },
-  labels: function() {
-    return [jsPsych.evaluateTimelineVariable('low_label'), jsPsych.evaluateTimelineVariable('high_label')];
-  },
+  labels: ["Nej", "Ja"],
   slider_width: 200,
   require_movement: true,
   button_label: "Fortsätt",

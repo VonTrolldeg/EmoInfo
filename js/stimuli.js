@@ -23,8 +23,6 @@ var stimuli_narrative = [
     ],
     mouselab_heading: "Ytterligare information om fallet",
     bigQ: "bör få flyktingstatus i Sverige?",
-    low_label: "Nej",
-    high_label: "Ja",
     motivation_prompt_yes: "Du valde att bevilja Haile flyktingstatus baserat på hans berättelse och den ytterligare informationen. Motivera vad som gjorde att du valde det beslutet:",
     motivation_prompt_no: "Du valde att neka Haile flyktingstatus baserat på hans berättelse och den ytterligare informationen. Motivera vad som gjorde att du valde det beslutet:"
   },
@@ -48,8 +46,6 @@ var stimuli_narrative = [
     ],
     mouselab_heading: "Ytterligare information om fallet",
     bigQ: "bör få flyktingstatus i Sverige?",
-    low_label: "Nej",
-    high_label: "Ja",
     motivation_prompt_yes: "Du valde att bevilja Haile flyktingstatus baserat på hans berättelse och den ytterligare informationen. Motivera vad som gjorde att du valde det beslutet:",
     motivation_prompt_no: "Du valde att neka Haile flyktingstatus baserat på hans berättelse och den ytterligare informationen. Motivera vad som gjorde att du valde det beslutet:"
   },
@@ -73,8 +69,6 @@ var stimuli_narrative = [
     ],
     mouselab_heading: "[RUBRIK SAKNAS]",
     bigQ: "[FRÅGA SAKNAS]",
-    low_label: "[SAKNAS]",
-    high_label: "[SAKNAS]",
     motivation_prompt_yes: "[TEXT SAKNAS]",
     motivation_prompt_no: "[TEXT SAKNAS]"
   },
@@ -98,8 +92,6 @@ var stimuli_narrative = [
     ],
     mouselab_heading: "[RUBRIK SAKNAS]",
     bigQ: "[FRÅGA SAKNAS]",
-    low_label: "[SAKNAS]",
-    high_label: "[SAKNAS]",
     motivation_prompt_yes: "[TEXT SAKNAS]",
     motivation_prompt_no: "[TEXT SAKNAS]"
   },
@@ -123,8 +115,6 @@ var stimuli_narrative = [
     ],
     mouselab_heading: "[RUBRIK SAKNAS]",
     bigQ: "[FRÅGA SAKNAS]",
-    low_label: "[SAKNAS]",
-    high_label: "[SAKNAS]",
     motivation_prompt_yes: "[TEXT SAKNAS]",
     motivation_prompt_no: "[TEXT SAKNAS]"
   },
@@ -148,8 +138,6 @@ var stimuli_narrative = [
     ],
     mouselab_heading: "[RUBRIK SAKNAS]",
     bigQ: "[FRÅGA SAKNAS]",
-    low_label: "[SAKNAS]",
-    high_label: "[SAKNAS]",
     motivation_prompt_yes: "[TEXT SAKNAS]",
     motivation_prompt_no: "[TEXT SAKNAS]"
   }
