@@ -50,10 +50,10 @@ var stimuli_narrative = [
 
   // === KONDITION 3: Narrativ 2 — neutral (PLATSHÅLLARE) ===
   {
-    stimulus_id: "narrativ_2_neutral",
-    person_name: "[NAMN SAKNAS]",
-    narrative_heading: "[RUBRIK SAKNAS]",
-    narrative_content: "[NARRATIVTEXT SAKNAS]",
+    stimulus_id: "Hasse_neutral",
+    person_name: "Hasse",
+    narrative_heading: "Hasse berättar",
+    narrative_content: "Det var mycket den där onsdagen. Jag åkte direkt från arbetet till mina barns skolpjäs. Det var stressigt, jag behövde verkligen skynda mig, men jag hann precis dit innan föreställningen började. Jag var stolt när jag såg mitt barn på scen uppträdande som Klas Klättermus. Jag vill inte missa sådana stunder.\nJag har arbetat på Bättre Bygge under många år, och det har varit en del toppar och dalar under den tiden. Jag började som byggarbetare, men sedan jag fått vissa ryggbesvär fick jag ändra på hur jag arbetade. Jag kunde inte längre arbeta fysiskt med att bygga och jag var osäker på hur mitt fortsatta arbetsliv skulle se ut.\nJag flyttades över till att leda byggprojekt istället. Jag var inte säker på att jag skulle få chansen, så jag blev positivt överraskad. Jag tycker faktiskt att min praktiska erfarenhet gör mig till en bra projektledare, och jag är glad att jag fick chansen att byta bana utan att behöva lämna byggbranschen. Jag har liksom en fot på kontoret och en på byggarbetsplatsen. Jag trivs på jobbet. Det finns inte på kartan att jag skulle göra något skadligt mot min arbetsgivare.\nDet är sant att jag har haft skulder till banken som jag nyligen betalade av, men det är för att jag var tvungen att hjälpa min syster, som haft ekonomiska problem med sin blomsteraffär. Hon har kämpat med sin affär, och kan jag hjälpa till gör jag det gärna. Jag lånade ut pengar till henne som jag precis fick tillbaka, och då kunde jag till slut reglera skulden.\nJag har inte varit i trassel med lagen på tjugo år och är rädd om min anställning. Då var jag ung och dum, nu har jag familj och ansvar och ett arbete jag trivs med. Varför skulle jag äventyra det för lite kontanter?\nDet är otrevligt att anklagas för ett brott som jag inte har begått. Det är inte roligt att vara i en domstol och jag oroar mig för vad mina barn ska tänka om mig. Jag tycker om min arbetsgivare och skulle inte stjäla från företaget.",
     instructions_body: "[INSTRUKTIONSTEXT SAKNAS]",
     options: [
       { id: "n2_pos_1", label: "[ETIKETT SAKNAS]", type: "positive", description: "[TEXT SAKNAS]" },
@@ -72,9 +72,9 @@ var stimuli_narrative = [
 
   // === KONDITION 4: Narrativ 2 — emotionell (PLATSHÅLLARE) ===
   {
-    stimulus_id: "narrativ_2_emotion",
-    person_name: "[NAMN SAKNAS]",
-    narrative_heading: "[RUBRIK SAKNAS]",
+    stimulus_id: "Hasse_emotion",
+    person_name: "Hasse",
+    narrative_heading: "Hasse berättar",
     narrative_content: "[NARRATIVTEXT SAKNAS]",
     instructions_body: "[INSTRUKTIONSTEXT SAKNAS]",
     options: [
