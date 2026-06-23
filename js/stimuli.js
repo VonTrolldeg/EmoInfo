@@ -21,7 +21,6 @@ var stimuli_narrative = [
       { id: "arresteringar_tigreaner",        label: "Arresteringar: utveckling",      type: "negative", description: "Andelen arresteringar och kvarhållningar av tigreaner har enligt landinformationen minskat sedan början av 2022. Efter hösten 2022 finns ingen information om mass-arresteringar av tigreaner i Etiopien." },
       { id: "sakerhetssituation_tigray",      label: "Krigsbrott i Tigray",            type: "negative", description: "Det är enbart i regionen Tigray det finns kännedom om grova krigsbrott i dagsläget." }
     ],
-    mouselab_heading: "Ytterligare information om fallet",
     bigQ: "bör få flyktingstatus i Sverige?",
     motivation_prompt_yes: "Du valde att bevilja Haile flyktingstatus baserat på hans berättelse och den ytterligare informationen. Motivera vad som gjorde att du valde det beslutet:",
     motivation_prompt_no: "Du valde att neka Haile flyktingstatus baserat på hans berättelse och den ytterligare informationen. Motivera vad som gjorde att du valde det beslutet:"
@@ -44,7 +43,6 @@ var stimuli_narrative = [
       { id: "arresteringar_tigreaner",        label: "Arresteringar: utveckling",      type: "negative", description: "Andelen arresteringar och kvarhållningar av tigreaner har enligt landinformationen minskat sedan början av 2022. Efter hösten 2022 finns ingen information om mass-arresteringar av tigreaner i Etiopien." },
       { id: "sakerhetssituation_tigray",      label: "Krigsbrott i Tigray",            type: "negative", description: "Det är enbart i regionen Tigray det finns kännedom om grova krigsbrott i dagsläget." }
     ],
-    mouselab_heading: "Ytterligare information om fallet",
     bigQ: "bör få flyktingstatus i Sverige?",
     motivation_prompt_yes: "Du valde att bevilja Haile flyktingstatus baserat på hans berättelse och den ytterligare informationen. Motivera vad som gjorde att du valde det beslutet:",
     motivation_prompt_no: "Du valde att neka Haile flyktingstatus baserat på hans berättelse och den ytterligare informationen. Motivera vad som gjorde att du valde det beslutet:"
@@ -67,7 +65,6 @@ var stimuli_narrative = [
       { id: "n2_neg_3", label: "[ETIKETT SAKNAS]", type: "negative", description: "[TEXT SAKNAS]" },
       { id: "n2_neg_4", label: "[ETIKETT SAKNAS]", type: "negative", description: "[TEXT SAKNAS]" }
     ],
-    mouselab_heading: "[RUBRIK SAKNAS]",
     bigQ: "[FRÅGA SAKNAS]",
     motivation_prompt_yes: "[TEXT SAKNAS]",
     motivation_prompt_no: "[TEXT SAKNAS]"
@@ -90,7 +87,6 @@ var stimuli_narrative = [
       { id: "n2_neg_3", label: "[ETIKETT SAKNAS]", type: "negative", description: "[TEXT SAKNAS]" },
       { id: "n2_neg_4", label: "[ETIKETT SAKNAS]", type: "negative", description: "[TEXT SAKNAS]" }
     ],
-    mouselab_heading: "[RUBRIK SAKNAS]",
     bigQ: "[FRÅGA SAKNAS]",
     motivation_prompt_yes: "[TEXT SAKNAS]",
     motivation_prompt_no: "[TEXT SAKNAS]"
@@ -113,7 +109,6 @@ var stimuli_narrative = [
       { id: "n3_neg_3", label: "[ETIKETT SAKNAS]", type: "negative", description: "[TEXT SAKNAS]" },
       { id: "n3_neg_4", label: "[ETIKETT SAKNAS]", type: "negative", description: "[TEXT SAKNAS]" }
     ],
-    mouselab_heading: "[RUBRIK SAKNAS]",
     bigQ: "[FRÅGA SAKNAS]",
     motivation_prompt_yes: "[TEXT SAKNAS]",
     motivation_prompt_no: "[TEXT SAKNAS]"
@@ -136,7 +131,6 @@ var stimuli_narrative = [
       { id: "n3_neg_3", label: "[ETIKETT SAKNAS]", type: "negative", description: "[TEXT SAKNAS]" },
       { id: "n3_neg_4", label: "[ETIKETT SAKNAS]", type: "negative", description: "[TEXT SAKNAS]" }
     ],
-    mouselab_heading: "[RUBRIK SAKNAS]",
     bigQ: "[FRÅGA SAKNAS]",
     motivation_prompt_yes: "[TEXT SAKNAS]",
     motivation_prompt_no: "[TEXT SAKNAS]"

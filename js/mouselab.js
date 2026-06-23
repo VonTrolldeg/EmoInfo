@@ -33,7 +33,6 @@ function buildMouselabTrial() {
     const name        = jsPsych.evaluateTimelineVariable('person_name');
     const personName  = jsPsych.evaluateTimelineVariable('person_name');
     const bigQ        = jsPsych.evaluateTimelineVariable('bigQ');
-    const heading     = jsPsych.evaluateTimelineVariable('mouselab_heading');
 
     // Para ihop positiva och negativa alternativ slumpmässigt (ett par per rad)
     const positives = shuffleArray(options.filter(opt => opt.type === 'positive'));
@@ -58,7 +57,7 @@ function buildMouselabTrial() {
 
     // Returnera hela sidan: kortraden + info-modal + mitt-modal
     return `
-    <h2>${heading}</h2>
+    <h2>Ytterligare information om fallet</h2>
     <p>Välj vilka kort med information du vill läsa. Korten med <strong>+</strong> stödjer ${name}s berättelse och <strong>−</strong> går emot den.</p>
     <div class="option-list">
       ${optionDivs.join('\n      ')}
