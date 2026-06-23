@@ -117,8 +117,12 @@ const pre_main_questions = [pre_main_q_1, pre_main_q_2];
 // === STEG 6: pre binary question ===
 const pre_binary_q = {
   type: jsPsychHtmlButtonResponse,
-  stimulus: `<div class="text-content"><p>${stimuli.binary_questions.pre}</p></div>`,
-  choices: stimuli.binary_questions.buttons,
+  stimulus: function() {
+    const name = jsPsych.evaluateTimelineVariable('person_name');
+    const bigQ = jsPsych.evaluateTimelineVariable('bigQ');
+    return `<div class="text-content"><p>Ta ett ögonblick och tänk igenom allt du fått veta om ${name}s fall. Anser du att ${name} ${bigQ}</p></div>`;
+  },
+  choices: ["Ja", "Nej"],
   data: { question: "refugee_status_binary_pre" },
   on_load: function() {
     document.getElementById('jspsych-html-button-response-btngroup').classList.add('btn-row');
@@ -128,7 +132,12 @@ const pre_binary_q = {
 // === STEG 7: Instruktioner inför mouselab ===
 const pre_mouselab_instructions = {
   type: jsPsychHtmlButtonResponse,
-  stimulus: `<div class="text-content"><h2>${stimuli.mouselab.heading}</h2><p>${stimuli.pre_mouselab_instructions}</p></div>`,
+  stimulus: function() {
+    const name = jsPsych.evaluateTimelineVariable('person_name_short');
+    const bigQ = jsPsych.evaluateTimelineVariable('bigQ');
+    const heading = jsPsych.evaluateTimelineVariable('mouselab_heading');
+    return `<div class="text-content"><h2>${heading}</h2><p>Nu har du läst ${name}s berättelse. På nästa sida får du mer information om fallet. En del information stödjer ${name}s berättelse och markeras med <strong>+</strong>. Annat talar emot den <strong>−</strong>. När du läst så mycket information du tycker du behöver om fallet gör du en ny bedömning om ${name} ${bigQ} Du kan läsa informationen i vilken ordning du vill.</p></div>`;
+  },
   choices: ["Fortsätt"]
 };
 
@@ -165,8 +174,12 @@ const post_main_questions = [post_main_q_1, post_main_q_2];
 // === STEG 10: post binary question ===
 const post_binary_q = {
   type: jsPsychHtmlButtonResponse,
-  stimulus: `<div class="text-content"><p>${stimuli.binary_questions.post}</p></div>`,
-  choices: stimuli.binary_questions.buttons,
+  stimulus: function() {
+    const name = jsPsych.evaluateTimelineVariable('person_name');
+    const bigQ = jsPsych.evaluateTimelineVariable('bigQ');
+    return `<div class="text-content"><p>Slutligen, anser du att ${name} ${bigQ}</p></div>`;
+  },
+  choices: ["Ja", "Nej"],
   data: { question: "refugee_status_binary_post" },
   on_load: function() {
     document.getElementById('jspsych-html-button-response-btngroup').classList.add('btn-row');
