@@ -189,18 +189,22 @@ const post_binary_q = {
 // === STEG 11: motivation ===
 const motivation_q = {
   type: jsPsychSurveyText,
-  preamble: `
-    <div class="text-content">
-      <h2>${stimuli.motivation.heading}</h2>
-      <p>${stimuli.motivation.instruction}</p>
-    </div>`,
+  preamble: function() {
+    const name = jsPsych.evaluateTimelineVariable('person_name_short');
+    return `<div class="text-content">
+      <h2>Motivering av beslut</h2>
+      <p>Som beslutsfattare på Migrationsverket var din uppgift att avgöra om du tror att ${name} talar sanning eller inte och bedöma om ${name} bör få flyktingstatus i Sverige eller inte.</p>
+    </div>`;
+  },
   questions: function() {
     const lastBinary = jsPsych.data.get().filter({ question: "refugee_status_binary_post" }).last(1).values()[0];
     const isYes = lastBinary && lastBinary.response === 0;
-    const prompt = isYes ? stimuli.motivation.prompt_yes : stimuli.motivation.prompt_no;
+    const prompt = isYes
+      ? jsPsych.evaluateTimelineVariable('motivation_prompt_yes')
+      : jsPsych.evaluateTimelineVariable('motivation_prompt_no');
     return [{ prompt, rows: 8, name: 'motivation' }];
   },
-  button_label: stimuli.motivation.button
+  button_label: "Fortsätt"
 };
 
 // === STEG 12: avslutningsskärm ===
