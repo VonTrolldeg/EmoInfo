@@ -86,10 +86,11 @@ const narrative_page = {
 };
 
 // === STEG 5: Pre main questions — före mouselab ===
-// TODO: Om fler frågor läggs till här — överväg att samla alla på en sida med custom HTML istället för en jsPsych-trial per fråga.
 const pre_main_q_1 = {
   type: jsPsychHtmlSliderResponse,
-  stimulus: `<p>${stimuli.main_questions.credibility}</p>`,
+  stimulus: function() {
+    return `<p>Hur trovärdig tyckte du att ${jsPsych.evaluateTimelineVariable('person_name')} verkade?</p>`;
+  },
   labels: ["Inte alls trovärdig", "Mycket trovärdig"],
   slider_width: 200,
   require_movement: true,
@@ -99,8 +100,12 @@ const pre_main_q_1 = {
 
 const pre_main_q_2 = {
   type: jsPsychHtmlSliderResponse,
-  stimulus: `<p>${stimuli.main_questions.refugee_status}</p>`,
-  labels: ["Nej", "Ja"],
+  stimulus: function() {
+    return `<p>Anser du att ${jsPsych.evaluateTimelineVariable('person_name')} ${jsPsych.evaluateTimelineVariable('bigQ')}</p>`;
+  },
+  labels: function() {
+    return [jsPsych.evaluateTimelineVariable('low_label'), jsPsych.evaluateTimelineVariable('high_label')];
+  },
   slider_width: 200,
   require_movement: true,
   button_label: "Fortsätt",
@@ -132,7 +137,9 @@ const pre_mouselab_instructions = {
 // === STEG 9: Post main questions — efter mouselab ===
 const post_main_q_1 = {
   type: jsPsychHtmlSliderResponse,
-  stimulus: `<p>${stimuli.main_questions.credibility}</p>`,
+  stimulus: function() {
+    return `<p>Hur trovärdig tyckte du att ${jsPsych.evaluateTimelineVariable('person_name')} verkade?</p>`;
+  },
   labels: ["Inte alls trovärdig", "Mycket trovärdig"],
   slider_width: 200,
   require_movement: true,
@@ -142,8 +149,12 @@ const post_main_q_1 = {
 
 const post_main_q_2 = {
   type: jsPsychHtmlSliderResponse,
-  stimulus: `<p>${stimuli.main_questions.refugee_status}</p>`,
-  labels: ["Nej", "Ja"],
+  stimulus: function() {
+    return `<p>Anser du att ${jsPsych.evaluateTimelineVariable('person_name')} ${jsPsych.evaluateTimelineVariable('bigQ')}</p>`;
+  },
+  labels: function() {
+    return [jsPsych.evaluateTimelineVariable('low_label'), jsPsych.evaluateTimelineVariable('high_label')];
+  },
   slider_width: 200,
   require_movement: true,
   button_label: "Fortsätt",
