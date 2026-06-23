@@ -30,7 +30,7 @@ function buildMouselabTrial() {
   // stimulus körs precis innan trialen visas och bygger upp hela HTML-strukturen
   stimulus: function() {
     const options     = jsPsych.evaluateTimelineVariable('options');
-    const name        = jsPsych.evaluateTimelineVariable('person_name_short');
+    const name        = jsPsych.evaluateTimelineVariable('person_name');
     const personName  = jsPsych.evaluateTimelineVariable('person_name');
     const bigQ        = jsPsych.evaluateTimelineVariable('bigQ');
     const lowLabel    = jsPsych.evaluateTimelineVariable('low_label');

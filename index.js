@@ -133,7 +133,7 @@ const pre_binary_q = {
 const pre_mouselab_instructions = {
   type: jsPsychHtmlButtonResponse,
   stimulus: function() {
-    const name = jsPsych.evaluateTimelineVariable('person_name_short');
+    const name = jsPsych.evaluateTimelineVariable('person_name');
     const bigQ = jsPsych.evaluateTimelineVariable('bigQ');
     const heading = jsPsych.evaluateTimelineVariable('mouselab_heading');
     return `<div class="text-content"><h2>${heading}</h2><p>Nu har du läst ${name}s berättelse. På nästa sida får du mer information om fallet. En del information stödjer ${name}s berättelse och markeras med <strong>+</strong>. Annat talar emot den <strong>−</strong>. När du läst så mycket information du tycker du behöver om fallet gör du en ny bedömning om ${name} ${bigQ} Du kan läsa informationen i vilken ordning du vill.</p></div>`;
@@ -190,7 +190,7 @@ const post_binary_q = {
 const motivation_q = {
   type: jsPsychSurveyText,
   preamble: function() {
-    const name = jsPsych.evaluateTimelineVariable('person_name_short');
+    const name = jsPsych.evaluateTimelineVariable('person_name');
     return `<div class="text-content">
       <h2>Motivering av beslut</h2>
       <p>Som beslutsfattare på Migrationsverket var din uppgift att avgöra om du tror att ${name} talar sanning eller inte och bedöma om ${name} bör få flyktingstatus i Sverige eller inte.</p>
