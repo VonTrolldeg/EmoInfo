@@ -29,9 +29,17 @@ function buildMouselabTrial() {
 
   // stimulus körs precis innan trialen visas och bygger upp hela HTML-strukturen
   stimulus: function() {
+    const options     = jsPsych.evaluateTimelineVariable('options');
+    const name        = jsPsych.evaluateTimelineVariable('person_name_short');
+    const personName  = jsPsych.evaluateTimelineVariable('person_name');
+    const bigQ        = jsPsych.evaluateTimelineVariable('bigQ');
+    const lowLabel    = jsPsych.evaluateTimelineVariable('low_label');
+    const highLabel   = jsPsych.evaluateTimelineVariable('high_label');
+    const heading     = jsPsych.evaluateTimelineVariable('mouselab_heading');
+
     // Para ihop positiva och negativa alternativ slumpmässigt (ett par per rad)
-    const positives = shuffleArray(stimuli.options.filter(opt => opt.type === 'positive'));
-    const negatives = shuffleArray(stimuli.options.filter(opt => opt.type === 'negative'));
+    const positives = shuffleArray(options.filter(opt => opt.type === 'positive'));
+    const negatives = shuffleArray(options.filter(opt => opt.type === 'negative'));
     positiveOnLeft = Math.random() < 0.5;
     const randomizedOptions = positives.flatMap((opt, i) =>
       positiveOnLeft ? [opt, negatives[i]] : [negatives[i], opt]);
@@ -52,8 +60,8 @@ function buildMouselabTrial() {
 
     // Returnera hela sidan: kortraden + info-modal + mitt-modal
     return `
-    <h2>${stimuli.mouselab.heading}</h2>
-    <p>${stimuli.mouselab.instructions}</p>
+    <h2>${heading}</h2>
+    <p>Välj vilka kort med information du vill läsa. Korten med <strong>+</strong> stödjer ${name}s berättelse och <strong>−</strong> går emot den.</p>
     <div class="option-list">
       ${optionDivs.join('\n      ')}
     </div>
@@ -72,7 +80,7 @@ function buildMouselabTrial() {
       <div id="mid-modal-content">
         <h3>Efter 4 kort ber vi dig besvara frågorna igen</h3>
         <div class="mid-question">
-          <p>${stimuli.main_questions.credibility}</p>
+          <p>Hur trovärdig tyckte du att ${personName} verkade?</p>
           <div class="slider-wrapper">
             <input type="range" class="jspsych-slider" id="mid-credibility-slider" min="0" max="100" value="50" step="1">
             <div class="slider-labels">
@@ -82,12 +90,12 @@ function buildMouselabTrial() {
           </div>
         </div>
         <div class="mid-question">
-          <p>${stimuli.main_questions.refugee_status}</p>
+          <p>Anser du att ${personName} ${bigQ}</p>
           <div class="slider-wrapper">
             <input type="range" class="jspsych-slider" id="mid-refugee-slider" min="0" max="100" value="50" step="1">
             <div class="slider-labels">
-              <span>Nej</span>
-              <span>Ja</span>
+              <span>${lowLabel}</span>
+              <span>${highLabel}</span>
             </div>
           </div>
         </div>
