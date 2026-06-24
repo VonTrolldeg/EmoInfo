@@ -202,7 +202,10 @@ const motivation_q = {
       : jsPsych.evaluateTimelineVariable('motivation_prompt_no');
     return [{ prompt, rows: 8, name: 'motivation' }];
   },
-  button_label: "Fortsätt"
+  button_label: "Fortsätt",
+  on_load: function() {
+    setTimeout(() => document.activeElement?.blur(), 50);
+  }
 };
 
 // === STEG 12: avslutningsskärm ===
