@@ -25,8 +25,8 @@ var stimuli_narrative = [
     low_label: "Bör inte få flyktingstatus",
     high_label: "Bör få flyktingstatus",
     motivation_instruction: "Som beslutsfattare på Migrationsverket var din uppgift att avgöra om du tror att Haile Gebremedhin talar sanning eller inte och bedöma om han bör få flyktingstatus i Sverige eller inte.",
-    motivation_prompt_yes: "Du ska förklara ditt beslut för Haile själv. Berätta för honom varför du valde att bevilja honom flyktingstatus, och ta med det du minns från hans berättelse och det du fick veta om hans situation.",
-    motivation_prompt_no: "Du ska förklara ditt beslut för Haile själv. Berätta för honom varför du valde att neka honom flyktingstatus, och ta med det du minns från hans berättelse och det du fick veta om hans situation."
+    motivation_prompt_yes: "Du har beviljat Haile flyktingstatus. Motivera nu ditt beslut som migrationshandläggare genom att återge huvuddragen i Hailes berättelse och den ytterligare information du fått läsa, så utförligt du kan.",
+    motivation_prompt_no: "Du har nekat Haile flyktingstatus. Motivera nu ditt beslut som migrationshandläggare genom att återge huvuddragen i Hailes berättelse och den ytterligare information du fått läsa, så utförligt du kan."
   },
 
   // === KONDITION 2: Haile — emotionell ===
@@ -50,8 +50,8 @@ var stimuli_narrative = [
     low_label: "Bör inte få flyktingstatus",
     high_label: "Bör få flyktingstatus",
     motivation_instruction: "Som beslutsfattare på Migrationsverket var din uppgift att avgöra om du tror att Haile Gebremedhin talar sanning eller inte och bedöma om han bör få flyktingstatus i Sverige eller inte.",
-    motivation_prompt_yes: "Du ska förklara ditt beslut för Haile själv. Berätta för honom varför du valde att bevilja honom flyktingstatus, och ta med det du minns från hans berättelse och det du fick veta om hans situation.",
-    motivation_prompt_no: "Du ska förklara ditt beslut för Haile själv. Berätta för honom varför du valde att neka honom flyktingstatus, och ta med det du minns från hans berättelse och det du fick veta om hans situation."
+    motivation_prompt_yes: "Du har beviljat Haile flyktingstatus. Motivera nu ditt beslut som migrationshandläggare genom att återge huvuddragen i Hailes berättelse och den ytterligare information du fått läsa, så utförligt du kan.",
+    motivation_prompt_no: "Du har nekat Haile flyktingstatus. Motivera nu ditt beslut som migrationshandläggare genom att återge huvuddragen i Hailes berättelse och den ytterligare information du fått läsa, så utförligt du kan."
   },
 
   // === KONDITION 3: Narrativ 2 — neutral (PLATSHÅLLARE) ===
@@ -75,8 +75,8 @@ var stimuli_narrative = [
     low_label: "Är inte skyldig",
     high_label: "Är skyldig",
     motivation_instruction: "Som nämndeman i rätten var din uppgift att avgöra om du tror att Hasse talar sanning eller inte och bedöma om han är skyldig eller inte.",
-    motivation_prompt_yes: "Du ska förklara ditt beslut för Hasse själv. Berätta för honom varför du bedömde honom som skyldig till stölden, och ta med det du minns från hans berättelse och det du fick veta om händelsen.",
-    motivation_prompt_no: "Du ska förklara ditt beslut för Hasse själv. Berätta för honom varför du bedömde honom som oskyldig till stölden, och ta med det du minns från hans berättelse och det du fick veta om händelsen."
+    motivation_prompt_yes: "Du har bedömt Hasse som skyldig till stölden. Motivera nu ditt beslut som nämndeman genom att återge huvuddragen i Hasses berättelse och den ytterligare information du fått läsa, så utförligt du kan.",
+    motivation_prompt_no: "Du har bedömt Hasse som oskyldig till stölden. Motivera nu ditt beslut som nämndeman genom att återge huvuddragen i Hasses berättelse och den ytterligare information du fått läsa, så utförligt du kan."
   },
 
   // === KONDITION 4: Narrativ 2 — emotionell (PLATSHÅLLARE) ===
@@ -100,8 +100,8 @@ var stimuli_narrative = [
     low_label: "Är inte skyldig",
     high_label: "Är skyldig",
     motivation_instruction: "Som nämndeman i rätten var din uppgift att avgöra om du tror att Hasse talar sanning eller inte och bedöma om han är skyldig eller inte.",
-    motivation_prompt_yes: "Du ska förklara ditt beslut för Hasse själv. Berätta för honom varför du bedömde honom som skyldig till stölden, och ta med det du minns från hans berättelse och det du fick veta om händelsen.",
-    motivation_prompt_no: "Du ska förklara ditt beslut för Hasse själv. Berätta för honom varför du bedömde honom som oskyldig till stölden, och ta med det du minns från hans berättelse och det du fick veta om händelsen."
+    motivation_prompt_yes: "Du har bedömt Hasse som skyldig till stölden. Motivera nu ditt beslut som nämndeman genom att återge huvuddragen i Hasses berättelse och den ytterligare information du fått läsa, så utförligt du kan.",
+    motivation_prompt_no: "Du har bedömt Hasse som oskyldig till stölden. Motivera nu ditt beslut som nämndeman genom att återge huvuddragen i Hasses berättelse och den ytterligare information du fått läsa, så utförligt du kan."
   },
 
   // === KONDITION 5: Sanna — neutral ===
@@ -125,8 +125,8 @@ var stimuli_narrative = [
     low_label: "Absolut inte återbetalningsskyldig",
     high_label: "Absolut återbetalningsskyldig",
     motivation_instruction: "Som handläggare på Försäkringskassan var din uppgift att avgöra om du tror att Sanna talar sanning eller inte och bedöma om hon bör betala tillbaka sitt bostadsbidrag eller inte.",
-    motivation_prompt_yes: "Du ska förklara ditt beslut för Sanna själv. Berätta för henne varför du bedömde att hon ska betala tillbaka bidraget, och ta med det du minns från hennes berättelse och det du fick veta om hennes situation.",
-    motivation_prompt_no: "Du ska förklara ditt beslut för Sanna själv. Berätta för henne varför du bedömde att hon inte behvöer betala tillbaka bidraget, och ta med det du minns från hennes berättelse och det du fick veta om hennes situation."
+    motivation_prompt_yes: "Du har bedömt att Sanna ska betala tillbaka bidraget. Motivera nu ditt beslut som handläggare på Försäkringskassan genom att återge huvuddragen i Sannas berättelse och den ytterligare information du fått läsa, så utförligt du kan.",
+    motivation_prompt_no: "Du har bedömt att Sanna inte ska betala tillbaka bidraget. Motivera nu ditt beslut som handläggare på Försäkringskassan genom att återge huvuddragen i Sannas berättelse och den ytterligare information du fått läsa, så utförligt du kan."
   },
 
   // === KONDITION 6: Sanna — emotionell ===
@@ -150,8 +150,8 @@ var stimuli_narrative = [
     low_label: "Absolut inte återbetalningsskyldig",
     high_label: "Absolut återbetalningsskyldig",
     motivation_instruction: "Som handläggare på Försäkringskassan var din uppgift att avgöra om du tror att Sanna talar sanning eller inte och bedöma om hon bör betala tillbaka sitt bostadsbidrag eller inte.",
-    motivation_prompt_yes: "Du ska förklara ditt beslut för Sanna själv. Berätta för henne varför du bedömde att hon ska betala tillbaka bidraget, och ta med det du minns från hennes berättelse och det du fick veta om hennes situation.",
-    motivation_prompt_no: "Du ska förklara ditt beslut för Sanna själv. Berätta för henne varför du bedömde att hon inte behvöer betala tillbaka bidraget, och ta med det du minns från hennes berättelse och det du fick veta om hennes situation."
+    motivation_prompt_yes: "Du har bedömt att Sanna ska betala tillbaka bidraget. Motivera nu ditt beslut som handläggare på Försäkringskassan genom att återge huvuddragen i Sannas berättelse och den ytterligare information du fått läsa, så utförligt du kan.",
+    motivation_prompt_no: "Du har bedömt att Sanna inte ska betala tillbaka bidraget. Motivera nu ditt beslut som handläggare på Försäkringskassan genom att återge huvuddragen i Sannas berättelse och den ytterligare information du fått läsa, så utförligt du kan."
   }
 
 ];

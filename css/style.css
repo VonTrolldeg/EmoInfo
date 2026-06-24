@@ -108,6 +108,7 @@ text-decoration: underline;
   align-items: center;
   justify-content: center;
   background-color: #DCEBF0;
+  color: #222;
   cursor: pointer;
   padding: 14px;
   min-height: 100px;
@@ -118,8 +119,15 @@ text-decoration: underline;
   border-radius: 2px;
 }
 
-.mouselab-option:hover {
-  background-color: #F1F7F9;
+.mouselab-option:focus {
+  outline: none;
+}
+
+/* Hover only on devices with a real pointer — prevents sticky hover on iOS */
+@media (hover: hover) {
+  .mouselab-option:hover {
+    background-color: #F1F7F9;
+  }
 }
 
 .mouselab-option.visited {
