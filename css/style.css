@@ -260,10 +260,6 @@ text-decoration: underline;
   margin-top: 4px;
 }
 
-.slider-labels span {
-  width: 50%;
-}
-
 .slider-labels span:first-child {
   text-align: left;
 }
