@@ -254,7 +254,8 @@ text-decoration: underline;
 .slider-labels {
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  width: calc(100% + 60px);
+  margin-left: -30px;
   font-size: 13px;
   color: #444;
   margin-top: 4px;
