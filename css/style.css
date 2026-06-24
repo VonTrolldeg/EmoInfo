@@ -268,17 +268,6 @@ text-decoration: underline;
   text-align: right;
 }
 
-/* Prevent jsPsych slider labels from overflowing off narrow screens —
-   the last label is anchored to the right edge instead of centered on it */
-#jspsych-html-slider-response-wrapper p:first-of-type {
-  text-align: left !important;
-}
-#jspsych-html-slider-response-wrapper p:last-of-type {
-  text-align: right !important;
-  right: 0 !important;
-  left: auto !important;
-}
-
 /* Stängknappen i modalen */
 #modal-close {
   display: block;
