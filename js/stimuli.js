@@ -122,8 +122,8 @@ var stimuli_narrative = [
       { id: "sanna_neg_4b", label: "Missade samtal",         type: "negative", description: "Sanna har missat flera bokade samtal med sin handläggare där hon hade kunnat få hjälp att hantera sitt bostadsbidrag." }
     ],
     bigQ: "bör betala tillbaka sitt bostadsbidrag?",
-    low_label: "Absolut inte återbetalningsskyldig",
-    high_label: "Absolut återbetalningsskyldig",
+    low_label: "Absolut inte<br>återbetalningsskyldig",
+    high_label: "Absolut<br>återbetalningsskyldig",
     motivation_instruction: "Som handläggare på Försäkringskassan var din uppgift att avgöra om du tror att Sanna talar sanning eller inte och bedöma om hon bör betala tillbaka sitt bostadsbidrag eller inte.",
     motivation_prompt_yes: "Du har bedömt att Sanna ska betala tillbaka bidraget. Motivera nu ditt beslut som handläggare på Försäkringskassan genom att återge huvuddragen i Sannas berättelse och den ytterligare information du fått läsa, så utförligt du kan.",
     motivation_prompt_no: "Du har bedömt att Sanna inte ska betala tillbaka bidraget. Motivera nu ditt beslut som handläggare på Försäkringskassan genom att återge huvuddragen i Sannas berättelse och den ytterligare information du fått läsa, så utförligt du kan."
@@ -147,8 +147,8 @@ var stimuli_narrative = [
       { id: "sanna_neg_4b", label: "Missade samtal",         type: "negative", description: "Sanna har missat flera bokade samtal med sin handläggare där hon hade kunnat få hjälp att hantera sitt bostadsbidrag." }
     ],
     bigQ: "bör betala tillbaka sitt bostadsbidrag?",
-    low_label: "Absolut inte återbetalningsskyldig",
-    high_label: "Absolut återbetalningsskyldig",
+    low_label: "Absolut inte<br>återbetalningsskyldig",
+    high_label: "Absolut<br>återbetalningsskyldig",
     motivation_instruction: "Som handläggare på Försäkringskassan var din uppgift att avgöra om du tror att Sanna talar sanning eller inte och bedöma om hon bör betala tillbaka sitt bostadsbidrag eller inte.",
     motivation_prompt_yes: "Du har bedömt att Sanna ska betala tillbaka bidraget. Motivera nu ditt beslut som handläggare på Försäkringskassan genom att återge huvuddragen i Sannas berättelse och den ytterligare information du fått läsa, så utförligt du kan.",
     motivation_prompt_no: "Du har bedömt att Sanna inte ska betala tillbaka bidraget. Motivera nu ditt beslut som handläggare på Försäkringskassan genom att återge huvuddragen i Sannas berättelse och den ytterligare information du fått läsa, så utförligt du kan."
