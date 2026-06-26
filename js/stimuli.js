@@ -1,6 +1,6 @@
 // === Narrativ-array för sex konditioner (3 berättelser × neutral/emotionell) ===
 // Används av narrative_procedure i index.js via jsPsych timeline variables.
-// CONDITION 1-2: Haile, CONDITION 3-4: Narrativ 2 (platshållare), CONDITION 5-6: Narrativ 3 (platshållare)
+// CONDITION 1-2: Haile (neutral/emotionell), CONDITION 3-4: Hasse (neutral/emotionell), CONDITION 5-6: Sanna (neutral/emotionell)
 
 var stimuli_narrative = [
 
