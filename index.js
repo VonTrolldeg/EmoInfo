@@ -8,6 +8,7 @@ var jsPsych = initJsPsych();
 if (typeof CONDITION === 'undefined') {
   CONDITION = parseInt(jsPsych.data.getURLVariable('condition')) || 1;
 }
+console.log('CONDITION:', CONDITION);
 
 var mouselab_list = buildMouselabTrial();
 
