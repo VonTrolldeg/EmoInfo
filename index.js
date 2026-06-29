@@ -132,7 +132,27 @@ const pre_binary_q = {
   }
 };
 
-// === STEG 7: Instruktioner inför mouselab ===
+// === STEG 7: Uppmärksamhetskontroll ===
+const attention_1 = {
+  type: jsPsychHtmlSliderResponse,
+  stimulus: `<div class="text-content">
+    <p>Svaret på denna frågan är väldigt enkel, det är bara att flytta markören så långt åt vänster som du kan. Detta är en uppmärksamhetskontroll.</p>
+    <p>Baserat på instruktionen ovan, flytta markören på skalan nedan.</p>
+  </div>`,
+  labels: ["Vänster", "Höger"],
+  slider_start: 50,
+  slider_width: 200,
+  require_movement: true,
+  button_label: "Fortsätt",
+  data: { category: "attention_check" },
+  on_finish: function(data) {
+    if (data.response >= 5) {
+      jsPsych.abortExperiment(); // TODO: redirect till Maximiles quality-länk
+    }
+  }
+};
+
+// === STEG 8: Instruktioner inför mouselab ===
 const pre_mouselab_instructions = {
   type: jsPsychHtmlButtonResponse,
   stimulus: function() {
@@ -239,7 +259,7 @@ const finish_screen = {
 
 // === FLÖDE ===
 const narrative_procedure = {
-  timeline: [instructions, narrative_page, ...pre_main_questions, pre_binary_q, pre_mouselab_instructions, mouselab_list, ...post_main_questions, post_binary_q, motivation_q],
+  timeline: [instructions, narrative_page, ...pre_main_questions, pre_binary_q, attention_1, pre_mouselab_instructions, mouselab_list, ...post_main_questions, post_binary_q, motivation_q],
   timeline_variables: stimuli_narrative,
   sample: {
     type: "custom",
