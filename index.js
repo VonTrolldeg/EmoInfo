@@ -211,7 +211,18 @@ const motivation_q = {
   }
 };
 
-// === STEG 12: avslutningsskärm ===
+// === STEG 12: Demografifrågor ===
+const demographics = {
+  type: jsPsychSurveyText,
+  questions: [
+    { prompt: "Vilket år är du född?", placeholder: "åååå", required: true, name: "birth_year" },
+    { prompt: "Vilket kön har du?", placeholder: "man/kvinna", required: true, name: "gender" }
+  ],
+  button_label: "Fortsätt",
+  data: { category: "demographics" }
+};
+
+// === STEG 13: avslutningsskärm ===
 const finish_screen = {
   type: jsPsychHtmlButtonResponse,
   stimulus: `
@@ -236,5 +247,5 @@ const narrative_procedure = {
   }
 };
 
-timeline.push(consent_info, consent_provide, narrative_procedure, finish_screen);
+timeline.push(consent_info, consent_provide, narrative_procedure, demographics, finish_screen);
 jsPsych.run(timeline);
