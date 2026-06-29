@@ -60,7 +60,7 @@ function buildMouselabTrial() {
     // Returnera hela sidan: kortraden + info-modal + mitt-modal
     return `
     <h2>Ytterligare information om fallet</h2>
-    <p>Välj vilka kort med information du vill läsa. Korten med <strong>+</strong> stödjer ${name}s berättelse och <strong>−</strong> går emot den.</p>
+    <p>Välj vilka kort med information du vill läsa. Korten med <span class="symbol-icon">+</span> stödjer ${name}s berättelse och <span class="symbol-icon">−</span> går emot den.</p>
     <div class="option-list">
       ${optionDivs.join('\n      ')}
     </div>
