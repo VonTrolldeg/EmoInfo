@@ -315,6 +315,16 @@ const practice_mouselab = {
   data: { category: "practice" }
 };
 
+const practice_binary_q = {
+  type: jsPsychHtmlButtonResponse,
+  stimulus: `<div class="text-content"><p>Var Erik hemma i sin lägenhet hela kvällen?</p></div>`,
+  choices: ["Ja", "Nej"],
+  data: { category: "practice" },
+  on_load: function() {
+    document.getElementById('jspsych-html-button-response-btngroup').classList.add('btn-row');
+  }
+};
+
 // === FLÖDE ===
 const narrative_procedure = {
   timeline: [instructions, narrative_page, ...pre_main_questions, pre_binary_q, attention_1, pre_mouselab_instructions, mouselab_list, ...post_main_questions, post_binary_q, motivation_q],
@@ -325,5 +335,5 @@ const narrative_procedure = {
   }
 };
 
-timeline.push(consent_info, consent_provide, practice_mouselab, narrative_procedure, demographics, finish_screen);
+timeline.push(consent_info, consent_provide, practice_mouselab, practice_binary_q, narrative_procedure, demographics, finish_screen);
 jsPsych.run(timeline);
