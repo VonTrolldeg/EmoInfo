@@ -325,6 +325,14 @@ const practice_binary_q = {
   }
 };
 
+const experiment_start_transition = {
+  type: jsPsychHtmlKeyboardResponse,
+  stimulus: `<div style="display:flex;align-items:center;justify-content:center;height:200px;"><div class="loading-spinner"></div></div>`,
+  choices: "NO_KEYS",
+  trial_duration: 1000,
+  data: { category: "transition" }
+};
+
 // === FLÖDE ===
 const narrative_procedure = {
   timeline: [instructions, narrative_page, ...pre_main_questions, pre_binary_q, attention_1, pre_mouselab_instructions, mouselab_list, ...post_main_questions, post_binary_q, motivation_q],
@@ -335,5 +343,5 @@ const narrative_procedure = {
   }
 };
 
-timeline.push(consent_info, consent_provide, practice_mouselab, practice_binary_q, narrative_procedure, demographics, finish_screen);
+timeline.push(consent_info, consent_provide, practice_mouselab, practice_binary_q, experiment_start_transition, narrative_procedure, demographics, finish_screen);
 jsPsych.run(timeline);
