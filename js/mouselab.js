@@ -55,6 +55,7 @@ const practice_mouselab = {
     document.getElementById("modal-close").addEventListener("click", () => {
       document.getElementById("info-modal").style.display = "none";
     });
+    setTimeout(() => document.activeElement?.blur(), 50);
   },
   data: { category: "practice" }
 };
