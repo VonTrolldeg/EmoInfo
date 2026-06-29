@@ -14,8 +14,12 @@ body {
   -webkit-text-size-adjust: 100%; /* Förhindrar att iOS Safari zoomar upp text automatiskt */
 }
 
-textarea {
+textarea, input[type="text"] {
   font-size: 16px; /* Förhindrar att iOS Safari zoomar in när fältet fokuseras */
+}
+
+#jspsych-survey-text input[type="text"] {
+  width: auto;
 }
 
 .info-item {

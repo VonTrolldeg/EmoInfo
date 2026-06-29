@@ -215,8 +215,8 @@ const motivation_q = {
 const demographics = {
   type: jsPsychSurveyText,
   questions: [
-    { prompt: "Vilket år är du född?", placeholder: "åååå", required: true, name: "birth_year" },
-    { prompt: "Vilket kön har du?", placeholder: "man/kvinna", required: true, name: "gender" }
+    { prompt: "Vilket år är du född?", placeholder: "åååå", required: true, name: "birth_year", columns: 6 },
+    { prompt: "Vilket kön har du?", placeholder: "man/kvinna", required: true, name: "gender", columns: 12 }
   ],
   button_label: "Fortsätt",
   data: { category: "demographics" }
