@@ -257,7 +257,7 @@ const finish_screen = {
   data: { category: 'finish' }
 };
 
-// === ÖVNINGS-MOUSELAB ===
+// === STEG 3: Övnings-mouselab (körs en gång efter consent, innan experimentet) ===
 const _practiceCards = {};
 
 const practice_mouselab = {
