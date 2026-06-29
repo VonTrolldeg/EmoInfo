@@ -20,6 +20,12 @@ textarea, input[type="text"] {
   max-width: 100%;
 }
 
+.jspsych-survey-text-response textarea {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
+}
+
 #jspsych-survey-text input[type="text"] {
   width: auto;
 }
