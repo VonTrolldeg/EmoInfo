@@ -1,3 +1,68 @@
+// =============================================================================
+// ÖVNINGS-MOUSELAB — visas en gång efter consent, innan experimentet
+// =============================================================================
+
+const _practiceCards = {};
+
+const practice_mouselab = {
+  type: jsPsychHtmlButtonResponse,
+  stimulus: function() {
+    const cards = [
+      { id: "pr_pos_1", type: "positive", label: "Grannens iakttagelse", description: "Grannen säger att Eriks lampor var tända hela kvällen" },
+      { id: "pr_pos_2", type: "positive", label: "Telefonens position",  description: "Eriks telefon kopplade upp mot masten närmast hemmet klockan 21:00" },
+      { id: "pr_neg_1", type: "negative", label: "Möjlig observation",   description: "En bekant tror att hon såg Erik på stan men är inte säker" },
+      { id: "pr_neg_2", type: "negative", label: "Bilens placering",     description: "Eriks bil stod inte på sin vanliga plats, men han parkerar ibland på gatan bakom" }
+    ];
+
+    const positives = shuffleArray(cards.filter(c => c.type === 'positive'));
+    const negatives = shuffleArray(cards.filter(c => c.type === 'negative'));
+    const positiveOnLeft = Math.random() < 0.5;
+    const randomized = positives.flatMap((c, i) => positiveOnLeft ? [c, negatives[i]] : [negatives[i], c]);
+    randomized.forEach(c => { _practiceCards[c.id] = c; });
+
+    const optionDivs = randomized.map(c =>
+      `<button class="mouselab-option" id="${c.id}" type="button">
+        <span class="card-symbol">${c.type === 'positive' ? '+' : '−'}</span>
+        <span class="card-label">${c.label}</span>
+      </button>`
+    ).join('\n');
+
+    return `
+      <h2>Övning</h2>
+      <p>Du kommer under testets gång få utföra en sån här uppgift. Här får du testa hur den fungerar. Din uppgift är att med hjälp av informationen avgöra om påståendet är sant eller falskt. Korten med <span class="symbol-icon">+</span> talar för berättelsen och korten med <span class="symbol-icon">−</span> talar emot den. Du kan läsa korten i vilken ordning du vill.</p>
+      <p><strong>Påstående: Erik var hemma i sin lägenhet hela kvällen.</strong></p>
+      <div class="option-list">${optionDivs}</div>
+      <div id="info-modal">
+        <div id="modal-content">
+          <h3 id="modal-heading"></h3>
+          <p id="modal-text"></p>
+          <button id="modal-close" type="button">Stäng</button>
+        </div>
+      </div>
+    `;
+  },
+  choices: ["Fortsätt"],
+  on_load: function() {
+    document.querySelectorAll(".mouselab-option").forEach(option => {
+      option.addEventListener("click", () => {
+        const card = _practiceCards[option.id];
+        document.getElementById("modal-heading").textContent = card.label;
+        document.getElementById("modal-text").textContent = card.description;
+        document.getElementById("info-modal").style.display = "flex";
+        option.classList.add("visited");
+      });
+    });
+    document.getElementById("modal-close").addEventListener("click", () => {
+      document.getElementById("info-modal").style.display = "none";
+    });
+  },
+  data: { category: "practice" }
+};
+
+// =============================================================================
+// HUVUD-MOUSELAB — körs för varje narrativ via buildMouselabTrial()
+// =============================================================================
+
 // --- Datainsamling: klickordning och tidsåtgång per knapp ---
 // pre = före mittfrågan, post = efter mittfrågan
 var preClickData = [];

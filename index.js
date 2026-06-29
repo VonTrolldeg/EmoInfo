@@ -63,7 +63,10 @@ const consent_provide = {
   }
 };
 
-// === STEG 3: Introduction to experiment ===
+// === STEG 3: Övnings-mouselab (körs en gång efter consent, innan experimentet) ===
+
+
+// === STEG 4: Introduction to experiment ===
 const instructions = {
   type: jsPsychHtmlButtonResponse,
   stimulus: function() {
@@ -73,7 +76,7 @@ const instructions = {
   choices: ["Starta"]
 };
 
-// === STEG 4: Narrativsidan ===
+// === STEG 5: Narrativsidan ===
 const narrative_page = {
   type: jsPsychHtmlButtonResponse,
   stimulus: function() {
@@ -88,7 +91,7 @@ const narrative_page = {
   }
 };
 
-// === STEG 5: Pre main questions — före mouselab ===
+// === STEG 6: Pre main questions — före mouselab ===
 const pre_main_q_1 = {
   type: jsPsychHtmlSliderResponse,
   stimulus: function() {
@@ -117,7 +120,7 @@ const pre_main_q_2 = {
 
 const pre_main_questions = [pre_main_q_1, pre_main_q_2];
 
-// === STEG 6: pre binary question ===
+// === STEG 7: pre binary question ===
 const pre_binary_q = {
   type: jsPsychHtmlButtonResponse,
   stimulus: function() {
@@ -132,7 +135,7 @@ const pre_binary_q = {
   }
 };
 
-// === STEG 7: Uppmärksamhetskontroll ===
+// === STEG 8: Uppmärksamhetskontroll ===
 const attention_1 = {
   type: jsPsychHtmlSliderResponse,
   stimulus: `<div class="text-content">
@@ -152,7 +155,7 @@ const attention_1 = {
   }
 };
 
-// === STEG 8: Instruktioner inför mouselab ===
+// === STEG 9: Instruktioner inför mouselab ===
 const pre_mouselab_instructions = {
   type: jsPsychHtmlButtonResponse,
   stimulus: function() {
@@ -163,9 +166,9 @@ const pre_mouselab_instructions = {
   choices: ["Fortsätt"]
 };
 
-// === STEG 8: mouselabben and mid main questions ===
+// === STEG 10: mouselabben and mid main questions ===
 
-// === STEG 9: Post main questions — efter mouselab ===
+// === STEG 11: Post main questions — efter mouselab ===
 const post_main_q_1 = {
   type: jsPsychHtmlSliderResponse,
   stimulus: function() {
@@ -193,7 +196,7 @@ const post_main_q_2 = {
 };
 
 const post_main_questions = [post_main_q_1, post_main_q_2];
-// === STEG 10: post binary question ===
+// === STEG 12: post binary question ===
 const post_binary_q = {
   type: jsPsychHtmlButtonResponse,
   stimulus: function() {
@@ -208,7 +211,7 @@ const post_binary_q = {
   }
 };
 
-// === STEG 11: motivation ===
+// === STEG 12: motivation ===
 const motivation_q = {
   type: jsPsychSurveyText,
   preamble: function() {
@@ -231,7 +234,7 @@ const motivation_q = {
   }
 };
 
-// === STEG 12: Demografifrågor ===
+// === STEG 13: Demografifrågor ===
 const demographics = {
   type: jsPsychSurveyText,
   questions: [
@@ -242,7 +245,7 @@ const demographics = {
   data: { category: "demographics" }
 };
 
-// === STEG 13: avslutningsskärm ===
+// === STEG 14: avslutningsskärm ===
 const finish_screen = {
   type: jsPsychHtmlButtonResponse,
   stimulus: `
@@ -257,63 +260,7 @@ const finish_screen = {
   data: { category: 'finish' }
 };
 
-// === STEG 3: Övnings-mouselab (körs en gång efter consent, innan experimentet) ===
-const _practiceCards = {};
-
-const practice_mouselab = {
-  type: jsPsychHtmlButtonResponse,
-  stimulus: function() {
-    const cards = [
-      { id: "pr_pos_1", type: "positive", label: "Grannens iakttagelse", description: "Grannen säger att Eriks lampor var tända hela kvällen" },
-      { id: "pr_pos_2", type: "positive", label: "Telefonens position",  description: "Eriks telefon kopplade upp mot masten närmast hemmet klockan 21:00" },
-      { id: "pr_neg_1", type: "negative", label: "Möjlig observation",   description: "En bekant tror att hon såg Erik på stan men är inte säker" },
-      { id: "pr_neg_2", type: "negative", label: "Bilens placering",     description: "Eriks bil stod inte på sin vanliga plats, men han parkerar ibland på gatan bakom" }
-    ];
-
-    const positives = shuffleArray(cards.filter(c => c.type === 'positive'));
-    const negatives = shuffleArray(cards.filter(c => c.type === 'negative'));
-    const positiveOnLeft = Math.random() < 0.5;
-    const randomized = positives.flatMap((c, i) => positiveOnLeft ? [c, negatives[i]] : [negatives[i], c]);
-    randomized.forEach(c => { _practiceCards[c.id] = c; });
-
-    const optionDivs = randomized.map(c =>
-      `<button class="mouselab-option" id="${c.id}" type="button">
-        <span class="card-symbol">${c.type === 'positive' ? '+' : '−'}</span>
-        <span class="card-label">${c.label}</span>
-      </button>`
-    ).join('\n');
-
-    return `
-      <h2>Övning</h2>
-      <p>Du kommer under testets gång få utföra en sån här uppgift. Här får du testa hur den fungerar. Din uppgift är att med hjälp av informationen avgöra om påståendet är sant eller falskt. Korten med <span class="symbol-icon">+</span> talar för berättelsen och korten med <span class="symbol-icon">−</span> talar emot den. Du kan läsa korten i vilken ordning du vill.</p>
-      <p><strong>Påstående: Erik var hemma i sin lägenhet hela kvällen.</strong></p>
-      <div class="option-list">${optionDivs}</div>
-      <div id="info-modal">
-        <div id="modal-content">
-          <h3 id="modal-heading"></h3>
-          <p id="modal-text"></p>
-          <button id="modal-close" type="button">Stäng</button>
-        </div>
-      </div>
-    `;
-  },
-  choices: ["Fortsätt"],
-  on_load: function() {
-    document.querySelectorAll(".mouselab-option").forEach(option => {
-      option.addEventListener("click", () => {
-        const card = _practiceCards[option.id];
-        document.getElementById("modal-heading").textContent = card.label;
-        document.getElementById("modal-text").textContent = card.description;
-        document.getElementById("info-modal").style.display = "flex";
-        option.classList.add("visited");
-      });
-    });
-    document.getElementById("modal-close").addEventListener("click", () => {
-      document.getElementById("info-modal").style.display = "none";
-    });
-  },
-  data: { category: "practice" }
-};
+// === STEG 3: Övnings-mouselab — definieras i mouselab.js ===
 
 const practice_binary_q = {
   type: jsPsychHtmlButtonResponse,
