@@ -138,7 +138,7 @@ const pre_mouselab_instructions = {
   stimulus: function() {
     const name = jsPsych.evaluateTimelineVariable('person_name');
     const bigQ = jsPsych.evaluateTimelineVariable('bigQ');
-    return `<div class="text-content"><h2>Ytterligare information om fallet</h2><p>Nu har du läst ${name}s egen berättelse. På nästa sida kommer du att få mer information om fallet. En del av information där stödjer ${name}s berättelse och markeras med <span class="symbol-icon">+</span>. Annat talar emot den och markeras då med <span class="symbol-icon">−</span>. När du läst så mycket information du tycker du behöver om fallet gör du en ny bedömning om ${name} ${bigQ} Du kan läsa informationen i vilken ordning du vill.</p></div>`;
+    return `<div class="text-content"><h2>Ytterligare information om fallet</h2><p>Nu har du läst ${name}s egen berättelse. På nästa sida kommer du att få mer information om fallet. En del av information där stödjer ${name}s berättelse och markeras med  <span class="symbol-icon">+</span> . Annat talar emot den och markeras då med  <span class="symbol-icon">−</span> . När du läst så mycket information du tycker du behöver om fallet gör du en ny bedömning om ${name} ${bigQ} Du kan läsa informationen i vilken ordning du vill.</p></div>`;
   },
   choices: ["Fortsätt"]
 };
