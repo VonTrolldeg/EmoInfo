@@ -137,6 +137,7 @@ text-decoration: underline;
 
 .mouselab-option:focus {
   outline: none;
+  background-color: #DCEBF0;
 }
 
 /* Hover only on devices with a real pointer — prevents sticky hover on iOS */
