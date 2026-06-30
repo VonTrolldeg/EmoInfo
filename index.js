@@ -10,7 +10,7 @@ if (typeof CONDITION === 'undefined') {
 }
 
 // debug
-console.log('CONDITION:', CONDITION);
+//console.log('CONDITION:', CONDITION);
 
 var mouselab_list = buildMouselabTrial();
 
@@ -64,8 +64,9 @@ const consent_provide = {
 };
 
 // === STEG 3: Övnings-mouselab (körs en gång efter consent, innan experimentet) ===
-// practice_mouselab definieras i mouselab.js
 
+
+// === STEG 4: Övnings-fråga ===
 const practice_binary_q = {
   type: jsPsychHtmlButtonResponse,
   stimulus: `<div class="text-content"><p>Var Erik hemma i sin lägenhet hela kvällen?</p></div>`,
@@ -75,7 +76,7 @@ const practice_binary_q = {
     document.getElementById('jspsych-html-button-response-btngroup').classList.add('btn-row');
   }
 };
-
+// = transition snurran =
 const experiment_start_transition = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus: `<div style="display:flex;align-items:center;justify-content:center;height:200px;"><div class="loading-spinner"></div></div>`,
@@ -84,7 +85,7 @@ const experiment_start_transition = {
   data: { category: "transition" }
 };
 
-// === STEG 4: Introduction to experiment ===
+// === STEG 5: Introduction to experiment ===
 const instructions = {
   type: jsPsychHtmlButtonResponse,
   stimulus: function() {
@@ -94,7 +95,7 @@ const instructions = {
   choices: ["Starta"]
 };
 
-// === STEG 5: Narrativsidan ===
+// === STEG 6: Narrativsidan ===
 const narrative_page = {
   type: jsPsychHtmlButtonResponse,
   stimulus: function() {
@@ -109,7 +110,7 @@ const narrative_page = {
   }
 };
 
-// === STEG 6: Pre main questions — före mouselab ===
+// === STEG 7: Pre main questions — före mouselab ===
 const pre_main_q_1 = {
   type: jsPsychHtmlSliderResponse,
   stimulus: function() {
@@ -138,7 +139,7 @@ const pre_main_q_2 = {
 
 const pre_main_questions = [pre_main_q_1, pre_main_q_2];
 
-// === STEG 7: pre binary question ===
+// === STEG 8: pre binary question ===
 const pre_binary_q = {
   type: jsPsychHtmlButtonResponse,
   stimulus: function() {
@@ -153,7 +154,7 @@ const pre_binary_q = {
   }
 };
 
-// === STEG 8: Uppmärksamhetskontroll ===
+// === STEG 9: Uppmärksamhetskontroll ===
 const attention_1 = {
   type: jsPsychHtmlSliderResponse,
   stimulus: `<div class="text-content">
@@ -173,7 +174,7 @@ const attention_1 = {
   }
 };
 
-// === STEG 9: Instruktioner inför mouselab ===
+// === STEG 10: Instruktioner inför mouselab ===
 const pre_mouselab_instructions = {
   type: jsPsychHtmlButtonResponse,
   stimulus: function() {
@@ -184,9 +185,9 @@ const pre_mouselab_instructions = {
   choices: ["Fortsätt"]
 };
 
-// === STEG 10: mouselabben and mid main questions ===
+// === STEG 11: mouselabben and mid main questions ===
 
-// === STEG 11: Post main questions — efter mouselab ===
+// === STEG 12: Post main questions — efter mouselab ===
 const post_main_q_1 = {
   type: jsPsychHtmlSliderResponse,
   stimulus: function() {
@@ -214,7 +215,7 @@ const post_main_q_2 = {
 };
 
 const post_main_questions = [post_main_q_1, post_main_q_2];
-// === STEG 12: post binary question ===
+// === STEG 13: post binary question ===
 const post_binary_q = {
   type: jsPsychHtmlButtonResponse,
   stimulus: function() {
@@ -227,19 +228,15 @@ const post_binary_q = {
   }
 };
 
-// === STEG 13: motivation ===
+// === STEG 14: motivation ===
 const motivation_q = {
   type: jsPsychHtmlButtonResponse,
   stimulus: function() {
-    const lastBinary = jsPsych.data.get().filter({ question: "refugee_status_binary_post" }).last(1).values()[0];
-    const isYes = lastBinary && lastBinary.response === 0;
-    const prompt = isYes
-      ? jsPsych.evaluateTimelineVariable('motivation_prompt_yes')
-      : jsPsych.evaluateTimelineVariable('motivation_prompt_no');
+    const name = jsPsych.evaluateTimelineVariable('person_name');
     return `
       <div class="text-content">
         <h2>Motivering av beslut</h2>
-        <p>${prompt}</p>
+        <p>Tänk tillbaka på både ${name}s egen berättelse och den ytterligare informationen du fick läsa. Skriv kortfattat ner vad du minns från var och en, gärna i stödord. Ta med det som hade betydelse för fallet, inte din allmänna åsikt.</p>
         <textarea id="motivation-textarea" rows="8" style="width:100%;box-sizing:border-box;font-size:16px;margin-top:12px;padding:8px;border:1px solid #ccc;border-radius:2px;"></textarea>
       </div>`;
   },
@@ -254,7 +251,7 @@ const motivation_q = {
   }
 };
 
-// === STEG 14: Demografifrågor ===
+// === STEG 15: Demografifrågor ===
 const demographics = {
   type: jsPsychSurveyText,
   questions: [
@@ -265,7 +262,7 @@ const demographics = {
   data: { category: "demographics" }
 };
 
-// === STEG 15: avslutningsskärm ===
+// === STEG 16: avslutningsskärm ===
 const finish_screen = {
   type: jsPsychHtmlButtonResponse,
   stimulus: `
@@ -279,6 +276,8 @@ const finish_screen = {
   choices: ['Avsluta'],
   data: { category: 'finish' }
 };
+
+
 
 
 // === FLÖDE ===
