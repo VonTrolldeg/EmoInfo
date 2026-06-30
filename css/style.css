@@ -16,18 +16,6 @@ body {
 
 textarea, input[type="text"] {
   font-size: 16px; /* Förhindrar att iOS Safari zoomar in när fältet fokuseras */
-  box-sizing: border-box;
-  max-width: 100%;
-}
-
-#jspsych-survey-text textarea {
-  width: 100% !important;
-  max-width: 500px !important;
-  box-sizing: border-box;
-}
-
-#jspsych-survey-text input[type="text"] {
-  width: auto;
 }
 
 .info-item {
