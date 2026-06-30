@@ -200,9 +200,7 @@ const post_main_questions = [post_main_q_1, post_main_q_2];
 const post_binary_q = {
   type: jsPsychHtmlButtonResponse,
   stimulus: function() {
-    const name = jsPsych.evaluateTimelineVariable('person_name');
-    const bigQ = jsPsych.evaluateTimelineVariable('bigQ');
-    return `<div class="text-content"><p>Slutligen, anser du att ${name} ${bigQ}</p></div>`;
+    return `<div class="text-content"><p>${jsPsych.evaluateTimelineVariable('post_binary_preamble')}</p></div>`;
   },
   choices: ["Ja", "Nej"],
   data: { question: "refugee_status_binary_post" },
