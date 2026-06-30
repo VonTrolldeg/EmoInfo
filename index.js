@@ -228,7 +228,15 @@ const motivation_q = {
   },
   button_label: "Fortsätt",
   on_load: function() {
-    setTimeout(() => document.activeElement?.blur(), 50);
+    setTimeout(() => {
+      document.activeElement?.blur();
+      document.querySelectorAll('#jspsych-survey-text textarea').forEach(el => {
+        el.style.width = '100%';
+        el.style.maxWidth = '100%';
+        el.style.boxSizing = 'border-box';
+        if (el.parentElement) el.parentElement.style.maxWidth = '100%';
+      });
+    }, 50);
   }
 };
 
