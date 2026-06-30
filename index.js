@@ -276,7 +276,7 @@ const experiment_start_transition = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus: `<div style="display:flex;align-items:center;justify-content:center;height:200px;"><div class="loading-spinner"></div></div>`,
   choices: "NO_KEYS",
-  trial_duration: 1200,
+  trial_duration: 1100,
   data: { category: "transition" }
 };
 
