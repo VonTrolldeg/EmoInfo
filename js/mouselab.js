@@ -11,7 +11,7 @@ const practice_mouselab = {
       { id: "pr_pos_1", type: "positive", label: "Grannens iakttagelse", description: "Grannen, tvärs över gatan säger att Eriks lampor var tända hela kvällen" },
       { id: "pr_pos_2", type: "positive", label: "Telefonens position",  description: "Eriks telefon kopplade upp mot masten närmast hemmet klockan 20:13" },
       { id: "pr_neg_1", type: "negative", label: "Möjlig observation",   description: "En bekant tror att hon såg Erik på stan men är inte säker" },
-      { id: "pr_neg_2", type: "negative", label: "Bilens placering",     description: "Eriks bil stod inte på sin vanliga plats, men han parkerar ibland på gatan bakom huset" }
+      { id: "pr_neg_2", type: "negative", label: "Bilens placering",     description: "Eriks bil stod inte på delen av gatan som han oftast parkerar på" }
     ];
 
     const positives = shuffleArray(cards.filter(c => c.type === 'positive'));
