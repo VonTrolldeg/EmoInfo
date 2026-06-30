@@ -2,7 +2,20 @@
 document.head.insertAdjacentHTML('beforeend', '<meta name="viewport" content="width=device-width, initial-scale=1.0">');
 
 // === STEG 0: Initiera jsPsych ===
-var jsPsych = initJsPsych();
+// 0 = normalt avslut, 1 = kvalitetsbortfall (attention check), 2 = screenout (inget samtycke)
+var complete_type = 0;
+
+var jsPsych = initJsPsych({
+  on_finish: function() {
+    if (complete_type == 0) {
+      window.location = 'https://www.google.com'; // TODO: byt till Maximiles complete-URL
+    } else if (complete_type == 1) {
+      window.location = 'https://www.google.com'; // TODO: byt till Maximiles quality-URL
+    } else if (complete_type == 2) {
+      window.location = 'https://www.google.com'; // TODO: byt till Maximiles screenout-URL
+    }
+  }
+});
 
 // Cognition.run sätter CONDITION automatiskt; URL-parameter (?condition=N) används för lokal testning
 if (typeof CONDITION === 'undefined') {
@@ -58,6 +71,7 @@ const consent_provide = {
   data: { category: "consent" },
   on_finish: function (data) {
     if (data.response == 1) {
+      complete_type = 2;
       jsPsych.abortExperiment();
     }
   }
@@ -169,7 +183,8 @@ const attention_1 = {
   data: { category: "attention_check" },
   on_finish: function(data) {
     if (data.response >= 5) {
-      jsPsych.abortExperiment(); // TODO: redirect till Maximiles quality-länk
+      complete_type = 1;
+      jsPsych.abortExperiment();
     }
   }
 };
