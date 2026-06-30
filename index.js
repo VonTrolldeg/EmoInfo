@@ -64,7 +64,25 @@ const consent_provide = {
 };
 
 // === STEG 3: Övnings-mouselab (körs en gång efter consent, innan experimentet) ===
+// practice_mouselab definieras i mouselab.js
 
+const practice_binary_q = {
+  type: jsPsychHtmlButtonResponse,
+  stimulus: `<div class="text-content"><p>Var Erik hemma i sin lägenhet hela kvällen?</p></div>`,
+  choices: ["Ja", "Nej"],
+  data: { category: "practice" },
+  on_load: function() {
+    document.getElementById('jspsych-html-button-response-btngroup').classList.add('btn-row');
+  }
+};
+
+const experiment_start_transition = {
+  type: jsPsychHtmlKeyboardResponse,
+  stimulus: `<div style="display:flex;align-items:center;justify-content:center;height:200px;"><div class="loading-spinner"></div></div>`,
+  choices: "NO_KEYS",
+  trial_duration: 1100,
+  data: { category: "transition" }
+};
 
 // === STEG 4: Introduction to experiment ===
 const instructions = {
@@ -209,7 +227,7 @@ const post_binary_q = {
   }
 };
 
-// === STEG 12: motivation ===
+// === STEG 13: motivation ===
 const motivation_q = {
   type: jsPsychHtmlButtonResponse,
   stimulus: function() {
@@ -236,7 +254,7 @@ const motivation_q = {
   }
 };
 
-// === STEG 13: Demografifrågor ===
+// === STEG 14: Demografifrågor ===
 const demographics = {
   type: jsPsychSurveyText,
   questions: [
@@ -247,7 +265,7 @@ const demographics = {
   data: { category: "demographics" }
 };
 
-// === STEG 14: avslutningsskärm ===
+// === STEG 15: avslutningsskärm ===
 const finish_screen = {
   type: jsPsychHtmlButtonResponse,
   stimulus: `
@@ -262,25 +280,6 @@ const finish_screen = {
   data: { category: 'finish' }
 };
 
-// === STEG 3: Övnings-mouselab — definieras i mouselab.js ===
-
-const practice_binary_q = {
-  type: jsPsychHtmlButtonResponse,
-  stimulus: `<div class="text-content"><p>Var Erik hemma i sin lägenhet hela kvällen?</p></div>`,
-  choices: ["Ja", "Nej"],
-  data: { category: "practice" },
-  on_load: function() {
-    document.getElementById('jspsych-html-button-response-btngroup').classList.add('btn-row');
-  }
-};
-
-const experiment_start_transition = {
-  type: jsPsychHtmlKeyboardResponse,
-  stimulus: `<div style="display:flex;align-items:center;justify-content:center;height:200px;"><div class="loading-spinner"></div></div>`,
-  choices: "NO_KEYS",
-  trial_duration: 1200,
-  data: { category: "transition" }
-};
 
 // === FLÖDE ===
 const narrative_procedure = {
