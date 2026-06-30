@@ -22,7 +22,7 @@ textarea, input[type="text"] {
 
 .jspsych-survey-text-response textarea {
   width: 100% !important;
-  max-width: 100% !important;
+  max-width: 500px !important;
   box-sizing: border-box;
 }
 
