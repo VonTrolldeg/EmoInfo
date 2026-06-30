@@ -211,32 +211,28 @@ const post_binary_q = {
 
 // === STEG 12: motivation ===
 const motivation_q = {
-  type: jsPsychSurveyText,
-  preamble: function() {
-    return `<div class="text-content">
-      <h2>Motivering av beslut</h2>
-      <p>${jsPsych.evaluateTimelineVariable('motivation_instruction')}</p>
-    </div>`;
-  },
-  questions: function() {
+  type: jsPsychHtmlButtonResponse,
+  stimulus: function() {
     const lastBinary = jsPsych.data.get().filter({ question: "refugee_status_binary_post" }).last(1).values()[0];
     const isYes = lastBinary && lastBinary.response === 0;
     const prompt = isYes
       ? jsPsych.evaluateTimelineVariable('motivation_prompt_yes')
       : jsPsych.evaluateTimelineVariable('motivation_prompt_no');
-    return [{ prompt, rows: 8, name: 'motivation' }];
+    return `
+      <div class="text-content">
+        <h2>Motivering av beslut</h2>
+        <p>${prompt}</p>
+        <textarea id="motivation-textarea" rows="8" style="width:100%;box-sizing:border-box;font-size:16px;margin-top:12px;padding:8px;border:1px solid #ccc;border-radius:2px;"></textarea>
+      </div>`;
   },
-  button_label: "Fortsätt",
+  choices: ["Fortsätt"],
   on_load: function() {
-    setTimeout(() => {
-      document.activeElement?.blur();
-      document.querySelectorAll('#jspsych-survey-text textarea').forEach(el => {
-        el.style.width = '100%';
-        el.style.maxWidth = '100%';
-        el.style.boxSizing = 'border-box';
-        if (el.parentElement) el.parentElement.style.maxWidth = '100%';
-      });
-    }, 50);
+    setTimeout(() => document.activeElement?.blur(), 50);
+  },
+  on_finish: function(data) {
+    const ta = document.getElementById('motivation-textarea');
+    data.motivation = ta ? ta.value : '';
+    data.category = 'motivation';
   }
 };
 
