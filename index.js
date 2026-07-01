@@ -106,7 +106,8 @@ const instructions = {
     const body = jsPsych.evaluateTimelineVariable('instructions_body');
     return `<div class="text-content"><h2>Instruktioner till studien</h2>${body.split('\n\n').map(p => `<p>${p}</p>`).join('')}</div>`;
   },
-  choices: ["Starta"]
+  choices: ["Starta"],
+  data: { category: "test_instructions" }
 };
 
 // === STEG 6: Narrativsidan ===
@@ -120,7 +121,7 @@ const narrative_page = {
   choices: ["Fortsätt"],
   save_trial_parameters: { stimulus: false },
   data: function() {
-    return { assigned_narrative: jsPsych.evaluateTimelineVariable('stimulus_id') };
+    return { category: "narrative_page", assigned_narrative: jsPsych.evaluateTimelineVariable('stimulus_id') };
   }
 };
 
@@ -134,7 +135,7 @@ const pre_main_q_1 = {
   slider_width: 200,
   require_movement: true,
   button_label: "Fortsätt",
-  data: { question: "credibility_pre" }
+  data: { category: "pre_main_q", question: "credibility_pre" }
 };
 
 const pre_main_q_2 = {
@@ -148,7 +149,7 @@ const pre_main_q_2 = {
   slider_width: 200,
   require_movement: true,
   button_label: "Fortsätt",
-  data: { question: "refugee_status_pre" }
+  data: { category: "pre_main_q", question: "main_judgment_pre" }
 };
 
 const pre_main_questions = [pre_main_q_1, pre_main_q_2];
@@ -162,7 +163,7 @@ const pre_binary_q = {
     return `<div class="text-content"><p>Ta ett ögonblick och tänk igenom allt du fått veta om ${name}s fall. Anser du att ${name} ${bigQ}</p></div>`;
   },
   choices: ["Ja", "Nej"],
-  data: { question: "refugee_status_binary_pre" },
+  data: { category: "pre_binary", question: "binary_judgment_pre" },
   on_load: function() {
     document.getElementById('jspsych-html-button-response-btngroup').classList.add('btn-row');
   }
@@ -197,7 +198,8 @@ const pre_mouselab_instructions = {
     const bigQ = jsPsych.evaluateTimelineVariable('bigQ');
     return `<div class="text-content"><h2>Ytterligare information om fallet</h2><p>Nu har du läst ${name}s egen berättelse. På nästa sida kommer du att få mer information om fallet. En del av information där stödjer ${name}s berättelse och markeras med  <span class="symbol-icon">+</span> . Annat talar emot den och markeras då med  <span class="symbol-icon">−</span> . När du läst så mycket information du tycker du behöver om fallet gör du en ny bedömning om ${name} ${bigQ} Du kan läsa informationen i vilken ordning du vill.</p></div>`;
   },
-  choices: ["Fortsätt"]
+  choices: ["Fortsätt"],
+  data: { category: "mouselab_instructions" }
 };
 
 // === STEG 11: mouselabben and mid main questions ===
@@ -212,7 +214,7 @@ const post_main_q_1 = {
   slider_width: 200,
   require_movement: true,
   button_label: "Fortsätt",
-  data: { question: "credibility_post" }
+  data: { category: "post_main_q", question: "credibility_post" }
 };
 
 const post_main_q_2 = {
@@ -226,7 +228,7 @@ const post_main_q_2 = {
   slider_width: 200,
   require_movement: true,
   button_label: "Fortsätt",
-  data: { question: "refugee_status_post" }
+  data: { category: "post_main_q", question: "main_judgment_post" }
 };
 
 const post_main_questions = [post_main_q_1, post_main_q_2];
@@ -241,7 +243,7 @@ const post_binary_q = {
     </div>`;
   },
   choices: ["Ja", "Nej"],
-  data: { question: "refugee_status_binary_post" },
+  data: { category: "post_binary", question: "binary_judgment_post" },
   on_load: function() {
     document.getElementById('jspsych-html-button-response-btngroup').classList.add('btn-row');
   }

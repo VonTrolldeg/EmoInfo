@@ -253,6 +253,7 @@ function buildMouselabTrial() {
 
     // on_finish sparar all insamlad data till jsPsych när deltagaren klickar "Fortsätt"
     on_finish: function(data) {
+      data.category = 'mouselab';
       data.pre_click_order = preClickOrder.join(' > ');
       data.pre_click_durations = JSON.stringify(preClickData);
       data.post_click_order = postClickOrder.join(' > ');
