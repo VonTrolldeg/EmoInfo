@@ -8,9 +8,9 @@ var complete_type = 0;
 var jsPsych = initJsPsych({
   on_finish: function() {
     if (complete_type == 0) {
-      window.location = 'https://www.google.com'; // TODO: byt till Maximiles complete-URL
+      window.location = 'https://unsplash.com'; // TODO: byt till Maximiles complete-URL
     } else if (complete_type == 1) {
-      window.location = 'https://www.google.com'; // TODO: byt till Maximiles quality-URL
+      window.location = 'https://earthview.withgoogle.com'; // TODO: byt till Maximiles quality-URL
     } else if (complete_type == 2) {
       window.location = 'https://www.google.com'; // TODO: byt till Maximiles screenout-URL
     }
