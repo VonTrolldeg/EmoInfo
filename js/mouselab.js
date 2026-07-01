@@ -29,8 +29,7 @@ const practice_mouselab = {
 
     return `
       <h2>Övning</h2>
-      <p>Du kommer under testets gång få utföra en uppgift likt den här. Din uppgift är att med hjälp av informationen avgöra om påståendet är sant eller inte. Korten med <span class="symbol-icon">+</span> talar för påståendet och korten med <span class="symbol-icon">−</span> talar emot den. Du kan läsa korten i vilken ordning du vill.</p>
-      <p><strong>Påstående: Erik var hemma i sin lägenhet hela kvällen.</strong></p>
+<p>Under testet kommer du att få en uppgift som liknar den här. Din uppgift är att avgöra om påståendet är sant eller inte utifrån informationen på korten. Tryck på ett kort för att läsa mer. Korten med <span class="symbol-icon">+</span> talar för påståendet och korten med <span class="symbol-icon">−</span> talar emot det. Du kan öppna korten i vilken ordning du vill.</p>      <p><strong>Påstående: Erik var hemma i sin lägenhet hela kvällen.</strong></p>
       <div class="option-list">${optionDivs}</div>
       <div id="info-modal">
         <div id="modal-content">
@@ -175,6 +174,10 @@ function buildMouselabTrial() {
   on_load: function () {
     let totalClicks = 0;
     let midShown = false;
+    let hasClosedCard = false;
+
+    const continueBtn = document.querySelector('.jspsych-btn');
+    continueBtn.disabled = true;
 
     // Lyssna på klick på varje informationskort
     document.querySelectorAll(".mouselab-option").forEach((option) => {
@@ -208,6 +211,11 @@ function buildMouselabTrial() {
       }
       document.getElementById("info-modal").style.display = "none";
 
+      if (!hasClosedCard) {
+        hasClosedCard = true;
+        continueBtn.disabled = false;
+      }
+
       // Visa mittfrågan första gången deltagaren stängt sitt 4:e kort
       if (!midShown && totalClicks >= 4) {
         midShown = true;
@@ -224,15 +232,10 @@ function buildMouselabTrial() {
 
       midModal.style.display = "flex";
       midCloseBtn.disabled = true;
-      midCloseBtn.style.opacity = "0.6";
-      midCloseBtn.style.cursor = "not-allowed";
 
       // Aktiverar knappen först när båda sliders har rörts
       function updateMidState() {
-        const allTouched = credibilityTouched && refugeeTouched;
-        midCloseBtn.disabled = !allTouched;
-        midCloseBtn.style.opacity = allTouched ? "1" : "0.6";
-        midCloseBtn.style.cursor = allTouched ? "pointer" : "not-allowed";
+        midCloseBtn.disabled = !(credibilityTouched && refugeeTouched);
       }
 
       document.getElementById("mid-credibility-slider").addEventListener("input", (e) => {

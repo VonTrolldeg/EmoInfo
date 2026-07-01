@@ -56,6 +56,11 @@ background-color: #6C4B21;
 text-decoration: underline;
 }
 
+.jspsych-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 
 /* Centrerar knapp-containern för html-button-response-sidor (påverkar inte survey-likert) */
 #jspsych-html-button-response-btngroup {
@@ -192,7 +197,7 @@ text-decoration: underline;
   font-size: 16px;
   cursor: pointer;
   min-height: 44px;
-  background-color: #875E29;
+  background-color: #9c6114;
   color: white;
   width: 140px;
   border: none;
@@ -202,6 +207,11 @@ text-decoration: underline;
 #mid-modal-close:hover {
   background-color: #6C4B21;
   text-decoration: underline;
+}
+
+#mid-modal-close:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 /* Modalen - täcker hela skärmen med en halvtransparent bakgrund */
@@ -296,7 +306,7 @@ text-decoration: underline;
   font-size: 16px;
   cursor: pointer;
   min-height: 44px;
-  background-color: #875E29;
+  background-color: #9c6114;
   color: white;
   width: 140px;
   height: 36px;
