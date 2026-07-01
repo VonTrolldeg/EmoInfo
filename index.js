@@ -80,7 +80,8 @@ const consent_provide = {
 };
 
 // === STEG 3: Övnings-mouselab (körs en gång efter consent, innan experimentet) ===
-
+// practice_mouselab är definierad i js/mouselab.js och laddas in automatiskt eftersom
+// filen inkluderas i HTML innan index.js. Trialen läggs in i timelines i FLÖDE längst ned.
 
 // === STEG 4: Övnings-fråga ===
 const practice_binary_q = {
@@ -159,7 +160,6 @@ const pre_main_q_2 = {
   data: { category: "pre_main_q", question: "main_judgment_pre" }
 };
 
-const pre_main_questions = [pre_main_q_1, pre_main_q_2];
 
 // === STEG 8: pre binary question ===
 const pre_binary_q = {
@@ -212,7 +212,9 @@ const pre_mouselab_instructions = {
   data: { category: "mouselab_instructions" }
 };
 
-// === STEG 11: mouselabben and mid main questions ===
+// === STEG 11: Huvud-mouselab ===
+// mouselab_list byggs av buildMouselabTrial() i js/mouselab.js (rad 28 ovan).
+// Trialen visar informationskorten och hanterar mittfrågan som modal inuti samma trial.
 
 // === STEG 12: Post main questions — efter mouselab ===
 const post_main_q_1 = {
@@ -243,7 +245,6 @@ const post_main_q_2 = {
   data: { category: "post_main_q", question: "main_judgment_post" }
 };
 
-const post_main_questions = [post_main_q_1, post_main_q_2];
 // === STEG 13: post binary question ===
 const post_binary_q = {
   type: jsPsychHtmlButtonResponse,
@@ -323,7 +324,7 @@ const finish_screen = {
 
 // === FLÖDE ===
 const narrative_procedure = {
-  timeline: [instructions, narrative_page, ...pre_main_questions, pre_binary_q, attention_1, pre_mouselab_instructions, mouselab_list, ...post_main_questions, post_binary_q, motivation_q],
+  timeline: [instructions, narrative_page, pre_main_q_1, pre_main_q_2, pre_binary_q, attention_1, pre_mouselab_instructions, mouselab_list, post_main_q_1, post_main_q_2, post_binary_q, motivation_q],
   timeline_variables: stimuli_narrative,
   sample: {
     type: "custom",
