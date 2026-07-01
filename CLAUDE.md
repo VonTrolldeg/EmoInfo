@@ -1,7 +1,10 @@
 # EmoInfo
 
-Psykologisk trovärdighetsexperiment byggt med jsPsych och hostat på Cognition.run.
+Ett kognitionsexperiment som testar beslutsfattande i juridiska beslut. Där information som deltagaren tar del av under testet påverkar beslutsfattandet. 
+Byggt med jsPsych och hostat på Cognition.run.
 Deltagare läser en berättelse (en av sex konditioner) och gör bedömningar via sliders och mouselab.
+
+> Experimentet är i första hand byggt för att fungera på mobiltelefon. Tänk på det innan du ändrar layout, fontstorlekar eller interaktivitet.
 
 ## Projektstruktur
 
