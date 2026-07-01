@@ -15,6 +15,8 @@ const practiceCards = {};
 
 const practice_mouselab = {
   type: jsPsychHtmlButtonResponse,
+
+  // stimulus bygger upp hela HTML-strukturen precis innan trialen visas
   stimulus: function() {
     const cards = [
       { id: "pr_pos_1", type: "positive", label: "Grannens iakttagelse", description: "Grannen, tvärs över gatan säger att Eriks lampor var tända hela kvällen" },
@@ -23,12 +25,16 @@ const practice_mouselab = {
       { id: "pr_neg_2", type: "negative", label: "Bilens placering",     description: "Eriks bil stod inte på delen av gatan som han oftast parkerar på" }
     ];
 
+    // Para ihop positiva och negativa alternativ slumpmässigt (ett par per rad)
     const positives = shuffleArray(cards.filter(c => c.type === 'positive'));
     const negatives = shuffleArray(cards.filter(c => c.type === 'negative'));
     const positiveOnLeft = Math.random() < 0.5;
     const randomized = positives.flatMap((c, i) => positiveOnLeft ? [c, negatives[i]] : [negatives[i], c]);
+
+    // Bygg uppslagstabell så on_load kan visa rätt text när ett kort klickas
     randomized.forEach(c => { practiceCards[c.id] = c; });
 
+    // Skapa en knapp-HTML för varje informationskort
     const optionDivs = randomized.map(c =>
       `<button class="mouselab-option" id="${c.id}" type="button">
         <span class="card-symbol">${c.type === 'positive' ? '+' : '−'}</span>
@@ -50,7 +56,10 @@ const practice_mouselab = {
     `;
   },
   choices: ["Fortsätt"],
+
+  // on_load kopplar klick-interaktivitet när HTML:en är inlagd i DOM
   on_load: function() {
+    // Lyssna på klick på varje informationskort
     document.querySelectorAll(".mouselab-option").forEach(option => {
       option.addEventListener("click", () => {
         const card = practiceCards[option.id];
@@ -60,6 +69,8 @@ const practice_mouselab = {
         option.classList.add("visited");
       });
     });
+
+    // När deltagaren stänger ett infokort: dölj modalen
     document.getElementById("modal-close").addEventListener("click", () => {
       document.getElementById("info-modal").style.display = "none";
     });
