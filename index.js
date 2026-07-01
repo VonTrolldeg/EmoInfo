@@ -259,7 +259,29 @@ const post_main_q_2 = {
   data: { category: "post_main_q", question: "main_judgment_post" }
 };
 
-// === STEG 13: post binary question ===
+// === STEG 13: Uppmärksamhetskontroll 2 ===
+const attention_2 = {
+  type: jsPsychHtmlSliderResponse,
+  stimulus: `<div class="text-content">
+    <p>Svaret på denna frågan är väldigt enkel, det är bara att flytta markören så långt åt vänster som du kan. Detta är en uppmärksamhetskontroll.</p>
+    <p>Baserat på instruktionen ovan, flytta markören på skalan nedan.</p>
+  </div>`,
+  labels: ["Vänster", "Höger"],
+  slider_start: 50,
+  slider_width: 200,
+  require_movement: true,
+  button_label: "Fortsätt",
+  save_trial_parameters: { stimulus: false },
+  data: { category: "attention_check" },
+  on_finish: function(data) {
+    if (data.response >= 5) {
+      complete_type = 1;
+      jsPsych.abortExperiment();
+    }
+  }
+};
+
+// === STEG 14: post binary question ===
 const post_binary_q = {
   type: jsPsychHtmlButtonResponse,
   stimulus: function() {
@@ -277,7 +299,7 @@ const post_binary_q = {
   }
 };
 
-// === STEG 14: motivation ===
+// === STEG 15: motivation ===
 const motivation_q = {
   type: jsPsychHtmlButtonResponse,
   stimulus: function() {
@@ -306,7 +328,7 @@ const motivation_q = {
   }
 };
 
-// === STEG 15: Demografifrågor ===
+// === STEG 16: Demografifrågor ===
 const demographics = {
   type: jsPsychSurveyText,
   questions: [
@@ -317,7 +339,7 @@ const demographics = {
   data: { category: "demographics" }
 };
 
-// === STEG 16: avslutningsskärm ===
+// === STEG 17: avslutningsskärm ===
 const finish_screen = {
   type: jsPsychHtmlButtonResponse,
   stimulus: `
@@ -336,7 +358,7 @@ const finish_screen = {
 
 // === FLÖDE ===
 const narrative_procedure = {
-  timeline: [instructions, narrative_page, pre_main_q_1, pre_main_q_2, pre_binary_q, attention_1, pre_mouselab_instructions, mouselab_list, post_main_q_1, post_main_q_2, post_binary_q, motivation_q],
+  timeline: [instructions, narrative_page, pre_main_q_1, pre_main_q_2, pre_binary_q, attention_1, pre_mouselab_instructions, mouselab_list, post_main_q_1, post_main_q_2, attention_2, post_binary_q, motivation_q],
   timeline_variables: stimuli_narrative,
   sample: {
     type: "custom",
