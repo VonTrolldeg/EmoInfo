@@ -24,10 +24,6 @@ var stimuli_narrative = [
     bigQ: "bör få flyktingstatus i Sverige?",
     low_label: "Bör inte få flyktingstatus",
     high_label: "Bör få flyktingstatus",
-    motivation_instruction: "Som beslutsfattare på Migrationsverket var din uppgift att avgöra om du tror att Haile Gebremedhin talar sanning eller inte och bedöma om han bör få flyktingstatus i Sverige eller inte.",
-    motivation_prompt_yes: "Du har beviljat Haile flyktingstatus. Som handläggare på Migrationsverket bär du ett ansvar gentemot rättssamhället att din bedömning vilar på fakta i fallet. Ditt beslut med motivering kommer i nästa steg att sammanställas till ett beslut av någon annan. Skriv därför ner, i punktform, de uppgifter ur Hailes berättelse och den ytterligare informationen som ledde dig fram till ditt beslut. Ta med allt du minns som kan vara av betydelse. Det är uppgifter ur underlaget som efterfrågas, inte din allmänna åsikt.",
-    motivation_prompt_no: "Du har nekat Haile flyktingstatus. Som handläggare på Migrationsverket bär du ett ansvar gentemot rättssamhället att din bedömning vilar på fakta i fallet. Ditt beslut med motivering kommer i nästa steg att sammanställas till ett beslut av någon annan. Skriv därför ner, i punktform, de uppgifter ur Hailes berättelse och den ytterligare informationen som ledde dig fram till ditt beslut. Ta med allt du minns som kan vara av betydelse. Det är uppgifter ur underlaget som efterfrågas, inte din allmänna åsikt.",
-    post_binary_preamble: "Som handläggare på Migrationsverket bär du ett ansvar gentemot rättssamhället att fatta ett välgrundat beslut. Du har fått möjlighet att ta del av både Hailes egen berättelse och övrig information om fallet. Det är dags för dig att fatta ditt slutgiltiga avgörande. Anser du att Haile ska beviljas flyktingstatus?"
   },
 
   // === KONDITION 2: Haile — emotionell ===
@@ -50,10 +46,6 @@ var stimuli_narrative = [
     bigQ: "bör få flyktingstatus i Sverige?",
     low_label: "Bör inte få flyktingstatus",
     high_label: "Bör få flyktingstatus",
-    motivation_instruction: "Som beslutsfattare på Migrationsverket var din uppgift att avgöra om du tror att Haile Gebremedhin talar sanning eller inte och bedöma om han bör få flyktingstatus i Sverige eller inte.",
-    motivation_prompt_yes: "Du har beviljat Haile flyktingstatus. Som handläggare på Migrationsverket bär du ett ansvar gentemot rättssamhället att din bedömning vilar på fakta i fallet. Ditt beslut med motivering kommer i nästa steg att sammanställas till ett beslut av någon annan. Skriv därför ner, i punktform, de uppgifter ur Hailes berättelse och den ytterligare informationen som ledde dig fram till ditt beslut. Ta med allt du minns som kan vara av betydelse. Det är uppgifter ur underlaget som efterfrågas, inte din allmänna åsikt.",
-    motivation_prompt_no: "Du har nekat Haile flyktingstatus. Som handläggare på Migrationsverket bär du ett ansvar gentemot rättssamhället att din bedömning vilar på fakta i fallet. Ditt beslut med motivering kommer i nästa steg att sammanställas till ett beslut av någon annan. Skriv därför ner, i punktform, de uppgifter ur Hailes berättelse och den ytterligare informationen som ledde dig fram till ditt beslut. Ta med allt du minns som kan vara av betydelse. Det är uppgifter ur underlaget som efterfrågas, inte din allmänna åsikt.",
-    post_binary_preamble: "Som handläggare på Migrationsverket bär du ett ansvar gentemot rättssamhället att fatta ett välgrundat beslut. Du har fått möjlighet att ta del av både Hailes egen berättelse och övrig information om fallet. Det är dags för dig att fatta ditt slutgiltiga avgörande. Anser du att Haile ska beviljas flyktingstatus?"
   },
 
   // === KONDITION 3: Narrativ 2 — neutral (PLATSHÅLLARE) ===
@@ -76,10 +68,6 @@ var stimuli_narrative = [
     bigQ: "är skyldig?",
     low_label: "Är inte skyldig",
     high_label: "Är skyldig",
-    motivation_instruction: "Som nämndeman i rätten var din uppgift att avgöra om du tror att Hasse talar sanning eller inte och bedöma om han är skyldig eller inte.",
-    motivation_prompt_yes: "Du har bedömt Hasse som skyldig till stölden. Som nämndeman bär du ett ansvar gentemot rättssamhället att din bedömning vilar på fakta i fallet. Ditt beslut med motivering kommer i nästa steg att sammanställas till en dom av någon annan. Skriv därför ner, i punktform, de uppgifter ur Hasses berättelse och den ytterligare informationen som ledde dig fram till ditt beslut. Ta med allt du minns som kan vara av betydelse. Det är uppgifter ur underlaget som efterfrågas, inte din allmänna åsikt.",
-    motivation_prompt_no: "Du har bedömt Hasse som oskyldig till stölden. Som nämndeman bär du ett ansvar gentemot rättssamhället att din bedömning vilar på fakta i fallet. Ditt beslut med motivering kommer i nästa steg att sammanställas till en dom av någon annan. Skriv därför ner, i punktform, de uppgifter ur Hasses berättelse och den ytterligare informationen som ledde dig fram till ditt beslut. Ta med allt du minns som kan vara av betydelse. Det är uppgifter ur underlaget som efterfrågas, inte din allmänna åsikt.",
-    post_binary_preamble: "Som nämndeman i en rättslig process bär du ett ansvar gentemot rättssamhället att fatta ett välgrundat beslut. Du har fått möjlighet att ta del av både Hasses egen berättelse och övrig information om fallet. Det är dags för dig att fatta ditt slutgiltiga avgörande. Anser du att Hasse är skyldig?"
   },
 
   // === KONDITION 4: Narrativ 2 — emotionell (PLATSHÅLLARE) ===
@@ -102,10 +90,6 @@ var stimuli_narrative = [
     bigQ: "är skyldig?",
     low_label: "Är inte skyldig",
     high_label: "Är skyldig",
-    motivation_instruction: "Som nämndeman i rätten var din uppgift att avgöra om du tror att Hasse talar sanning eller inte och bedöma om han är skyldig eller inte.",
-    motivation_prompt_yes: "Du har bedömt Hasse som skyldig till stölden. Som nämndeman bär du ett ansvar gentemot rättssamhället att din bedömning vilar på fakta i fallet. Ditt beslut med motivering kommer i nästa steg att sammanställas till en dom av någon annan. Skriv därför ner, i punktform, de uppgifter ur Hasses berättelse och den ytterligare informationen som ledde dig fram till ditt beslut. Ta med allt du minns som kan vara av betydelse. Det är uppgifter ur underlaget som efterfrågas, inte din allmänna åsikt.",
-    motivation_prompt_no: "Du har bedömt Hasse som oskyldig till stölden. Som nämndeman bär du ett ansvar gentemot rättssamhället att din bedömning vilar på fakta i fallet. Ditt beslut med motivering kommer i nästa steg att sammanställas till en dom av någon annan. Skriv därför ner, i punktform, de uppgifter ur Hasses berättelse och den ytterligare informationen som ledde dig fram till ditt beslut. Ta med allt du minns som kan vara av betydelse. Det är uppgifter ur underlaget som efterfrågas, inte din allmänna åsikt.",
-    post_binary_preamble: "Som nämndeman i en rättslig process bär du ett ansvar gentemot rättssamhället att fatta ett välgrundat beslut. Du har fått möjlighet att ta del av både Hasses egen berättelse och övrig information om fallet. Det är dags för dig att fatta ditt slutgiltiga avgörande. Anser du att Hasse är skyldig?"
   },
 
   // === KONDITION 5: Sanna — neutral ===
@@ -128,10 +112,6 @@ var stimuli_narrative = [
     bigQ: "bör betala tillbaka sitt bostadsbidrag?",
     low_label: "Absolut inte<br>återbetalningsskyldig",
     high_label: "Absolut<br>återbetalningsskyldig",
-    motivation_instruction: "Som handläggare på Försäkringskassan var din uppgift att avgöra om du tror att Sanna talar sanning eller inte och bedöma om hon bör betala tillbaka sitt bostadsbidrag eller inte.",
-    motivation_prompt_yes: "Du har bedömt att Sanna ska betala tillbaka bidraget. Som handläggare på Försäkringskassan bär du ett ansvar gentemot rättssamhället att din bedömning vilar på fakta i fallet. Ditt beslut med motivering kommer i nästa steg att sammanställas till ett beslut av någon annan. Skriv därför ner, i punktform, de uppgifter ur Sannas berättelse och den ytterligare informationen som ledde dig fram till ditt beslut. Ta med allt du minns som kan vara av betydelse. Det är uppgifter ur underlaget som efterfrågas, inte din allmänna åsikt.",
-    motivation_prompt_no: "Du har bedömt att Sanna inte ska betala tillbaka bidraget. Som handläggare på Försäkringskassan bär du ett ansvar gentemot rättssamhället att din bedömning vilar på fakta i fallet. Ditt beslut med motivering kommer i nästa steg att sammanställas till ett beslut av någon annan. Skriv därför ner, i punktform, de uppgifter ur Sannas berättelse och den ytterligare informationen som ledde dig fram till ditt beslut. Ta med allt du minns som kan vara av betydelse. Det är uppgifter ur underlaget som efterfrågas, inte din allmänna åsikt.",
-    post_binary_preamble: "Som handläggare på Försäkringskassan bär du ett ansvar för en rättsamhället bedömning att fatta ett välgrundat beslut. Du har fått möjlighet att ta del av både Sannas egen berättelse och övrig information om fallet. Det är dags för dig att fatta ditt slutgiltiga avgörande. Anser du att Sanna ska betala tillbaka bostadsbidraget?"
   },
 
   // === KONDITION 6: Sanna — emotionell ===
@@ -154,10 +134,6 @@ var stimuli_narrative = [
     bigQ: "bör betala tillbaka sitt bostadsbidrag?",
     low_label: "Absolut inte<br>återbetalningsskyldig",
     high_label: "Absolut<br>återbetalningsskyldig",
-    motivation_instruction: "Som handläggare på Försäkringskassan var din uppgift att avgöra om du tror att Sanna talar sanning eller inte och bedöma om hon bör betala tillbaka sitt bostadsbidrag eller inte.",
-    motivation_prompt_yes: "Du har bedömt att Sanna ska betala tillbaka bidraget. Som handläggare på Försäkringskassan bär du ett ansvar gentemot rättssamhället att din bedömning vilar på fakta i fallet. Ditt beslut med motivering kommer i nästa steg att sammanställas till ett beslut av någon annan. Skriv därför ner, i punktform, de uppgifter ur Sannas berättelse och den ytterligare informationen som ledde dig fram till ditt beslut. Ta med allt du minns som kan vara av betydelse. Det är uppgifter ur underlaget som efterfrågas, inte din allmänna åsikt.",
-    motivation_prompt_no: "Du har bedömt att Sanna inte ska betala tillbaka bidraget. Som handläggare på Försäkringskassan bär du ett ansvar gentemot rättssamhället att din bedömning vilar på fakta i fallet. Ditt beslut med motivering kommer i nästa steg att sammanställas till ett beslut av någon annan. Skriv därför ner, i punktform, de uppgifter ur Sannas berättelse och den ytterligare informationen som ledde dig fram till ditt beslut. Ta med allt du minns som kan vara av betydelse. Det är uppgifter ur underlaget som efterfrågas, inte din allmänna åsikt.",
-    post_binary_preamble: "Som handläggare på Försäkringskassan bär du ett ansvar för en rättsamhället bedömning att fatta ett välgrundat beslut. Du har fått möjlighet att ta del av både Sannas egen berättelse och övrig information om fallet. Det är dags för dig att fatta ditt slutgiltiga avgörande. Anser du att Sanna ska betala tillbaka bostadsbidraget?"
   }
 
 ];
