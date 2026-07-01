@@ -48,6 +48,7 @@ const practice_mouselab = {
     `;
   },
   choices: ["Fortsätt"],
+  save_trial_parameters: { stimulus: false },
 
   // on_load kopplar klick-interaktivitet när HTML:en är inlagd i DOM
   on_load: function() {
@@ -166,6 +167,7 @@ function buildMouselabTrial() {
     },
 
     choices: ["Fortsätt"],
+    save_trial_parameters: { stimulus: false },
 
     // on_load kopplar all interaktivitet när HTML:en är inlagd i DOM
     on_load: function() {

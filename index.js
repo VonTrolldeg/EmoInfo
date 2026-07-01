@@ -54,6 +54,7 @@ const consent_info = {
     </div>
   `,
   choices: ["Fortsätt till medgivande"],
+  save_trial_parameters: { stimulus: false },
   data: { category: "consent" }
 };
 
@@ -68,6 +69,7 @@ const consent_provide = {
     </div>
   `,
   choices: ["Ja, jag samtycker till att delta", "Nej, jag samtycker inte till att delta"],
+  save_trial_parameters: { stimulus: false },
   data: { category: "consent" },
   on_finish: function (data) {
     if (data.response == 1) {
@@ -85,6 +87,7 @@ const practice_binary_q = {
   type: jsPsychHtmlButtonResponse,
   stimulus: `<div class="text-content"><p>Var Erik hemma i sin lägenhet hela kvällen?</p></div>`,
   choices: ["Ja", "Nej"],
+  save_trial_parameters: { stimulus: false },
   data: { category: "practice" },
   on_load: function() {
     document.getElementById('jspsych-html-button-response-btngroup').classList.add('btn-row');
@@ -96,6 +99,7 @@ const experiment_start_transition = {
   stimulus: `<div style="display:flex;align-items:center;justify-content:center;height:200px;"><div class="loading-spinner"></div></div>`,
   choices: "NO_KEYS",
   trial_duration: 1100,
+  save_trial_parameters: { stimulus: false },
   data: { category: "transition" }
 };
 
@@ -107,6 +111,7 @@ const instructions = {
     return `<div class="text-content"><h2>Instruktioner till studien</h2>${body.split('\n\n').map(p => `<p>${p}</p>`).join('')}</div>`;
   },
   choices: ["Starta"],
+  save_trial_parameters: { stimulus: false },
   data: { category: "test_instructions" }
 };
 
@@ -135,6 +140,7 @@ const pre_main_q_1 = {
   slider_width: 200,
   require_movement: true,
   button_label: "Fortsätt",
+  save_trial_parameters: { stimulus: false },
   data: { category: "pre_main_q", question: "credibility_pre" }
 };
 
@@ -149,6 +155,7 @@ const pre_main_q_2 = {
   slider_width: 200,
   require_movement: true,
   button_label: "Fortsätt",
+  save_trial_parameters: { stimulus: false },
   data: { category: "pre_main_q", question: "main_judgment_pre" }
 };
 
@@ -163,6 +170,7 @@ const pre_binary_q = {
     return `<div class="text-content"><p>Ta ett ögonblick och tänk igenom allt du fått veta om ${name}s fall. Anser du att ${name} ${bigQ}</p></div>`;
   },
   choices: ["Ja", "Nej"],
+  save_trial_parameters: { stimulus: false },
   data: { category: "pre_binary", question: "binary_judgment_pre" },
   on_load: function() {
     document.getElementById('jspsych-html-button-response-btngroup').classList.add('btn-row');
@@ -181,6 +189,7 @@ const attention_1 = {
   slider_width: 200,
   require_movement: true,
   button_label: "Fortsätt",
+  save_trial_parameters: { stimulus: false },
   data: { category: "attention_check" },
   on_finish: function(data) {
     if (data.response >= 5) {
@@ -199,6 +208,7 @@ const pre_mouselab_instructions = {
     return `<div class="text-content"><h2>Ytterligare information om fallet</h2><p>Nu har du läst ${name}s egen berättelse. På nästa sida kommer du att få mer information om fallet. En del av information där stödjer ${name}s berättelse och markeras med  <span class="symbol-icon">+</span> . Annat talar emot den och markeras då med  <span class="symbol-icon">−</span> . När du läst så mycket information du tycker du behöver om fallet gör du en ny bedömning om ${name} ${bigQ} Du kan läsa informationen i vilken ordning du vill.</p></div>`;
   },
   choices: ["Fortsätt"],
+  save_trial_parameters: { stimulus: false },
   data: { category: "mouselab_instructions" }
 };
 
@@ -214,6 +224,7 @@ const post_main_q_1 = {
   slider_width: 200,
   require_movement: true,
   button_label: "Fortsätt",
+  save_trial_parameters: { stimulus: false },
   data: { category: "post_main_q", question: "credibility_post" }
 };
 
@@ -228,6 +239,7 @@ const post_main_q_2 = {
   slider_width: 200,
   require_movement: true,
   button_label: "Fortsätt",
+  save_trial_parameters: { stimulus: false },
   data: { category: "post_main_q", question: "main_judgment_post" }
 };
 
@@ -243,6 +255,7 @@ const post_binary_q = {
     </div>`;
   },
   choices: ["Ja", "Nej"],
+  save_trial_parameters: { stimulus: false },
   data: { category: "post_binary", question: "binary_judgment_post" },
   on_load: function() {
     document.getElementById('jspsych-html-button-response-btngroup').classList.add('btn-row');
@@ -262,6 +275,8 @@ const motivation_q = {
       </div>`;
   },
   choices: ["Fortsätt"],
+  save_trial_parameters: { stimulus: false },
+  data: { category: "motivation" },
   on_load: function() {
     setTimeout(() => document.activeElement?.blur(), 50);
     const btn = document.querySelector('.jspsych-btn');
@@ -273,7 +288,6 @@ const motivation_q = {
   on_finish: function(data) {
     const ta = document.getElementById('motivation-textarea');
     data.motivation = ta ? ta.value : '';
-    data.category = 'motivation';
   }
 };
 
@@ -300,6 +314,7 @@ const finish_screen = {
     <p><strong> Tryck avsluta för att avsluta studien och registrera ditt deltagande. </strong> </p>
     </div>`,
   choices: ['Avsluta'],
+  save_trial_parameters: { stimulus: false },
   data: { category: 'finish' }
 };
 
