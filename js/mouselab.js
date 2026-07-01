@@ -2,14 +2,6 @@
 // ÖVNINGS-MOUSELAB — visas en gång efter consent, innan experimentet
 // =============================================================================
 
-// Fisher-Yates shuffle — blandar en array slumpmässigt
-function shuffleArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-}
 
 const practiceCards = {};
 
@@ -26,8 +18,8 @@ const practice_mouselab = {
     ];
 
     // Para ihop positiva och negativa alternativ slumpmässigt (ett par per rad)
-    const positives = shuffleArray(cards.filter(c => c.type === 'positive'));
-    const negatives = shuffleArray(cards.filter(c => c.type === 'negative'));
+    const positives = jsPsych.randomization.shuffle(cards.filter(c => c.type === 'positive'));
+    const negatives = jsPsych.randomization.shuffle(cards.filter(c => c.type === 'negative'));
     const positiveOnLeft = Math.random() < 0.5;
     const randomized = positives.flatMap((c, i) => positiveOnLeft ? [c, negatives[i]] : [negatives[i], c]);
 
@@ -109,8 +101,8 @@ function buildMouselabTrial() {
       const highLabel = jsPsych.evaluateTimelineVariable('high_label');
 
       // Para ihop positiva och negativa alternativ slumpmässigt (ett par per rad)
-      const positives = shuffleArray(options.filter(opt => opt.type === 'positive'));
-      const negatives = shuffleArray(options.filter(opt => opt.type === 'negative'));
+      const positives = jsPsych.randomization.shuffle(options.filter(opt => opt.type === 'positive'));
+      const negatives = jsPsych.randomization.shuffle(options.filter(opt => opt.type === 'negative'));
       positiveOnLeft = Math.random() < 0.5;
       const randomizedOptions = positives.flatMap((opt, i) =>
         positiveOnLeft ? [opt, negatives[i]] : [negatives[i], opt]);
