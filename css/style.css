@@ -282,19 +282,19 @@ textarea, input[type="text"] {
   width: 200px;
 }
 
-/* Etiketter under slidern, utspridda till ändarna */
-.slider-labels {
+/* Etiketter under slidern — spänner hela modalbredden för att ge långa texter plats */
+.slider-label-row {
   display: flex;
   justify-content: space-between;
-  width: calc(100% + 60px);
-  margin-left: -30px;
+  width: 100%;
+  padding: 4px 10px 0;
   font-size: 13px;
   color: #444;
-  margin-top: 4px;
+  box-sizing: border-box;
 }
 
-.slider-labels span {
-  text-align: center;
+.slider-label-row span:last-child {
+  text-align: right;
 }
 
 .loading-spinner {

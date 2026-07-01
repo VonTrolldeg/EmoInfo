@@ -144,20 +144,20 @@ function buildMouselabTrial() {
             <p>Hur trovärdig tyckte du att ${name} verkade?</p>
             <div class="slider-wrapper">
               <input type="range" class="jspsych-slider" id="mid-credibility-slider" min="0" max="100" value="50" step="1">
-              <div class="slider-labels">
-                <span>Inte alls trovärdig</span>
-                <span>Mycket trovärdig</span>
-              </div>
+            </div>
+            <div class="slider-label-row">
+              <span>Inte alls trovärdig</span>
+              <span>Mycket trovärdig</span>
             </div>
           </div>
           <div class="mid-question">
             <p>Anser du att ${name} ${bigQ}</p>
             <div class="slider-wrapper">
               <input type="range" class="jspsych-slider" id="mid-refugee-slider" min="0" max="100" value="50" step="1">
-              <div class="slider-labels">
-                <span>${lowLabel}</span>
-                <span>${highLabel}</span>
-              </div>
+            </div>
+            <div class="slider-label-row">
+              <span>${lowLabel}</span>
+              <span>${highLabel}</span>
             </div>
           </div>
           <button id="mid-modal-close" type="button">Fortsätt</button>

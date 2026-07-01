@@ -307,7 +307,7 @@ const motivation_q = {
     return `
       <div class="text-content">
         <h2>Motivering av beslut</h2>
-        <p>Tänk tillbaka på både ${name}s egen berättelse och den ytterligare informationen du fick läsa. Skriv kortfattat ner vad du minns från var och en, gärna i stödord. Ta med det som hade betydelse för fallet, inte din allmänna åsikt.</p>
+        <p>Tänk tillbaka på både ${name}s egen berättelse och den ytterligare informationen du fick läsa. Skriv kortfattat ner allt du minns från var och en, gärna i stödord. Det är uppgifterna du minns som efterfrågas, inte vad du själv tycker är rätt eller fel.</p>
         <textarea id="motivation-textarea" rows="8" style="width:100%;box-sizing:border-box;font-size:16px;margin-top:12px;padding:8px;border:1px solid #ccc;border-radius:2px;"></textarea>
       </div>`;
   },
