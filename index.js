@@ -8,11 +8,11 @@ var complete_type = 0;
 var jsPsych = initJsPsych({
   on_finish: function() {
     if (complete_type == 0) {
-      window.location = 'https://unsplash.com'; // TODO: byt till Maximiles complete-URL
+      window.location = 'https://unsplash.com'; // TODO: byt URL
     } else if (complete_type == 1) {
-      window.location = 'https://earthview.withgoogle.com'; // TODO: byt till Maximiles quality-URL
+      window.location = 'https://earthview.withgoogle.com'; // TODO: byt URL
     } else if (complete_type == 2) {
-      window.location = 'https://www.google.com'; // TODO: byt till Maximiles screenout-URL
+      window.location = 'https://www.google.com'; // TODO: byt URL
     }
   }
 });
@@ -25,9 +25,12 @@ if (typeof CONDITION === 'undefined') {
 // debug
 //console.log('CONDITION:', CONDITION);
 
+// Bygg mouselab-trialen en gång här — buildMouselabTrial() definieras i js/mouselab.js
 var mouselab_list = buildMouselabTrial();
 
+// Tom array som fylls på med trials i FLÖDE längst ned, sedan körs av jsPsych.run()
 var timeline = [];
+
 
 // === STEG 1: Consent information ===
 const consent_info = {
@@ -58,6 +61,7 @@ const consent_info = {
   data: { category: "consent" }
 };
 
+
 // === STEG 2: Consent  ===
 const consent_provide = {
   type: jsPsychHtmlButtonResponse,
@@ -79,9 +83,11 @@ const consent_provide = {
   }
 };
 
+
 // === STEG 3: Övnings-mouselab (körs en gång efter consent, innan experimentet) ===
 // practice_mouselab är definierad i js/mouselab.js och laddas in automatiskt eftersom
 // filen inkluderas i HTML innan index.js. Trialen läggs in i timelines i FLÖDE längst ned.
+
 
 // === STEG 4: Övnings-fråga ===
 const practice_binary_q = {
@@ -94,6 +100,7 @@ const practice_binary_q = {
     document.getElementById('jspsych-html-button-response-btngroup').classList.add('btn-row');
   }
 };
+
 // = transition snurran =
 const experiment_start_transition = {
   type: jsPsychHtmlKeyboardResponse,
@@ -103,6 +110,7 @@ const experiment_start_transition = {
   save_trial_parameters: { stimulus: false },
   data: { category: "transition" }
 };
+
 
 // === STEG 5: Introduction to experiment ===
 const instructions = {
@@ -115,6 +123,7 @@ const instructions = {
   save_trial_parameters: { stimulus: false },
   data: { category: "test_instructions" }
 };
+
 
 // === STEG 6: Narrativsidan ===
 const narrative_page = {
@@ -130,6 +139,7 @@ const narrative_page = {
     return { category: "narrative_page", assigned_narrative: jsPsych.evaluateTimelineVariable('stimulus_id') };
   }
 };
+
 
 // === STEG 7: Pre main questions — före mouselab ===
 const pre_main_q_1 = {
@@ -177,6 +187,7 @@ const pre_binary_q = {
   }
 };
 
+
 // === STEG 9: Uppmärksamhetskontroll ===
 const attention_1 = {
   type: jsPsychHtmlSliderResponse,
@@ -199,6 +210,7 @@ const attention_1 = {
   }
 };
 
+
 // === STEG 10: Instruktioner inför mouselab ===
 const pre_mouselab_instructions = {
   type: jsPsychHtmlButtonResponse,
@@ -212,9 +224,11 @@ const pre_mouselab_instructions = {
   data: { category: "mouselab_instructions" }
 };
 
+
 // === STEG 11: Huvud-mouselab ===
 // mouselab_list byggs av buildMouselabTrial() i js/mouselab.js (rad 28 ovan).
 // Trialen visar informationskorten och hanterar mittfrågan som modal inuti samma trial.
+
 
 // === STEG 12: Post main questions — efter mouselab ===
 const post_main_q_1 = {
@@ -320,8 +334,6 @@ const finish_screen = {
 };
 
 
-
-
 // === FLÖDE ===
 const narrative_procedure = {
   timeline: [instructions, narrative_page, pre_main_q_1, pre_main_q_2, pre_binary_q, attention_1, pre_mouselab_instructions, mouselab_list, post_main_q_1, post_main_q_2, post_binary_q, motivation_q],
@@ -332,5 +344,6 @@ const narrative_procedure = {
   }
 };
 
+// Bygg upp den fullständiga timelines i ordning och starta experimentet
 timeline.push(consent_info, consent_provide, practice_mouselab, practice_binary_q, experiment_start_transition, narrative_procedure, demographics, finish_screen);
 jsPsych.run(timeline);
