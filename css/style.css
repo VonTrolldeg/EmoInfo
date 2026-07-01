@@ -1,6 +1,17 @@
+:root {
+  --color-primary:      #9c6114; /* knappar */
+  --color-primary-dark: #6c4b21; /* hover */
+  --color-accent:       #875e29; /* rubriker och spinner */
+  --color-card:         #dcebf0; /* informationskort */
+  --color-card-visited: #d6c4aa; /* besökta kort */
+  --color-card-hover:   #f1f7f9; /* hover på kort */
+  --color-spinner-track:#e0d6c8; /* spinner-ring */
+  --color-symbol:       #54545f; /* + och − ikoner */
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: 'EB Garamond', serif;
-  color: #875E29;
+  color: var(--color-accent);
 }
 
 h1 { font-size: 24px; }
@@ -39,17 +50,18 @@ textarea, input[type="text"] {
   margin: 20px auto 50px !important;
   font-size: 16px !important;
   min-height: 44px;
-  background-color: #9c6114;
+  background-color: var(--color-primary);
   color: white;
   min-width: 140px;
   border: none;
   border-radius: 2px;
   padding: 0 20px;
 }
+
 /* Hover only on devices with a real pointer — prevents sticky hover on iOS */
 @media (hover: hover) {
   .jspsych-btn:hover {
-    background-color: #6C4B21;
+    background-color: var(--color-primary-dark);
     text-decoration: underline;
   }
 }
@@ -113,7 +125,7 @@ textarea, input[type="text"] {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #DCEBF0;
+  background-color: var(--color-card);
   color: #222;
   cursor: pointer;
   padding: 14px;
@@ -127,18 +139,18 @@ textarea, input[type="text"] {
 
 .mouselab-option:focus {
   outline: none;
-  background-color: #DCEBF0;
+  background-color: var(--color-card);
 }
 
 /* Hover only on devices with a real pointer — prevents sticky hover on iOS */
 @media (hover: hover) {
   .mouselab-option:hover {
-    background-color: #F1F7F9;
+    background-color: var(--color-card-hover);
   }
 }
 
 .mouselab-option.visited {
-  background-color: #d6c4aa;
+  background-color: var(--color-card-visited);
 }
 
 .card-symbol {
@@ -147,19 +159,18 @@ textarea, input[type="text"] {
   left: 10px;
   font-size: 24px;
   font-weight: 700;
-  color: #54545F;
+  color: var(--color-symbol);
 }
 
 .symbol-icon {
   font-size: 20px;
   font-weight: 700;
-  color: #54545F;
+  color: var(--color-symbol);
 }
 
 .card-label {
   font-weight: 700;
 }
-
 
 /* Mid-modal — visas efter 4 unika kort, täcker mouselabsidan */
 #mid-modal {
@@ -194,16 +205,18 @@ textarea, input[type="text"] {
   font-size: 16px;
   cursor: pointer;
   min-height: 44px;
-  background-color: #9c6114;
+  background-color: var(--color-primary);
   color: white;
   width: 140px;
   border: none;
   border-radius: 2px;
 }
 
-#mid-modal-close:hover {
-  background-color: #6C4B21;
-  text-decoration: underline;
+@media (hover: hover) {
+  #mid-modal-close:hover {
+    background-color: var(--color-primary-dark);
+    text-decoration: underline;
+  }
 }
 
 #mid-modal-close:disabled {
@@ -241,7 +254,7 @@ textarea, input[type="text"] {
 .info-item {
   font-family: initial;
   margin-bottom: 20px;
-  background-color: #DCEBF0;
+  background-color: var(--color-card);
   padding: 16px 18px;
   min-height: 72px;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
@@ -287,8 +300,8 @@ textarea, input[type="text"] {
 .loading-spinner {
   width: 44px;
   height: 44px;
-  border: 4px solid #e0d6c8;
-  border-top-color: #875E29;
+  border: 4px solid var(--color-spinner-track);
+  border-top-color: var(--color-accent);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -306,14 +319,16 @@ textarea, input[type="text"] {
   font-size: 16px;
   cursor: pointer;
   min-height: 44px;
-  background-color: #9c6114;
+  background-color: var(--color-primary);
   color: white;
   width: 140px;
   border: none;
   border-radius: 2px;
 }
 
-#modal-close:hover {
-  background-color: #6C4B21;
-  text-decoration: underline;
+@media (hover: hover) {
+  #modal-close:hover {
+    background-color: var(--color-primary-dark);
+    text-decoration: underline;
+  }
 }
