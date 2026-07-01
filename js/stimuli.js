@@ -22,8 +22,8 @@ var stimuli_narrative = [
       { id: "sakerhetssituation_tigray",      label: "Krigsbrott i Tigray",            type: "negative", description: "Det är enbart i regionen Tigray det finns kännedom om grova krigsbrott i dagsläget." }
     ],
     bigQ: "bör få flyktingstatus i Sverige?",
-    low_label: "Bör inte få flyktingstatus",
-    high_label: "Bör få flyktingstatus",
+    low_label: "Bör inte få<br>flyktingstatus",
+    high_label: "Bör få<br>flyktingstatus",
   },
 
   // === KONDITION 2: Haile — emotionell ===
@@ -44,8 +44,8 @@ var stimuli_narrative = [
       { id: "sakerhetssituation_tigray",      label: "Krigsbrott i Tigray",            type: "negative", description: "Det är enbart i regionen Tigray det finns kännedom om grova krigsbrott i dagsläget." }
     ],
     bigQ: "bör få flyktingstatus i Sverige?",
-    low_label: "Bör inte få flyktingstatus",
-    high_label: "Bör få flyktingstatus",
+    low_label: "Bör inte få<br>flyktingstatus",
+    high_label: "Bör få<br>flyktingstatus",
   },
 
   // === KONDITION 3: Narrativ 2 — neutral (PLATSHÅLLARE) ===
