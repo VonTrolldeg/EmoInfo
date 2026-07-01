@@ -262,6 +262,11 @@ const motivation_q = {
   choices: ["Fortsätt"],
   on_load: function() {
     setTimeout(() => document.activeElement?.blur(), 50);
+    const btn = document.querySelector('.jspsych-btn');
+    btn.disabled = true;
+    document.getElementById('motivation-textarea').addEventListener('input', function() {
+      btn.disabled = this.value.trim().length === 0;
+    });
   },
   on_finish: function(data) {
     const ta = document.getElementById('motivation-textarea');
