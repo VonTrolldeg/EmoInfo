@@ -288,7 +288,7 @@ const post_binary_q = {
     const name = jsPsych.evaluateTimelineVariable('person_name');
     const bigQ = jsPsych.evaluateTimelineVariable('bigQ');
     return `<div class="text-content">
-      <p>Det här är ditt slutgiltiga beslut. Du har fått möjlighet att ta del av ${name}s egen berättelse och av ytterligare bevis i fallet. Ta en stund och väg samman allt du fått veta innan du bestämmer dig. Ska ${name} ${bigQ}</p>
+      <p>Det här är ditt slutgiltiga beslut. Du har fått möjlighet att ta del av ${name}s egen berättelse och av ytterligare bevis i fallet. Ta en stund och väg samman allt du fått veta innan du bestämmer dig. Anser du att ${name} ${bigQ}</p>
     </div>`;
   },
   choices: ["Ja", "Nej"],
