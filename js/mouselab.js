@@ -81,7 +81,6 @@ var currentStartTime = 0;     // när deltagaren öppnade senaste infokort
 var midAnswers = { credibility: null, main_judgment: null };
 
 function buildMouselabTrial() {
-  let positiveOnLeft;
   let displayOrder = [];
   const infoData = {};
   const labelData = {};
@@ -100,12 +99,13 @@ function buildMouselabTrial() {
       // Para ihop positiva och negativa alternativ slumpmässigt (ett par per rad)
       const positives = jsPsych.randomization.shuffle(options.filter(opt => opt.type === 'positive'));
       const negatives = jsPsych.randomization.shuffle(options.filter(opt => opt.type === 'negative'));
-      positiveOnLeft = Math.random() < 0.5;
+      const positiveOnLeft = Math.random() < 0.5;
       const randomizedOptions = positives.flatMap((opt, i) =>
         positiveOnLeft ? [opt, negatives[i]] : [negatives[i], opt]);
 
       // Bygg uppslagstabeller och spara display-ordningen (position 1 = övre vänster, rad för rad)
-      displayOrder = randomizedOptions.map(opt => opt.label);
+      // Format: "pos:Etikett" / "neg:Etikett" — visar både position och typ, ersätter positive_side-kolumnen
+      displayOrder = randomizedOptions.map(opt => `${opt.type === 'positive' ? 'pos' : 'neg'}:${opt.label}`);
       randomizedOptions.forEach(opt => {
         infoData[opt.id] = opt.description;
         labelData[opt.id] = opt.label;
@@ -242,9 +242,8 @@ function buildMouselabTrial() {
       data.category = 'mouselab';
       data.click_log = JSON.stringify(clickLog);
       data.display_order = displayOrder.join(' > ');
-      data.mid_main_q_credibility = midAnswers.credibility;
-      data.mid_main_q_main_judgment = midAnswers.main_judgment;
-      data.positive_side = positiveOnLeft ? 'left' : 'right';
+      data.mid_credibility = midAnswers.credibility;
+      data.mid_big_q = midAnswers.main_judgment;
     }
   };
 }

@@ -153,7 +153,7 @@ const pre_main_q_1 = {
   button_label: "Fortsätt",
   save_trial_parameters: { stimulus: false },
   data: { category: "pre_main_q", question: "credibility_pre" },
-  on_finish: function(data) { data.credibility = data.response; }
+  on_finish: function(data) { data.pre_credibility = data.response; }
 };
 
 const pre_main_q_2 = {
@@ -169,7 +169,7 @@ const pre_main_q_2 = {
   button_label: "Fortsätt",
   save_trial_parameters: { stimulus: false },
   data: { category: "pre_main_q", question: "main_judgment_pre" },
-  on_finish: function(data) { data.main_judgment = data.response; }
+  on_finish: function(data) { data.pre_big_q = data.response; }
 };
 
 
@@ -244,7 +244,7 @@ const post_main_q_1 = {
   button_label: "Fortsätt",
   save_trial_parameters: { stimulus: false },
   data: { category: "post_main_q", question: "credibility_post" },
-  on_finish: function(data) { data.credibility = data.response; }
+  on_finish: function(data) { data.post_credibility = data.response; }
 };
 
 const post_main_q_2 = {
@@ -260,7 +260,7 @@ const post_main_q_2 = {
   button_label: "Fortsätt",
   save_trial_parameters: { stimulus: false },
   data: { category: "post_main_q", question: "main_judgment_post" },
-  on_finish: function(data) { data.main_judgment = data.response; }
+  on_finish: function(data) { data.post_big_q = data.response; }
 };
 
 // === STEG 13: Uppmärksamhetskontroll 2 ===
