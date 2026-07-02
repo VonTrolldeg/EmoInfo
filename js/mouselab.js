@@ -87,6 +87,7 @@ var midAnswers = { credibility: null, refugee_status: null };
 
 function buildMouselabTrial() {
   let positiveOnLeft;
+  let displayOrder = [];
   const infoData = {};
   const labelData = {};
 
@@ -108,7 +109,8 @@ function buildMouselabTrial() {
       const randomizedOptions = positives.flatMap((opt, i) =>
         positiveOnLeft ? [opt, negatives[i]] : [negatives[i], opt]);
 
-      // Bygg uppslagstabeller så on_load kan visa rätt text när ett kort klickas
+      // Bygg uppslagstabeller och spara display-ordningen (position 1 = övre vänster, rad för rad)
+      displayOrder = randomizedOptions.map(opt => opt.label);
       randomizedOptions.forEach(opt => {
         infoData[opt.id] = opt.description;
         labelData[opt.id] = opt.label;
@@ -182,9 +184,9 @@ function buildMouselabTrial() {
       document.querySelectorAll(".mouselab-option").forEach(option => {
         option.addEventListener("click", () => {
           if (postMidPhase) {
-            postClickOrder.push(option.id);
+            postClickOrder.push(labelData[option.id]);
           } else {
-            preClickOrder.push(option.id);
+            preClickOrder.push(labelData[option.id]);
           }
 
           currentStartTime = Date.now();
@@ -263,6 +265,7 @@ function buildMouselabTrial() {
       data.mid_main_q_credibility = midAnswers.credibility;
       data.mid_main_q_refugee_status = midAnswers.refugee_status;
       data.positive_side = positiveOnLeft ? 'left' : 'right';
+      data.display_order = displayOrder.join(' > ');
     }
   };
 }
