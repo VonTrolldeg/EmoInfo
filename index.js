@@ -72,11 +72,11 @@ const consent_provide = {
       <p>Om du istället väljer "Ja, jag samtycker till att delta" påbörjas experimentet. När du trycker på knappen intygar du att du har läst och förstått den information du fått, som att ditt deltagande är frivilligt och att du kan avsluta det när du vill.</p>
     </div>
   `,
-  choices: ["Ja, jag samtycker till att delta", "Nej, jag samtycker inte till att delta"],
+  choices: ["Nej, jag samtycker inte till att delta", "Ja, jag samtycker till att delta"],
   save_trial_parameters: { stimulus: false },
   data: { category: "consent" },
   on_finish: function (data) {
-    if (data.response == 1) {
+    if (data.response == 0) {
       complete_type = 2;
       jsPsych.abortExperiment();
     }
@@ -93,7 +93,7 @@ const consent_provide = {
 const practice_binary_q = {
   type: jsPsychHtmlButtonResponse,
   stimulus: `<div class="text-content"><p>Var Erik hemma i sin lägenhet hela kvällen?</p></div>`,
-  choices: ["Ja", "Nej"],
+  choices: ["Nej", "Ja"],
   save_trial_parameters: { stimulus: false },
   data: { category: "practice" },
   on_load: function() {
@@ -181,7 +181,7 @@ const pre_binary_q = {
     const bigQ = jsPsych.evaluateTimelineVariable('bigQ');
     return `<div class="text-content"><p>Ta ett ögonblick och tänk igenom allt du fått veta om ${name}s fall. Anser du att ${name} ${bigQ}</p></div>`;
   },
-  choices: ["Ja", "Nej"],
+  choices: ["Nej", "Ja"],
   save_trial_parameters: { stimulus: false },
   data: { category: "pre_binary", question: "binary_judgment_pre" },
   on_load: function() {
@@ -295,7 +295,7 @@ const post_binary_q = {
       <p>Det här är ditt slutgiltiga beslut. Du har fått möjlighet att ta del av ${name}s egen berättelse och av ytterligare bevis i fallet. Ta en stund och väg samman allt du fått veta innan du bestämmer dig. Anser du att ${name} ${bigQ}</p>
     </div>`;
   },
-  choices: ["Ja", "Nej"],
+  choices: ["Nej", "Ja"],
   save_trial_parameters: { stimulus: false },
   data: { category: "post_binary", question: "binary_judgment_post" },
   on_load: function() {
