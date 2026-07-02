@@ -78,7 +78,7 @@ const practice_mouselab = {
 // --- Datainsamling: klickordning och tidsåtgång per kort ---
 var clickLog = [];
 var currentStartTime = 0;     // när deltagaren öppnade senaste infokort
-var midAnswers = { credibility: null, refugee_status: null };
+var midAnswers = { credibility: null, main_judgment: null };
 
 function buildMouselabTrial() {
   let positiveOnLeft;
@@ -224,7 +224,7 @@ function buildMouselabTrial() {
         });
 
         document.getElementById("mid-refugee-slider").addEventListener("input", (e) => {
-          midAnswers.refugee_status = parseFloat(e.target.value);
+          midAnswers.main_judgment = parseFloat(e.target.value);
           refugeeTouched = true;
           updateMidState();
         });
@@ -240,7 +240,7 @@ function buildMouselabTrial() {
       data.category = 'mouselab';
       data.click_log = JSON.stringify(clickLog);
       data.mid_main_q_credibility = midAnswers.credibility;
-      data.mid_main_q_refugee_status = midAnswers.refugee_status;
+      data.mid_main_q_main_judgment = midAnswers.main_judgment;
       data.positive_side = positiveOnLeft ? 'left' : 'right';
     }
   };
