@@ -82,6 +82,7 @@ var midAnswers = { credibility: null, main_judgment: null };
 
 function buildMouselabTrial() {
   let positiveOnLeft;
+  let displayOrder = [];
   const infoData = {};
   const labelData = {};
 
@@ -103,7 +104,8 @@ function buildMouselabTrial() {
       const randomizedOptions = positives.flatMap((opt, i) =>
         positiveOnLeft ? [opt, negatives[i]] : [negatives[i], opt]);
 
-      // Bygg uppslagstabeller: id → beskrivning och id → etikett
+      // Bygg uppslagstabeller och spara display-ordningen (position 1 = övre vänster, rad för rad)
+      displayOrder = randomizedOptions.map(opt => opt.label);
       randomizedOptions.forEach(opt => {
         infoData[opt.id] = opt.description;
         labelData[opt.id] = opt.label;
@@ -239,6 +241,7 @@ function buildMouselabTrial() {
     on_finish: function(data) {
       data.category = 'mouselab';
       data.click_log = JSON.stringify(clickLog);
+      data.display_order = displayOrder.join(' > ');
       data.mid_main_q_credibility = midAnswers.credibility;
       data.mid_main_q_main_judgment = midAnswers.main_judgment;
       data.positive_side = positiveOnLeft ? 'left' : 'right';
