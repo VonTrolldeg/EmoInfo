@@ -75,19 +75,13 @@ const practice_mouselab = {
 // HUVUD-MOUSELAB — körs för varje narrativ via buildMouselabTrial()
 // =============================================================================
 
-// --- Datainsamling: klickordning och tidsåtgång per knapp ---
-// pre = före mittfrågan, post = efter mittfrågan
-var preClickData = [];
-var preClickOrder = [];
-var postClickData = [];
-var postClickOrder = [];
+// --- Datainsamling: klickordning och tidsåtgång per kort ---
+var clickLog = [];
 var currentStartTime = 0;     // när deltagaren öppnade senaste infokort
-var postMidPhase = false;     // blir true när mittfrågan besvarats
 var midAnswers = { credibility: null, refugee_status: null };
 
 function buildMouselabTrial() {
   let positiveOnLeft;
-  let displayOrder = [];
   const infoData = {};
   const labelData = {};
 
@@ -109,8 +103,7 @@ function buildMouselabTrial() {
       const randomizedOptions = positives.flatMap((opt, i) =>
         positiveOnLeft ? [opt, negatives[i]] : [negatives[i], opt]);
 
-      // Bygg uppslagstabeller och spara display-ordningen (position 1 = övre vänster, rad för rad)
-      displayOrder = randomizedOptions.map(opt => opt.label);
+      // Bygg uppslagstabeller: id → beskrivning och id → etikett
       randomizedOptions.forEach(opt => {
         infoData[opt.id] = opt.description;
         labelData[opt.id] = opt.label;
@@ -183,13 +176,8 @@ function buildMouselabTrial() {
       // Lyssna på klick på varje informationskort
       document.querySelectorAll(".mouselab-option").forEach(option => {
         option.addEventListener("click", () => {
-          if (postMidPhase) {
-            postClickOrder.push(labelData[option.id]);
-          } else {
-            preClickOrder.push(labelData[option.id]);
-          }
-
           currentStartTime = Date.now();
+          clickLog.push({ card: labelData[option.id] });
           document.getElementById("modal-heading").textContent = labelData[option.id];
           document.getElementById("modal-text").textContent = infoData[option.id];
           document.getElementById("info-modal").style.display = "flex";
@@ -200,14 +188,7 @@ function buildMouselabTrial() {
 
       // När deltagaren stänger ett infokort: spara tidsåtgång och visa mittfrågan om det är dags
       document.getElementById("modal-close").addEventListener("click", () => {
-        const duration = Date.now() - currentStartTime;
-        if (postMidPhase) {
-          const id = postClickOrder[postClickOrder.length - 1];
-          postClickData.push({ option: id, duration });
-        } else {
-          const id = preClickOrder[preClickOrder.length - 1];
-          preClickData.push({ option: id, duration });
-        }
+        clickLog[clickLog.length - 1].duration = Date.now() - currentStartTime;
         document.getElementById("info-modal").style.display = "none";
 
         if (!hasClosedCard) {
@@ -250,7 +231,6 @@ function buildMouselabTrial() {
 
         midCloseBtn.addEventListener("click", () => {
           midModal.style.display = "none";
-          postMidPhase = true;
         });
       }
     },
@@ -258,14 +238,10 @@ function buildMouselabTrial() {
     // on_finish sparar all insamlad data till jsPsych när deltagaren klickar "Fortsätt"
     on_finish: function(data) {
       data.category = 'mouselab';
-      data.pre_click_order = preClickOrder.join(' > ');
-      data.pre_click_durations = JSON.stringify(preClickData);
-      data.post_click_order = postClickOrder.join(' > ');
-      data.post_click_durations = JSON.stringify(postClickData);
+      data.click_log = JSON.stringify(clickLog);
       data.mid_main_q_credibility = midAnswers.credibility;
       data.mid_main_q_refugee_status = midAnswers.refugee_status;
       data.positive_side = positiveOnLeft ? 'left' : 'right';
-      data.display_order = displayOrder.join(' > ');
     }
   };
 }

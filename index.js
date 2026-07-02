@@ -336,7 +336,11 @@ const demographics = {
     { prompt: "Vilket kön har du?", placeholder: "man/kvinna", required: true, name: "gender", columns: 12 }
   ],
   button_label: "Fortsätt",
-  data: { category: "demographics" }
+  data: { category: "demographics" },
+  on_finish: function(data) {
+    data.birth_year = data.response.birth_year;
+    data.gender = data.response.gender;
+  }
 };
 
 // === STEG 17: avslutningsskärm ===
