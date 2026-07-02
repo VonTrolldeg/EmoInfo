@@ -8,11 +8,11 @@ var complete_type = 0;
 var jsPsych = initJsPsych({
   on_finish: function() {
     if (complete_type == 0) {
-      window.location = 'https://unsplash.com'; // TODO: byt URL
+      window.location = 'https://unsplash.com'; // TODO: byt URL — genomfört (normal avslutning)
     } else if (complete_type == 1) {
-      window.location = 'https://earthview.withgoogle.com'; // TODO: byt URL
+      window.location = 'https://earthview.withgoogle.com'; // TODO: byt URL — quality fallout (misslyckad uppmärksamhetskontroll)
     } else if (complete_type == 2) {
-      window.location = 'https://www.google.com'; // TODO: byt URL
+      window.location = 'https://www.google.com'; // TODO: byt URL — screenout (tackade nej till samtycke)
     }
   }
 });
