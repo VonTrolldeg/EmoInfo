@@ -40,7 +40,7 @@ const practice_mouselab = {
 
     return `
       <h2>Övning</h2>
-      <p>Under testet får du en uppgift som liknar den här. Din uppgift är att avgöra vad som faktiskt hände, utifrån informationen på korten. Tryck på ett kort för att läsa mer. Korten med plus talar för att påståendet stämmer, och korten med minus talar emot. Du väljer själv i vilken ordning du öppnar korten.</p>      <p><strong>Eriks berättar: Jag tog bilen hem efter jobbet och var hemma i min lägenhet hela kvällen.</strong></p>
+      <p>Under testet får du en uppgift som liknar den här. Din uppgift är att avgöra vad som faktiskt hände, utifrån informationen på korten. Tryck på ett kort för att läsa mer. Korten med plus talar för att påståendet stämmer, och korten med minus talar emot. Du väljer själv i vilken ordning du öppnar korten.</p>      <p><strong>Erik berättar: Jag tog bilen hem efter jobbet och var hemma i min lägenhet hela kvällen.</strong></p>
       <div class="option-list">${optionDivs}</div>
       <div id="info-modal">
         <div id="modal-content">
