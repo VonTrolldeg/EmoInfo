@@ -81,7 +81,7 @@ const practice_mouselab = {
     data.click_log = JSON.stringify(practiceClickLog);
     data.display_order = practiceDisplayOrder.join(' > ');
   },
-  data: { category: "practice", question: "mouselab_practice" }
+  data: { category: "mouselab_practice" }
 };
 
 // =============================================================================
