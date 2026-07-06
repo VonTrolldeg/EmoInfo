@@ -58,7 +58,7 @@ const consent_info = {
   `,
   choices: ["Fortsätt till medgivande"],
   save_trial_parameters: { stimulus: false },
-  data: { category: "consent" }
+  data: { category: "consent_info" }
 };
 
 
@@ -74,7 +74,7 @@ const consent_provide = {
   `,
   choices: ["Ja, jag samtycker till att delta", "Nej, jag samtycker inte till att delta"],
   save_trial_parameters: { stimulus: false },
-  data: { category: "consent" },
+  data: { category: "consent_provide" },
   on_finish: function (data) {
     if (data.response == 1) {
       complete_type = 2;
@@ -215,7 +215,7 @@ const attention_1 = {
   require_movement: true,
   button_label: "Fortsätt",
   save_trial_parameters: { stimulus: false },
-  data: { category: "attention_check" },
+  data: { category: "attention_1" },
   on_finish: function(data) {
     if (data.response >= 5) {
       complete_type = 1;
@@ -287,7 +287,7 @@ const attention_2 = {
   require_movement: true,
   button_label: "Fortsätt",
   save_trial_parameters: { stimulus: false },
-  data: { category: "attention_check" },
+  data: { category: "attention_2" },
   on_finish: function(data) {
     if (data.response <= 95) {
       complete_type = 1;
