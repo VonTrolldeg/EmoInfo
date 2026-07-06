@@ -101,12 +101,24 @@ const practice_binary_q = {
   }
 };
 
+// === STEG 4b: Övnings-trovärdighetsfråga ===
+const practice_credibility_q = {
+  type: jsPsychHtmlSliderResponse,
+  stimulus: `<p>Hur trovärdig tycker du att Erik verkade?</p>`,
+  labels: ["Inte alls trovärdig", "Mycket trovärdig"],
+  slider_width: 200,
+  require_movement: true,
+  button_label: "Fortsätt",
+  save_trial_parameters: { stimulus: false },
+  data: { category: "practice" }
+};
+
 // = transition snurran =
 const experiment_start_transition = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus: `<div style="display:flex;align-items:center;justify-content:center;height:200px;"><div class="loading-spinner"></div></div>`,
   choices: "NO_KEYS",
-  trial_duration: 1100,
+  trial_duration: 1000,
   save_trial_parameters: { stimulus: false },
   data: { category: "transition" }
 };
@@ -371,5 +383,5 @@ const narrative_procedure = {
 };
 
 // Bygg upp den fullständiga timelines i ordning och starta experimentet
-timeline.push(consent_info, consent_provide, practice_mouselab, practice_binary_q, experiment_start_transition, narrative_procedure, demographics, finish_screen);
+timeline.push(consent_info, consent_provide, practice_mouselab, practice_credibility_q, practice_binary_q, experiment_start_transition, narrative_procedure, demographics, finish_screen);
 jsPsych.run(timeline);
