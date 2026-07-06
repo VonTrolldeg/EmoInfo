@@ -165,7 +165,7 @@ const pre_main_q_1 = {
   require_movement: true,
   button_label: "Fortsätt",
   save_trial_parameters: { stimulus: false },
-  data: { category: "pre_main_q", question: "credibility_pre" }
+  data: { category: "pre_credibility" }
 };
 
 // === STEG 10: Pre main judgment — före mouselab ===
@@ -181,7 +181,7 @@ const pre_main_q_2 = {
   require_movement: true,
   button_label: "Fortsätt",
   save_trial_parameters: { stimulus: false },
-  data: { category: "pre_main_q", question: "main_judgment_pre" }
+  data: { category: "pre_big_q" }
 };
 
 
@@ -255,7 +255,7 @@ const post_main_q_1 = {
   require_movement: true,
   button_label: "Fortsätt",
   save_trial_parameters: { stimulus: false },
-  data: { category: "post_main_q", question: "credibility_post" }
+  data: { category: "post_credibility" }
 };
 
 // === STEG 16: Post main judgment — efter mouselab ===
@@ -271,7 +271,7 @@ const post_main_q_2 = {
   require_movement: true,
   button_label: "Fortsätt",
   save_trial_parameters: { stimulus: false },
-  data: { category: "post_main_q", question: "main_judgment_post" }
+  data: { category: "post_big_q" }
 };
 
 // === STEG 17: Uppmärksamhetskontroll 2 ===
