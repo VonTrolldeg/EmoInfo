@@ -4,6 +4,9 @@
 
 
 const practiceCards = {};
+var practiceClickLog = [];
+var practiceCurrentStartTime = 0;
+var practiceDisplayOrder = [];
 
 const practice_mouselab = {
   type: jsPsychHtmlButtonResponse,
@@ -23,7 +26,8 @@ const practice_mouselab = {
     const positiveOnLeft = Math.random() < 0.5;
     const randomized = positives.flatMap((c, i) => positiveOnLeft ? [c, negatives[i]] : [negatives[i], c]);
 
-    // Bygg uppslagstabell så on_load kan visa rätt text när ett kort klickas
+    // Bygg uppslagstabell och spara display-ordningen (position 1 = övre vänster, rad för rad)
+    practiceDisplayOrder = randomized.map(c => `${c.type === 'positive' ? 'pos' : 'neg'}:${c.label}`);
     randomized.forEach(c => { practiceCards[c.id] = c; });
 
     // Skapa en knapp-HTML för varje informationskort
@@ -36,7 +40,7 @@ const practice_mouselab = {
 
     return `
       <h2>Övning</h2>
-<p>Under testet kommer du att få en uppgift som liknar den här. Din uppgift är att avgöra om påståendet är sant eller inte utifrån informationen på korten. Tryck på ett kort för att läsa mer. Korten med <span class="symbol-icon">+</span> talar för påståendet och korten med <span class="symbol-icon">−</span> talar emot det. Du kan öppna korten i vilken ordning du vill.</p>      <p><strong>Påstående: Erik var hemma i sin lägenhet hela kvällen.</strong></p>
+<p>Under testet kommer du att få en uppgift som liknar den här. Din uppgift är att avgöra om påståendet är sant eller inte utifrån informationen på korten. Tryck på ett kort för att läsa mer. Korten med <span class="symbol-icon">+</span> talar för påståendet och korten med <span class="symbol-icon">−</span> talar emot det. Du kan öppna korten i vilken ordning du vill.</p>      <p><strong>Eriks påstående: Jag tog bilen hem efter jobbet och var hemma i sin lägenhet hela kvällen.</strong></p>
       <div class="option-list">${optionDivs}</div>
       <div id="info-modal">
         <div id="modal-content">
@@ -56,6 +60,8 @@ const practice_mouselab = {
     document.querySelectorAll(".mouselab-option").forEach(option => {
       option.addEventListener("click", () => {
         const card = practiceCards[option.id];
+        practiceCurrentStartTime = Date.now();
+        practiceClickLog.push({ card: card.label });
         document.getElementById("modal-heading").textContent = card.label;
         document.getElementById("modal-text").textContent = card.description;
         document.getElementById("info-modal").style.display = "flex";
@@ -63,12 +69,19 @@ const practice_mouselab = {
       });
     });
 
-    // När deltagaren stänger ett infokort: dölj modalen
+    // När deltagaren stänger ett infokort: spara tidsåtgång och dölj modalen
     document.getElementById("modal-close").addEventListener("click", () => {
+      practiceClickLog[practiceClickLog.length - 1].duration = Date.now() - practiceCurrentStartTime;
       document.getElementById("info-modal").style.display = "none";
     });
   },
-  data: { category: "practice" }
+
+  // on_finish sparar click-data till jsPsych när deltagaren klickar "Fortsätt"
+  on_finish: function(data) {
+    data.click_log = JSON.stringify(practiceClickLog);
+    data.display_order = practiceDisplayOrder.join(' > ');
+  },
+  data: { category: "practice", question: "mouselab_practice" }
 };
 
 // =============================================================================

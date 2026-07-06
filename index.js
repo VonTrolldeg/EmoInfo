@@ -98,7 +98,7 @@ const practice_credibility_q = {
   require_movement: true,
   button_label: "Fortsätt",
   save_trial_parameters: { stimulus: false },
-  data: { category: "practice" }
+  data: { category: "practice", question: "credibility_practice" }
 };
 
 // === STEG 5: Övnings-fråga ===
@@ -107,7 +107,7 @@ const practice_binary_q = {
   stimulus: `<div class="text-content"><p>Var Erik hemma i sin lägenhet hela kvällen?</p></div>`,
   choices: ["Ja", "Nej"],
   save_trial_parameters: { stimulus: false },
-  data: { category: "practice" },
+  data: { category: "practice", question: "binary_practice" },
   on_load: function() {
     document.getElementById('jspsych-html-button-response-btngroup').classList.add('btn-row');
   }
