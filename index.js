@@ -4,6 +4,7 @@ document.head.insertAdjacentHTML('beforeend', '<meta name="viewport" content="wi
 // === STEG 0: Initiera jsPsych ===
 // 0 = normalt avslut, 1 = kvalitetsbortfall (attention check), 2 = screenout (inget samtycke)
 var complete_type = 0;
+var motivationText = '';
 
 var jsPsych = initJsPsych({
   on_finish: function() {
@@ -335,11 +336,11 @@ const motivation_q = {
     btn.disabled = true;
     document.getElementById('motivation-textarea').addEventListener('input', function() {
       btn.disabled = this.value.trim().length === 0;
+      motivationText = this.value;
     });
   },
   on_finish: function(data) {
-    const ta = document.getElementById('motivation-textarea');
-    data.motivation = ta ? ta.value : '';
+    data.motivation = motivationText;
   }
 };
 
