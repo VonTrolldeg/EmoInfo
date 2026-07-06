@@ -93,7 +93,7 @@ const consent_provide = {
 // === STEG 4: Övnings-trovärdighetsfråga ===
 const practice_credibility_q = {
   type: jsPsychHtmlSliderResponse,
-  stimulus: `<p>Hur trovärdig tycker du att Erik verkade?</p>`,
+  stimulus: `<p>Du kommer även få frågor en persons trovärdighet. <br> Hur trovärdig tycker du att Erik verkade?</p>`,
   labels: ["Inte alls trovärdig", "Mycket trovärdig"],
   slider_width: 200,
   require_movement: true,
