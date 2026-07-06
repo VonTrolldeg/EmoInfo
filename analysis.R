@@ -2,6 +2,7 @@
 #1 = nej 0 = ja
 
 library(jsonlite)
+library(dplyr)
 
 #working directory
 setwd("/Users/Lisen/Desktop/data files")
@@ -53,7 +54,7 @@ for (id in participants) {
   })
 }
 
-clean_data      <- do.call(rbind, participant_list)
+clean_data      <- bind_rows(participant_list)
 data            <- clean_data[order(clean_data$participant_id), ]
 data_incomplete <- raw_data[raw_data$run_id %in% incomplete_ids, ]
 
