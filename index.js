@@ -89,19 +89,7 @@ const consent_provide = {
 // filen inkluderas i HTML innan index.js. Trialen läggs in i timelines i FLÖDE längst ned.
 
 
-// === STEG 4: Övnings-fråga ===
-const practice_binary_q = {
-  type: jsPsychHtmlButtonResponse,
-  stimulus: `<div class="text-content"><p>Var Erik hemma i sin lägenhet hela kvällen?</p></div>`,
-  choices: ["Ja", "Nej"],
-  save_trial_parameters: { stimulus: false },
-  data: { category: "practice" },
-  on_load: function() {
-    document.getElementById('jspsych-html-button-response-btngroup').classList.add('btn-row');
-  }
-};
-
-// === STEG 4b: Övnings-trovärdighetsfråga ===
+// === STEG 4: Övnings-trovärdighetsfråga ===
 const practice_credibility_q = {
   type: jsPsychHtmlSliderResponse,
   stimulus: `<p>Hur trovärdig tycker du att Erik verkade?</p>`,
@@ -113,7 +101,20 @@ const practice_credibility_q = {
   data: { category: "practice" }
 };
 
-// = transition snurran =
+// === STEG 5: Övnings-fråga ===
+const practice_binary_q = {
+  type: jsPsychHtmlButtonResponse,
+  stimulus: `<div class="text-content"><p>Var Erik hemma i sin lägenhet hela kvällen?</p></div>`,
+  choices: ["Ja", "Nej"],
+  save_trial_parameters: { stimulus: false },
+  data: { category: "practice" },
+  on_load: function() {
+    document.getElementById('jspsych-html-button-response-btngroup').classList.add('btn-row');
+  }
+};
+
+
+// === STEG 6: Transition ===
 const experiment_start_transition = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus: `<div style="display:flex;align-items:center;justify-content:center;height:200px;"><div class="loading-spinner"></div></div>`,
@@ -124,7 +125,7 @@ const experiment_start_transition = {
 };
 
 
-// === STEG 5: Introduction to experiment ===
+// === STEG 7: Introduction to experiment ===
 const instructions = {
   type: jsPsychHtmlButtonResponse,
   stimulus: function() {
@@ -137,7 +138,7 @@ const instructions = {
 };
 
 
-// === STEG 6: Narrativsidan ===
+// === STEG 8: Narrativsidan ===
 const narrative_page = {
   type: jsPsychHtmlButtonResponse,
   stimulus: function() {
@@ -153,7 +154,7 @@ const narrative_page = {
 };
 
 
-// === STEG 7: Pre main questions — före mouselab ===
+// === STEG 9: Pre credibility — före mouselab ===
 const pre_main_q_1 = {
   type: jsPsychHtmlSliderResponse,
   stimulus: function() {
@@ -167,6 +168,7 @@ const pre_main_q_1 = {
   data: { category: "pre_main_q", question: "credibility_pre" }
 };
 
+// === STEG 10: Pre main judgment — före mouselab ===
 const pre_main_q_2 = {
   type: jsPsychHtmlSliderResponse,
   stimulus: function() {
@@ -183,7 +185,7 @@ const pre_main_q_2 = {
 };
 
 
-// === STEG 8: pre binary question ===
+// === STEG 11: Pre binary question ===
 const pre_binary_q = {
   type: jsPsychHtmlButtonResponse,
   stimulus: function() {
@@ -200,7 +202,7 @@ const pre_binary_q = {
 };
 
 
-// === STEG 9: Uppmärksamhetskontroll ===
+// === STEG 12: Uppmärksamhetskontroll ===
 const attention_1 = {
   type: jsPsychHtmlSliderResponse,
   stimulus: `<div class="text-content">
@@ -223,7 +225,7 @@ const attention_1 = {
 };
 
 
-// === STEG 10: Instruktioner inför mouselab ===
+// === STEG 13: Instruktioner inför mouselab ===
 const pre_mouselab_instructions = {
   type: jsPsychHtmlButtonResponse,
   stimulus: function() {
@@ -237,12 +239,12 @@ const pre_mouselab_instructions = {
 };
 
 
-// === STEG 11: Huvud-mouselab ===
+// === STEG 14: Huvud-mouselab ===
 // mouselab_list byggs av buildMouselabTrial() i js/mouselab.js (rad 28 ovan).
 // Trialen visar informationskorten och hanterar mittfrågan som modal inuti samma trial.
 
 
-// === STEG 12: Post main questions — efter mouselab ===
+// === STEG 15: Post credibility — efter mouselab ===
 const post_main_q_1 = {
   type: jsPsychHtmlSliderResponse,
   stimulus: function() {
@@ -256,6 +258,7 @@ const post_main_q_1 = {
   data: { category: "post_main_q", question: "credibility_post" }
 };
 
+// === STEG 16: Post main judgment — efter mouselab ===
 const post_main_q_2 = {
   type: jsPsychHtmlSliderResponse,
   stimulus: function() {
@@ -271,14 +274,14 @@ const post_main_q_2 = {
   data: { category: "post_main_q", question: "main_judgment_post" }
 };
 
-// === STEG 13: Uppmärksamhetskontroll 2 ===
+// === STEG 17: Uppmärksamhetskontroll 2 ===
 const attention_2 = {
   type: jsPsychHtmlSliderResponse,
   stimulus: `<div class="text-content">
-    <p>Svaret på denna frågan är väldigt enkel, det är bara att flytta markören så långt åt vänster som du kan. Detta är en uppmärksamhetskontroll.</p>
+    <p>Svaret på denna frågan är väldigt enkel, det är bara att flytta markören hela vägen till "Helt trovärdig". Detta är en uppmärksamhetskontroll.</p>
     <p>Baserat på instruktionen ovan, flytta markören på skalan nedan.</p>
   </div>`,
-  labels: ["Vänster", "Höger"],
+  labels: ["Inte alls trovärdig", "Helt trovärdig"],
   slider_start: 50,
   slider_width: 200,
   require_movement: true,
@@ -286,14 +289,14 @@ const attention_2 = {
   save_trial_parameters: { stimulus: false },
   data: { category: "attention_check" },
   on_finish: function(data) {
-    if (data.response >= 5) {
+    if (data.response <= 95) {
       complete_type = 1;
       jsPsych.abortExperiment();
     }
   }
 };
 
-// === STEG 14: post binary question ===
+// === STEG 18: Post binary question ===
 const post_binary_q = {
   type: jsPsychHtmlButtonResponse,
   stimulus: function() {
@@ -311,7 +314,7 @@ const post_binary_q = {
   }
 };
 
-// === STEG 15: motivation ===
+// === STEG 19: Motivation ===
 const motivation_q = {
   type: jsPsychHtmlButtonResponse,
   stimulus: function() {
@@ -340,7 +343,7 @@ const motivation_q = {
   }
 };
 
-// === STEG 16: Demografifrågor ===
+// === STEG 20: Demografifrågor ===
 const demographics = {
   type: jsPsychSurveyText,
   questions: [
@@ -355,7 +358,7 @@ const demographics = {
   }
 };
 
-// === STEG 17: avslutningsskärm ===
+// === STEG 21: Avslutningsskärm ===
 const finish_screen = {
   type: jsPsychHtmlButtonResponse,
   stimulus: `
