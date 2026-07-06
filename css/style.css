@@ -1,3 +1,19 @@
+/* =============================================================================
+   css/style.css — layout och utseende för EmoInfo
+
+   Innehåller:
+     - CSS-variabler (färger och teman)
+     - Grundtypografi (EB Garamond för rubriker, Source Sans 3 för brödtext)
+     - jsPsych-overrides: vänsterställd text, knappstil, knapp-containerlayout
+     - Mouselabb-kort (.mouselab-option, .card-symbol, .card-label)
+     - Info-modal (#info-modal) och mitt-modal (#mid-modal) för kortsvar
+     - Slider-layout (.slider-wrapper, .slider-label-row)
+     - Laddningsspinner (.loading-spinner)
+
+   Experimentet är i första hand byggt för mobiltelefon — tänk på det vid
+   ändringar av layout, fontstorlekar och interaktivitet.
+   ============================================================================= */
+
 :root {
   --color-primary:      #9c6114; /* knappar */
   --color-primary-dark: #6c4b21; /* hover */

@@ -1,4 +1,20 @@
-# analysis.R av all runs merged in single file
+# =============================================================================
+# analysis.R — databearbetning för EmoInfo
+#
+# Läser in rådata (emoinfo.csv) från Cognition.run och omstrukturerar den
+# till ett analysvänligt format med en rad per deltagare.
+#
+# Förutsätter att working directory är satt till mappen med emoinfo.csv.
+# Kräver paketen jsonlite (för click_log-JSON) och dplyr (för bind_rows).
+#
+# Resultat:
+#   data            — ett data.frame med fullständiga deltagare, sorterat på id
+#   data_incomplete — rådata för deltagare som saknar mouselabb-trial
+#                     (ofullständiga körningar, t.ex. avbrott eller utfall)
+#
+# Kodning: 0 = Ja, 1 = Nej (för binära frågor och consent)
+# =============================================================================
+
 #1 = nej 0 = ja
 
 library(jsonlite)

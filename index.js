@@ -1,3 +1,12 @@
+// =============================================================================
+// index.js — EmoInfo-experimentets huvudfil
+//
+// Definierar hela jsPsych-timelines: consent, övning, narrativ, frågor och avslut.
+// Experimentet körs på Cognition.run som sätter CONDITION (1–6) automatiskt.
+// Beroende filer: js/stimuli.js (narrativinnehåll), js/mouselab.js (mouselabben),
+//                 css/style.css (layout), jspsych/ (biblioteket).
+// =============================================================================
+
 // Säkerställ korrekt skalning på mobil — måste ske innan jsPsych renderar något
 document.head.insertAdjacentHTML('beforeend', '<meta name="viewport" content="width=device-width, initial-scale=1.0">');
 

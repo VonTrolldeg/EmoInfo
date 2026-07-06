@@ -1,6 +1,20 @@
-// === Narrativ-array för sex konditioner (3 berättelser × neutral/emotionell) ===
-// Används av narrative_procedure i index.js via jsPsych timeline variables.
-// CONDITION 1-2: Haile (neutral/emotionell), CONDITION 3-4: Hasse (neutral/emotionell), CONDITION 5-6: Sanna (neutral/emotionell)
+// =============================================================================
+// js/stimuli.js — narrativinnehåll för EmoInfo
+//
+// Definierar stimuli_narrative: en array med ett objekt per kondition (1–6).
+// Varje objekt innehåller person_name, bigQ, low_label, high_label och options
+// (informationskort med pos/neg-typ, etikett och beskrivning) samt narrative-text.
+//
+// Konditioner:
+//   1–2: Haile Gebremedhin (neutral / emotionell)
+//   3–4: Hasse Andersson   (neutral / emotionell)
+//   5–6: Sanna Lindström   (neutral / emotionell)
+//
+// Arrayen indexeras med (CONDITION - 1) i index.js och matas in via
+// jsPsych timeline variables (narrative_procedure).
+// Fältnamnen person_name, bigQ, low_label, high_label, options är en del av
+// det publika kontraktet mot index.js och mouselab.js — ändra inte dessa.
+// =============================================================================
 
 var stimuli_narrative = [
 

@@ -1,4 +1,17 @@
 // =============================================================================
+// js/mouselab.js — mouselabb-trials för EmoInfo
+//
+// Innehåller två trials:
+//   practice_mouselab   — övningsomgång med fiktivt fall (Erik), visas en gång
+//                         efter consent innan experimentet startar
+//   buildMouselabTrial() — bygger huvud-mouselabben som körs per kondition;
+//                         visar informationskort, spårar klickordning och duration,
+//                         och visar en mittfråga efter 4 kort via modal
+//
+// Laddas in i index.js via <script>-tagg i HTML och körs som vanilla JS.
+// =============================================================================
+
+// =============================================================================
 // ÖVNINGS-MOUSELAB — visas en gång efter consent, innan experimentet
 // =============================================================================
 
